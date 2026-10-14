@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cari Destinasi - Tripnesia</title>
+</head>
+<body>
+  <header>
+    <a href="../Beranda.html">
+      <img src="../assets/images/logo.svg" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" width="160">
+    </a>
+    <nav aria-label="Menu utama">
+      <details>
+        <summary>Menu</summary>
+        <ul>
+          <li><a href="Beranda.html">Beranda</a></li>
+          <li><a href="cari.html">Cari</a></li>
+          <li><a href="Simpan.html">Simpan</a></li>
+          <li><a href="Profile.html">Profile</a></li>
+        </ul>
+      </details>
+    </nav>
+  </header>
+
+  <main>
+    <form action="#" method="post">
+      <p>
+        <label for="cari">Cari destinasi</label>
+        <input type="search" id="cari" name="cari" placeholder="Cari destinasi, kota, atau aktivitas...">
+        <button type="submit">Cari</button>
+      </p>
+
+      <p>
+        <label for="budget">Budget</label>
+        <select id="budget" name="budget">
+          <option value="" selected>Semua</option>
+          <option value="50000-100000">Rp 50.000 - Rp 100.000</option>
+          <option value="100000-250000">Rp 100.000 - Rp 250.000</option>
+          <option value="500000-800000">Rp 500.000 - Rp 800.000</option>
+          <option value="600000-1000000">Rp 600.000 - Rp 1.000.000</option>
+        </select>
+
+        <label for="durasi">Durasi</label>
+        <select id="durasi" name="durasi">
+          <option value="" selected>Semua</option>
+          <option value="1-hari">1 Hari</option>
+          <option value="2-hari-1-malam">2 Hari 1 Malam</option>
+          <option value="3-hari-2-malam">3 Hari 2 Malam</option>
+          <option value="lebih-dari-3-hari">Lebih dari 3 hari</option>
+        </select>
+
+        <label for="jenis">Jenis</label>
+        <select id="jenis" name="jenis">
+          <option value="" selected>Semua</option>
+          <option value="pantai">Pantai</option>
+          <option value="air-terjun">Air Terjun</option>
+          <option value="kebun-binatang">Kebun Binatang</option>
+          <option value="gunung">Gunung</option>
+        </select>
+      </p>
+    </form>
+
+    <section>
+      <h1>Hasil Rekomendasi</h1>
+      <ul>
+        <li>
+          <article>
+            <img src="../assets/images/curugcimahi.png" alt="Curug Cimahi">
+            <h2>Curug Cimahi</h2>
+            <p>Bandung</p>
+            <p>Rp 150.000 - Rp 250.000</p>
+            <p>1 Hari</p>
+            <a href="/detailwisata/curugcimahi/index.html">Lihat Detail</a>
+          </article>
+        </li>
+        <li>
+          <article>
+            <img src="../assets/images/kebunrayabogor.png" alt="Kebun Raya Bogor">
+            <h2>Kebun Raya Bogor</h2>
+            <p>Bogor</p>
+            <p>Rp 15.500 - Rp 50.000</p>
+            <p>1 hari</p>
+            <a href="/detailwisata/kebunrayabogor/index.html">Lihat Detail</a>
+          </article>
+        </li>
+        <li>
+          <article>
+            <img src="../assets/images/pantaisawarna.png" alt="Pantai Sawarna">
+            <h2>Pantai Sawarna</h2>
+            <p>Banten</p>
+            <p>Rp 500.000 - Rp 850.000</p>
+            <p>2 Hari 1 Malam</p>
+            <a href="/detailwisata/pantaisawarna/index.html">Lihat Detail</a>
+          </article>
+        </li>
+        <li>
+          <article>
+            <img src="../assets/images/tamansafari.png" alt="Taman Safari Indonesia">
+            <h2>Taman Safari Indonesia</h2>
+            <p>Cisarua, Kab Bogor</p>
+            <p>Rp 600.000 - Rp 1.000.000</p>
+            <p>2 Hari 1 Malam</p>
+            <a href="/detailwisata/tamansafari/index.html">Lihat Detail</a>
+          </article>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; Copyright TripNesia 2026</p>
+  </footer>
+</body>
+</html>

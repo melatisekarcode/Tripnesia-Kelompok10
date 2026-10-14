@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kata Sandi Baru</title>
+</head>
+<body>
+
+  <main>
+    <h1>Kata Sandi Baru</h1>
+    <p>Masukkan kata sandi baru untuk akun anda</p>
+
+    <form action="login.html" method="get">
+      <label for="password">Kata Sandi Baru</label><br>
+      <input type="password" id="password" name="password" placeholder="Masukkan kata sandi baru" minlength="8" required>
+      <br><br>
+
+      <label for="confirm-password">Konfirmasi Kata Sandi Baru</label><br>
+      <input type="password" id="confirm-password" name="confirm-password" placeholder="Ulangi kata sandi baru" minlength="8" required>
+      <br><br>
+
+      <ul>
+        <li>Minimal 8 Karakter</li>
+        <li>Mengandung huruf besar dan kecil</li>
+        <li>Mengandung angka</li>
+      </ul>
+
+      <button type="submit">Kirim</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; Copyright TripNesia 2026</p>
+  </footer>
+
+</body>
+</html>
