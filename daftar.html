@@ -1,93 +1,404 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tripnesia - Daftar</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --bs-primary: #0a84c6;
+            --bs-primary-rgb: 10, 132, 198;
+            --tn-border: #dfe5ee;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            color: #111827;
+            background: #fff;
+        }
+
+        /* Ukuran halaman mengikuti login.html */
+        .page {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Area utama */
+        .register-section {
+            min-height: calc(100vh - 65px);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px 24px;
+        }
+
+        /* Kotak pendaftaran */
+        .register-card {
+            width: 100%;
+            max-width: 390px;
+            padding: 28px 26px;
+            background: #fff;
+        }
+
+        /* Logo berada di tengah */
+        .brand {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+
+        .brand img {
+            display: block;
+            width: 175px;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Tab Masuk dan Daftar */
+        .tab-container {
+            display: flex;
+            width: 100%;
+            padding: 3px;
+            margin-bottom: 12px;
+            background: #f8f9fa;
+            border: 1px solid #c9cdd1;
+            border-radius: 8px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 7px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            background: transparent;
+            color: #111827;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .tab-button.active {
+            background: #fff;
+            border-color: #e5e7eb;
+            color: #111827;
+        }
+
+        /* Form pendaftaran */
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 12px;
+            color: #111827;
+        }
+
+        .form-control {
+            width: 100%;
+            height: 43px;
+            padding: 10px 12px;
+            border: 1px solid #c8ced5;
+            border-radius: 8px;
+            background: #f9fafb;
+            font-size: 12px;
+        }
+
+        .form-control::placeholder {
+            color: #9ca3af;
+        }
+
+        .form-control:focus {
+            border-color: #0a84c6;
+            box-shadow: 0 0 0 3px rgba(10, 132, 198, .12);
+            background: #fff;
+        }
+
+        .password-group {
+            position: relative;
+        }
+
+        .password-group .form-control {
+            padding-right: 40px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: #6b7280;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        /* Tombol Daftar */
+        .btn-register {
+            width: 100%;
+            height: 43px;
+            margin-top: 1px;
+            border: 1px solid #0a84c6;
+            border-radius: 8px;
+            background: #0a84c6;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .btn-register:hover {
+            border-color: #0873ab;
+            background: #0873ab;
+            color: #fff;
+        }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            padding: 18px 12px;
+            border-top: 1px solid var(--tn-border);
+            background: #f8fafc;
+            color: #6b7280;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer i {
+            margin-right: 5px;
+        }
+
+        /* Tampilan HP */
+        @media (max-width: 575.98px) {
+            .register-section {
+                min-height: calc(100vh - 55px);
+                padding: 24px 16px;
+            }
+
+            .register-card {
+                max-width: 420px;
+                padding: 22px 10px;
+            }
+
+            .brand {
+                margin-bottom: 20px;
+            }
+
+            .brand img {
+                width: 175px;
+            }
+
+            .tab-container {
+                margin-bottom: 10px;
+            }
+
+            .form-control {
+                height: 39px;
+            }
+
+            .mb-3 {
+                margin-bottom: 10px !important;
+            }
+
+            .btn-register {
+                height: 39px;
+            }
+
+            .footer {
+                font-size: 11px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <main>
-        <section>
-            <header>
-                <h1>Tripnesia</h1>
-                <p>Jelajah Indonesia, Temukan Cerita</p>
-            </header>
+    <!-- Halaman Daftar -->
+    <main class="page">
 
-            <nav>
-            <form>
-            <button type="submit" formaction="login.html">Masuk</button>
-            <button type="submit" formaction="daftar.html">Daftar</button>
-            </form>
-            </nav>
+        <section class="register-section">
 
-            <form action="login.html" method="get">
-                <div>
-                    <label for="nama">Nama</label>
-                    <br>
-                    <input
-                        type="text"
-                        id="nama"
-                        name="nama"
-                        placeholder="Masukkan Nama"
-                        required
-                    >
+            <div class="register-card">
+
+                <!-- Logo Tripnesia -->
+                <header class="brand">
+                    <a href="Beranda.html">
+                        <img src="../assets/images/logo.svg"
+                             alt="Tripnesia - Jelajahi Indonesia, Temukan Cerita">
+                    </a>
+                </header>
+
+                <!-- Tab Masuk dan Daftar -->
+                <div class="tab-container">
+
+                    <a href="login.html" class="tab-button">
+                        Masuk
+                    </a>
+
+                    <a href="daftar.html"
+                       class="tab-button active"
+                       aria-current="page">
+                        Daftar
+                    </a>
+
                 </div>
 
-                <br>
+                <!-- Form Daftar -->
+                <form id="registerForm">
 
-                <div>
-                    <label for="email">Email atau No HP</label>
-                    <br>
-                    <input
-                        type="text"
-                        id="email"
-                        name="email"
-                        placeholder="Masukkan Email atau Nomor HP"
-                        required
-                    >
-                </div>
+                    <!-- Nama -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">
+                            Nama
+                        </label>
 
-                <br>
+                        <input type="text"
+                               class="form-control"
+                               id="name"
+                               name="name"
+                               placeholder="Masukkan Nama"
+                               autocomplete="name"
+                               required>
+                    </div>
 
-                <div>
-                    <label for="password">Password</label>
-                    <br>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Masukkan Password"
-                        required
-                    >
-                </div>
+                    <!-- Email atau Nomor HP -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">
+                            Email atau No.HP
+                        </label>
 
-                <br>
+                        <input type="text"
+                               class="form-control"
+                               id="email"
+                               name="email"
+                               placeholder="Masukkan Email atau Nomor HP"
+                               autocomplete="username"
+                               required>
+                    </div>
 
-                <div>
-                    <label for="konfirmasi-password">
-                        Konfirmasi Password
-                    </label>
-                    <br>
-                    <input
-                        type="password"
-                        id="konfirmasi-password"
-                        name="konfirmasi_password"
-                        placeholder="Masukkan Password"
-                        required
-                    >
-                </div>
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">
+                            Password
+                        </label>
 
-                <br>
+                        <div class="password-group">
+                            <input type="password"
+                                   class="form-control"
+                                   id="password"
+                                   name="password"
+                                   placeholder="Masukkan Password"
+                                   autocomplete="new-password"
+                                   minlength="6"
+                                   required>
 
-                <button type="submit">Daftar</button>
-            </form>
+                            <button type="button"
+                                    class="toggle-password"
+                                    data-target="password"
+                                    aria-label="Tampilkan password">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                    </div>
 
-            <footer>
-                <p>© Copyright TripNesia 2026</p>
-            </footer>
+                    <!-- Konfirmasi Password -->
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">
+                            Konfirmasi Password
+                        </label>
+
+                        <div class="password-group">
+                            <input type="password"
+                                   class="form-control"
+                                   id="confirmPassword"
+                                   name="confirmPassword"
+                                   placeholder="Masukkan Password"
+                                   autocomplete="new-password"
+                                   minlength="6"
+                                   required>
+
+                            <button type="button"
+                                    class="toggle-password"
+                                    data-target="confirmPassword"
+                                    aria-label="Tampilkan konfirmasi password">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Daftar -->
+                    <button type="submit" class="btn btn-register">
+                        Daftar
+                    </button>
+
+                </form>
+
+            </div>
+
         </section>
+
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <i class="bi bi-c-circle"></i>
+        Copyright TripNesia 2026
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Tampilkan atau sembunyikan password
+        document.querySelectorAll(".toggle-password").forEach(function (button) {
+            button.addEventListener("click", function () {
+                const targetId = this.getAttribute("data-target");
+                const input = document.getElementById(targetId);
+                const icon = this.querySelector("i");
+
+                if (input.type === "password") {
+                    input.type = "text";
+                    icon.classList.remove("bi-eye");
+                    icon.classList.add("bi-eye-slash");
+                } else {
+                    input.type = "password";
+                    icon.classList.remove("bi-eye-slash");
+                    icon.classList.add("bi-eye");
+                }
+            });
+        });
+
+        // Validasi form pendaftaran
+        document.getElementById("registerForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                alert("Konfirmasi password tidak sama. Silakan periksa kembali.");
+                return;
+            }
+
+            alert("Form pendaftaran berhasil divalidasi. Backend belum terhubung.");
+        });
+    </script>
 
 </body>
 </html>

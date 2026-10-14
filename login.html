@@ -1,435 +1,451 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cari Destinasi - Tripnesia</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tripnesia - Login</title>
 
-  <!-- Bootstrap CSS & Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 
-  <style>
-    :root {
-      --bs-primary: #0a84c6;
-      --bs-primary-rgb: 10, 132, 198;
-      --tn-border: #dfe5ee;
-      --tn-soft: #f1f5fb;
-    }
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+          rel="stylesheet">
 
-    body {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      color: #111827;
-      background-color: #f8fafc;
-    }
+    <style>
+        :root {
+            --bs-primary: #0a84c6;
+            --bs-primary-rgb: 10, 132, 198;
+            --tn-border: #dfe5ee;
+            --tn-soft: #f1f5fb;
+        }
 
-    .btn-primary {
-      --bs-btn-bg: #0a84c6;
-      --bs-btn-border-color: #0a84c6;
-      --bs-btn-hover-bg: #0873ab;
-      --bs-btn-hover-border-color: #0873ab;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
-    .btn-outline-secondary {
-      --bs-btn-color: #4b5563;
-      --bs-btn-border-color: var(--tn-border);
-    }
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            color: #111827;
+            background: #fff;
+        }
 
-    .page {
-      max-width: 960px;
-    }
+        /* Mengikuti ukuran halaman Beranda.html */
+        .page {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+        }
 
-    /* Search & Filter Styles */
-    .search-input {
-      background: var(--tn-soft);
-      border: 1px solid var(--tn-border);
-      border-radius: 10px;
-      font-size: .875rem;
-    }
+        /* Area utama login */
+        .login-section {
+            min-height: calc(100vh - 65px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
 
-    .filter-pills {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 6px;
-      white-space: nowrap;
-    }
+        /* Kotak login */
+        .login-card {
+            width: 100%;
+            max-width: 390px;
+            padding: 28px 26px;
+            background: #fff;
+        }
 
-    .filter-pills::-webkit-scrollbar {
-      display: none;
-    }
+        /* Logo di tengah */
+        .brand {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
 
-    .filter-pill {
-      background: #fff;
-      border: 1px solid var(--tn-border);
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: .8rem;
-      font-weight: 500;
-      color: #4b5563;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
-      transition: all .15s;
-    }
+        .brand img {
+            display: block;
+            width: 175px;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
 
-    .filter-pill.active {
-      background-color: var(--bs-primary);
-      color: #fff;
-      border-color: var(--bs-primary);
-    }
+        /* Tab Masuk dan Daftar */
+        .tab-container {
+            display: flex;
+            width: 100%;
+            padding: 3px;
+            margin-bottom: 28px;
+            background: #f8f9fa;
+            border: 1px solid #c9cdd1;
+            border-radius: 8px;
+        }
 
-    .filter-pill:hover {
-      border-color: #9ca3af;
-    }
+        .tab-button {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            background: transparent;
+            color: #111827;
+            font-size: 13px;
+            font-weight: 600;
+        }
 
-    /* Filter Box Panel */
-    .filter-panel {
-      background: #fff;
-      border: 1px solid var(--tn-border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-top: 16px;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 6px rgba(0,0,0,.02);
-      display: none;
-    }
+        .tab-button.active {
+            background: #fff;
+            border-color: #e5e7eb;
+            color: #0a84c6;
+        }
 
-    .filter-panel.show {
-      display: block;
-    }
+        /* Form */
+        .form-label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+        }
 
-    .filter-panel h6 {
-      font-size: .85rem;
-      font-weight: 600;
-      color: #4b5563;
-      margin-bottom: 12px;
-    }
+        .form-control {
+            height: 43px;
+            border: 1px solid #c8ced5;
+            border-radius: 8px;
+            background: #f9fafb;
+            padding: 10px 12px;
+            font-size: 13px;
+        }
 
-    /* Recommendation Cards */
-    .dest-card {
-      border: 1px solid var(--tn-border);
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,.04);
-      overflow: hidden;
-      background: #fff;
-      padding: 12px;
-      display: flex;
-      gap: 12px;
-      position: relative;
-      transition: transform .15s, border-color .15s;
-    }
+        .form-control::placeholder {
+            color: #9ca3af;
+        }
 
-    .dest-card:hover {
-      transform: translateY(-2px);
-      border-color: #cbd5e1;
-    }
+        .form-control:focus {
+            border-color: #0a84c6;
+            box-shadow: 0 0 0 3px rgba(10, 132, 198, 0.12);
+        }
 
-    .dest-card img {
-      width: 90px;
-      height: 90px;
-      border-radius: 10px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
+        .password-group {
+            position: relative;
+        }
 
-    .card-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      flex: 1;
-    }
+        .password-group .form-control {
+            padding-right: 42px;
+        }
 
-    .card-info h2 {
-      font-size: .95rem;
-      font-weight: 700;
-      color: #111827;
-      margin-bottom: 2px;
-    }
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #6b7280;
+            font-size: 16px;
+            padding: 0;
+        }
 
-    .card-info .location {
-      font-size: .75rem;
-      color: #6b7280;
-      margin-bottom: 4px;
-    }
+        .forgot-password {
+            display: block;
+            margin: 10px 0 22px;
+            text-align: right;
+            color: #111827;
+            font-size: 12px;
+            text-decoration: none;
+        }
 
-    .card-info .price {
-      font-size: .85rem;
-      font-weight: 700;
-      color: #111827;
-      margin-bottom: 2px;
-    }
+        .forgot-password:hover {
+            color: #0a84c6;
+        }
 
-    .card-info .duration {
-      font-size: .75rem;
-      color: #6b7280;
-    }
+        /* Tombol Masuk */
+        .btn-login {
+            width: 100%;
+            height: 43px;
+            border: 1px solid #0a84c6;
+            border-radius: 8px;
+            background: #0a84c6;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+        }
 
-    .detail-btn {
-      align-self: flex-end;
-      padding: 4px 10px;
-      border: 1px solid #38bdf8;
-      color: #0284c7;
-      border-radius: 6px;
-      font-size: .75rem;
-      font-weight: 600;
-      text-decoration: none;
-      background: #fff;
-      transition: background .15s;
-    }
+        .btn-login:hover {
+            background: #0873ab;
+            border-color: #0873ab;
+            color: #fff;
+        }
 
-    .detail-btn:hover {
-      background-color: #f0f9ff;
-    }
+        /* Garis pemisah */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 23px 0 18px;
+            color: #9ca3af;
+            font-size: 12px;
+        }
 
-    footer {
-      border-top: 1px solid var(--tn-border);
-    }
-  </style>
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #d1d5db;
+        }
+
+        /* Google dan Facebook tersusun ke bawah */
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-social {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            width: 100%;
+            height: 43px;
+            border: 1px solid #555;
+            border-radius: 8px;
+            background: #fff;
+            color: #111827;
+            font-size: 12px;
+        }
+
+        .btn-social:hover {
+            background: #f8fafc;
+            border-color: #0a84c6;
+        }
+
+        .google-icon {
+            color: #4285f4;
+            font-size: 16px;
+        }
+
+        .facebook-icon {
+            color: #1877f2;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            padding: 18px 12px;
+            border-top: 1px solid var(--tn-border);
+            background: #f8fafc;
+            text-align: center;
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .footer i {
+            margin-right: 5px;
+        }
+
+        /* Responsif untuk HP */
+        @media (max-width: 575.98px) {
+            .login-section {
+                min-height: calc(100vh - 55px);
+                padding: 24px 16px;
+            }
+
+            .login-card {
+                max-width: 420px;
+                padding: 22px 10px;
+            }
+
+            .brand {
+                margin-bottom: 28px;
+            }
+
+            .brand img {
+                width: 165px;
+            }
+
+            .footer {
+                font-size: 11px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- Header -->
-  <header class="border-bottom bg-white sticky-top">
-    <div class="page container d-flex align-items-center justify-content-between py-2">
-      <a href="Beranda.html">
-        <img src="../assets/images/logo.svg" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="36">
-      </a>
-      <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuDrawer" aria-controls="menuDrawer" aria-label="Menu">
-        <i class="bi bi-list fs-5"></i>
-      </button>
-    </div>
-  </header>
+    <!-- Area login -->
+    <main class="page">
 
-  <!-- Drawer Menu -->
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="menuDrawer" aria-labelledby="menuDrawerLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="menuDrawerLabel">Menu</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Tutup"></button>
-    </div>
-    <div class="offcanvas-body">
-      <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link text-dark" href="Beranda.html">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link text-dark" href="cari.html">Cari</a></li>
-        <li class="nav-item"><a class="nav-link text-dark" href="Simpan.html">Simpan</a></li>
-        <li class="nav-item"><a class="nav-link text-dark" href="Profile.html">Profile</a></li>
-      </ul>
-    </div>
-  </div>
+        <section class="login-section">
 
-  <main class="page container py-4">
+            <div class="login-card">
 
-    <!-- Form Pencarian & Filter Pills -->
-    <form action="#" method="post" class="mb-3">
-      <div class="input-group mb-3">
-        <span class="input-group-text search-input border-end-0"><i class="bi bi-search text-secondary"></i></span>
-        <input type="search" id="cari" name="cari" class="form-control search-input border-start-0" placeholder="Cari destinasi, kota, atau aktivitas...">
-        <button type="submit" class="d-none">Cari</button>
-      </div>
+                <!-- Logo Tripnesia di tengah -->
+                <header class="brand">
+                    <img src="../assets/images/logo.svg"
+                         alt="Tripnesia - Jelajahi Indonesia, Temukan Cerita">
+                </header>
 
-      <div class="filter-pills" id="filterPills">
-        <button type="button" class="filter-pill active" data-target="semua">Semua</button>
-        <button type="button" class="filter-pill" data-target="budget">Budget</button>
-        <button type="button" class="filter-pill" data-target="durasi">Durasi</button>
-        <button type="button" class="filter-pill" data-target="jenis">Jenis</button>
-      </div>
-    </form>
+                <!-- Tab Masuk dan Daftar -->
+                <div class="tab-container">
+                    <button type="button"
+                            class="tab-button active"
+                            id="loginTab">
+                        Masuk
+                    </button>
 
-    <!-- Panel Filter Budget -->
-    <div class="filter-panel" id="panel-budget">
-      <h6>Pilih Rentang Budget</h6>
-      <div class="form-check mb-2">
-        <input class="form-check-input" type="radio" name="r_budget" id="b1" value="50000">
-        <label class="form-check-label small" for="b1">Rp 50.000 - Rp 100.000</label>
-      </div>
-      <div class="form-check mb-2">
-        <input class="form-check-input" type="radio" name="r_budget" id="b2" value="100000">
-        <label class="form-check-label small" for="b2">Rp 100.000 - Rp 250.000</label>
-      </div>
-      <div class="form-check mb-2">
-        <input class="form-check-input" type="radio" name="r_budget" id="b3" value="500000" checked>
-        <label class="form-check-label small" for="b3">Rp 500.000 - Rp 800.000</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="r_budget" id="b4" value="600000">
-        <label class="form-check-label small" for="b4">Rp 600.000 - Rp 1.000.000</label>
-      </div>
-    </div>
+                    <a href="daftar.html"
+                      class="tab-button text-center text-decoration-none"
+                      id="registerTab">
+                        Daftar
+                    </a>
+                </div>
 
-    <!-- Panel Filter Durasi -->
-    <div class="filter-panel" id="panel-durasi">
-      <h6>Pilih Durasi</h6>
-      <div class="form-check mb-2">
-        <input class="form-check-input" type="radio" name="r_durasi" id="d1" value="1-hari">
-        <label class="form-check-label small" for="d1">1 Hari</label>
-      </div>
-      <div class="form-check mb-2">
-        <input class="form-check-input" type="radio" name="r_durasi" id="d2" value="2-hari" checked>
-        <label class="form-check-label small" for="d2">2 Hari 1 Malam</label>
-      </div>
-      <div class="form-check mb-2">
-        <input class="form-check-input" type="radio" name="r_durasi" id="d3" value="3-hari">
-        <label class="form-check-label small" for="d3">3 Hari 2 Malam</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="r_durasi" id="d4" value="lebih">
-        <label class="form-check-label small" for="d4">Lebih dari 3 hari</label>
-      </div>
-    </div>
+                <!-- Form Login -->
+                <form id="authForm">
 
-    <!-- Panel Filter Jenis -->
-    <div class="filter-panel" id="panel-jenis">
-      <h6>Pilih Jenis Destinasi</h6>
-      <div class="form-check mb-2">
-        <input class="form-check-input" type="radio" name="r_jenis" id="j1" value="pantai" checked>
-        <label class="form-check-label small" for="j1">Pantai</label>
-      </div>
-      <div class="form-check mb-2">
-        <input class="form-check-input" type="radio" name="r_jenis" id="j2" value="air-terjun">
-        <label class="form-check-label small" for="j2">Air Terjun</label>
-      </div>
-      <div class="form-check mb-2">
-        <input class="form-check-input" type="radio" name="r_jenis" id="j3" value="kebun-binatang">
-        <label class="form-check-label small" for="j3">Kebun Binatang</label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="r_jenis" id="j4" value="gunung">
-        <label class="form-check-label small" for="j4">Gunung</label>
-      </div>
-    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">
+                            Email atau No.HP
+                        </label>
 
-    <!-- Hasil Rekomendasi -->
-    <section>
-      <!-- Bagian tombol Terpopuler telah dihapus di sini, menyisakan judul saja -->
-      <div class="mb-3">
-        <h1 class="h6 fw-bold mb-0">Hasil Rekomendasi</h1>
-      </div>
+                        <input type="text"
+                               class="form-control"
+                               id="email"
+                               placeholder="Masukkan Email atau Nomor HP"
+                               autocomplete="username"
+                               required>
+                    </div>
 
-      <!-- Daftar Destinasi yang Dinamis -->
-      <ul class="list-unstyled d-flex flex-column gap-3" id="destinationList">
-        <!-- Item 1: Curug Cimahi -->
-        <li class="dest-item" data-category="air-terjun" data-duration="1-hari" data-budget="250000">
-          <article class="dest-card">
-            <img src="../assets/images/curugcimahi.png" alt="Curug Cimahi">
-            <div class="card-content">
-              <div class="card-info">
-                <h2>Curug Cimahi</h2>
-                <p class="location"><i class="bi bi-geo-alt"></i> Bandung</p>
-                <p class="price">Rp 150.000 - Rp 250.000</p>
-                <p class="duration"><i class="bi bi-clock"></i> 1 Hari</p>
-              </div>
-              <a href="/detailwisata/curugcimahi/index.html" class="detail-btn">Lihat Detail</a>
+                    <div class="mb-0">
+                        <label for="password" class="form-label">
+                            Password
+                        </label>
+
+                        <div class="password-group">
+                            <input type="password"
+                                   class="form-control"
+                                   id="password"
+                                   placeholder="Masukkan Password"
+                                   autocomplete="current-password"
+                                   required>
+
+                            <button type="button"
+                                    class="toggle-password"
+                                    id="togglePassword"
+                                    aria-label="Tampilkan password">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <a href="lupasandi.html" class="forgot-password" id="forgotPassword">
+                        Lupa Password?
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-login"
+                            id="submitButton">
+                        Masuk
+                    </button>
+
+                    <!-- Pemisah -->
+                    <div class="divider">
+                        <span>atau</span>
+                    </div>
+
+                    <!-- Tombol Google dan Facebook -->
+                    <div class="social-buttons">
+
+                        <button type="button"
+                                class="btn btn-social"
+                                id="googleLogin">
+                            <i class="bi bi-google google-icon"></i>
+                            <span>Lanjut dengan Google</span>
+                        </button>
+
+                        <button type="button"
+                                class="btn btn-social"
+                                id="facebookLogin">
+                            <i class="bi bi-facebook facebook-icon"></i>
+                            <span>Lanjut dengan Facebook</span>
+                        </button>
+
+                    </div>
+                </form>
+
             </div>
-          </article>
-        </li>
-        <!-- Item 2: Kebun Raya Bogor -->
-        <li class="dest-item" data-category="kebun-binatang" data-duration="1-hari" data-budget="50000">
-          <article class="dest-card">
-            <img src="../assets/images/kebunrayabogor.png" alt="Kebun Raya Bogor">
-            <div class="card-content">
-              <div class="card-info">
-                <h2>Kebun Raya Bogor</h2>
-                <p class="location"><i class="bi bi-geo-alt"></i> Bogor</p>
-                <p class="price">Rp 15.500 - Rp 50.000</p>
-                <p class="duration"><i class="bi bi-clock"></i> 1 hari</p>
-              </div>
-              <a href="/detailwisata/kebunrayabogor/index.html" class="detail-btn">Lihat Detail</a>
-            </div>
-          </article>
-        </li>
-        <!-- Item 3: Pantai Sawarna -->
-        <li class="dest-item" data-category="pantai" data-duration="2-hari" data-budget="850000">
-          <article class="dest-card">
-            <img src="../assets/images/pantaisawarna.png" alt="Pantai Sawarna">
-            <div class="card-content">
-              <div class="card-info">
-                <h2>Pantai Sawarna</h2>
-                <p class="location"><i class="bi bi-geo-alt"></i> Banten</p>
-                <p class="price">Rp 500.000 - Rp 850.000</p>
-                <p class="duration"><i class="bi bi-clock"></i> 2 Hari 1 Malam</p>
-              </div>
-              <a href="/detailwisata/pantaisawarna/index.html" class="detail-btn">Lihat Detail</a>
-            </div>
-          </article>
-        </li>
-        <!-- Item 4: Taman Safari -->
-        <li class="dest-item" data-category="kebun-binatang" data-duration="2-hari" data-budget="1000000">
-          <article class="dest-card">
-            <img src="../assets/images/tamansafari.png" alt="Taman Safari Indonesia">
-            <div class="card-content">
-              <div class="card-info">
-                <h2>Taman Safari Indonesia</h2>
-                <p class="location"><i class="bi bi-geo-alt"></i> Cisarua, Kab Bogor</p>
-                <p class="price">Rp 600.000 - Rp 1.000.000</p>
-                <p class="duration"><i class="bi bi-clock"></i> 2 Hari 1 Malam</p>
-              </div>
-              <a href="/detailwisata/tamansafari/index.html" class="detail-btn">Lihat Detail</a>
-            </div>
-          </article>
-        </li>
-      </ul>
-    </section>
-  </main>
+        </section>
 
-  <footer class="text-center text-secondary small py-3 bg-white">
-    <i class="bi bi-c-circle"></i> Copyright TripNesia 2026
-  </footer>
+    </main>
 
-  <!-- Bootstrap JS Bundle & Interactive Script -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    const pills = document.querySelectorAll('.filter-pill');
-    const panels = document.querySelectorAll('.filter-panel');
-    const destItems = document.querySelectorAll('.dest-item');
+    <!-- Footer -->
+    <footer class="footer">
+        <i class="bi bi-c-circle"></i>
+        Copyright TripNesia 2026
+    </footer>
 
-    pills.forEach(pill => {
-      pill.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Atur status aktif pada pill
-        pills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        // Sembunyikan semua panel filter terlebih dahulu
-        panels.forEach(panel => panel.classList.remove('show'));
+    <script>
+        const loginTab = document.getElementById("loginTab");
+        const registerTab = document.getElementById("registerTab");
+        const submitButton = document.getElementById("submitButton");
+        const authForm = document.getElementById("authForm");
+        const password = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+        const forgotPassword = document.getElementById("forgotPassword");
 
-        const target = pill.getAttribute('data-target');
-        
-        if (target === 'semua') {
-          // Tampilkan semua destinasi
-          destItems.forEach(item => item.style.display = 'block');
-        } else {
-          // Tampilkan panel filter yang sesuai
-          const activePanel = document.getElementById(`panel-${target}`);
-          if (activePanel) {
-            activePanel.classList.add('show');
-          }
+        let mode = "login";
+
+        // Mengubah tab Masuk dan Daftar
+        function setMode(newMode) {
+            mode = newMode;
+
+            loginTab.classList.toggle("active", mode === "login");
+            registerTab.classList.toggle("active", mode === "register");
+
+            submitButton.textContent =
+                mode === "login" ? "Masuk" : "Daftar";
+
+            password.autocomplete =
+                mode === "login" ? "current-password" : "new-password";
+
+            forgotPassword.style.display =
+                mode === "login" ? "block" : "none";
         }
-      });
-    });
 
-    // Simulasi filter interaktif berdasarkan pilihan radio button di dalam panel
-    document.querySelectorAll('.filter-panel input[type="radio"]').forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        const activePill = document.querySelector('.filter-pill.active').getAttribute('data-target');
-        
-        destItems.forEach(item => {
-          if (activePill === 'jenis') {
-            const selectedJenis = document.querySelector('input[name="r_jenis"]:checked');
-            if (selectedJenis) {
-              // Cocokkan berdasarkan kategori jenis destinasi
-              const cat = item.getAttribute('data-category');
-              // Logika sederhana penyesuaian kategori
-              if (selectedJenis.id === 'j1' && cat === 'pantai') item.style.display = 'block';
-              else if (selectedJenis.id === 'j2' && cat === 'air-terjun') item.style.display = 'block';
-              else if (selectedJenis.id === 'j3' && cat === 'kebun-binatang') item.style.display = 'block';
-              else item.style.display = 'none';
-            }
-          }
+        loginTab.addEventListener("click", () => setMode("login"));
+
+        // Menampilkan atau menyembunyikan password
+        togglePassword.addEventListener("click", function () {
+            const show = password.type === "password";
+
+            password.type = show ? "text" : "password";
+
+            this.innerHTML = show
+                ? '<i class="bi bi-eye-slash"></i>'
+                : '<i class="bi bi-eye"></i>';
         });
-      });
-    });
-  </script>
+
+                authForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (mode === "login") {
+                window.location.href = "Beranda.html";
+            }
+        });
+
+        document.getElementById("googleLogin").addEventListener("click", function () {
+            alert("Login Google belum terhubung.");
+        });
+
+        document.getElementById("facebookLogin").addEventListener("click", function () {
+            alert("Login Facebook belum terhubung.");
+        });
+    </script>
+
 </body>
 </html>
