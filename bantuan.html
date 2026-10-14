@@ -2,227 +2,497 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bantuan & Support - TripNesia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tripnesia - Bantuan &amp; Support</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --bs-primary: #0a84c6;
+            --bs-primary-rgb: 10, 132, 198;
+            --tn-border: #dfe5ee;
+            --tn-soft: #dbeafe;
+            --tn-text: #111827;
+            --tn-muted: #6b7280;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            color: var(--tn-text);
+            background: #fff;
+        }
+
+        /* Ukuran halaman mengikuti daftar.html / login.html */
+        .page {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* ===== Header (sejajar dengan kartu di bawahnya) ===== */
+        .topbar {
+            padding: 0 20px;                 /* sama dengan padding kiri-kanan .help-section */
+            background: #fff;
+        }
+
+        .topbar-inner {
+            position: relative;
+            width: 100%;
+            max-width: 390px;                /* sama dengan lebar .help-card */
+            margin: 0 auto;
+            padding: 8px 6px;                /* 6px kiri-kanan sama dengan padding .help-card */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Garis bawah navbar, selebar isi kartu */
+        .topbar-inner::after {
+            content: "";
+            position: absolute;
+            left: 6px;
+            right: 6px;
+            bottom: 0;
+            height: 1px;
+            background: var(--tn-border);
+        }
+
+        .topbar img {
+            display: block;
+            height: 40px;
+            width: auto;
+        }
+
+        .btn-menu {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border: 1px solid var(--tn-border);
+            border-radius: 8px;
+            background: #fff;
+            color: #4b5563;
+            font-size: 20px;
+        }
+
+        /* ===== Area utama ===== */
+        .help-section {
+            min-height: calc(100vh - 129px);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 28px 20px 24px;
+        }
+
+        .help-card {
+            width: 100%;
+            max-width: 390px;
+            padding: 0 6px;
+            background: #fff;
+        }
+
+        /* Judul + tombol kembali */
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .btn-back {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--tn-border);
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
+            color: var(--tn-text);
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .page-title h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .page-title p {
+            margin: 2px 0 0;
+            font-size: 11px;
+            line-height: 1.35;
+            color: var(--tn-muted);
+        }
+
+        /* Pencarian */
+        .search-wrap {
+            position: relative;
+            margin-bottom: 22px;
+        }
+
+        .search-wrap i {
+            position: absolute;
+            top: 50%;
+            left: 12px;
+            transform: translateY(-50%);
+            font-size: 14px;
+            color: var(--tn-muted);
+        }
+
+        .search-wrap .form-control {
+            width: 100%;
+            height: 43px;
+            padding: 10px 12px 10px 36px;
+            border: 1px solid #c8ced5;
+            border-radius: 8px;
+            background: #f9fafb;
+            font-size: 12px;
+        }
+
+        .search-wrap .form-control::placeholder {
+            color: #9ca3af;
+        }
+
+        .search-wrap .form-control:focus {
+            border-color: var(--bs-primary);
+            box-shadow: 0 0 0 3px rgba(10, 132, 198, .12);
+            background: #fff;
+        }
+
+        .section-title {
+            margin: 0 0 12px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .block {
+            margin-bottom: 24px;
+        }
+
+        /* ===== Kartu FAQ ===== */
+        .help-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border: 1px solid #eef0f4;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, .10);
+            color: inherit;
+            text-decoration: none;
+            transition: border-color .15s, box-shadow .15s;
+        }
+
+        .help-item:hover,
+        .help-item:focus-visible {
+            border-color: var(--bs-primary);
+            box-shadow: 0 2px 10px rgba(10, 132, 198, .18);
+            color: inherit;
+        }
+
+        .help-item h2,
+        .help-item h3 {
+            margin: 0 0 2px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .help-item p {
+            margin: 0;
+            font-size: 10.5px;
+            line-height: 1.4;
+            color: var(--tn-muted);
+        }
+
+        .icon-box {
+            width: 36px;
+            height: 36px;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            background: var(--tn-soft);
+            color: var(--bs-primary);
+            font-size: 16px;
+        }
+
+        .help-item .chevron {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        /* ===== Kartu kontak ===== */
+        .contact-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .contact-card {
+            width: 120px;
+            padding: 14px 10px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, .10);
+            text-align: center;
+        }
+
+        .contact-card .icon-box {
+            margin: 0 auto 8px;
+            background: #fff;
+            border: 1.5px solid var(--bs-primary);
+        }
+
+        .contact-card h3 {
+            margin: 0 0 8px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .btn-contact {
+            display: block;
+            padding: 6px 0;
+            border-radius: 6px;
+            background: var(--tn-soft);
+            color: var(--bs-primary);
+            font-size: 11px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .btn-contact:hover {
+            background: var(--bs-primary);
+            color: #fff;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            width: 100%;
+            padding: 18px 12px;
+            border-top: 1px solid var(--tn-border);
+            background: #f8fafc;
+            color: var(--tn-muted);
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .footer i {
+            margin-right: 5px;
+        }
+
+        /* ===== Tampilan HP ===== */
+        @media (max-width: 575.98px) {
+            .topbar {
+                padding: 0 16px;             /* sama dengan padding .help-section di HP */
+            }
+
+            .topbar-inner {
+                max-width: 420px;            /* sama dengan .help-card di HP */
+                padding: 6px 0;
+            }
+
+            .topbar-inner::after {
+                left: 0;
+                right: 0;
+            }
+
+            .help-section {
+                min-height: calc(100vh - 119px);
+                padding: 20px 16px 24px;
+            }
+
+            .help-card {
+                max-width: 420px;
+                padding: 0;
+            }
+
+            .search-wrap .form-control {
+                height: 39px;
+            }
+
+            .footer {
+                font-size: 11px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-      <header>
-    <a href="Beranda.html">
-      <img src="../assets/images/logo.svg" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" width="160">
-    </a>
-    <nav aria-label="Menu utama">
-      <details>
-        <summary>Menu</summary>
-        <ul>
-          <li><a href="Beranda.html">Beranda</a></li>
-          <li><a href="cari.html">Cari</a></li>
-          <li><a href="Simpan.html">Simpan</a></li>
-          <li><a href="../akun.html">Profile</a></li>
-        </ul>
-      </details>
-    </nav>
-  </header>
+    <div class="page">
 
-    <main>
-
-        <section aria-labelledby="judul-bantuan">
-
-            <header>
-                <a href="profil.html" aria-label="Kembali ke halaman profil">
-                    ←
+        <!-- Header -->
+        <header class="topbar">
+            <div class="topbar-inner">
+                <a href="Beranda.html">
+                    <img src="../assets/images/logo.svg"
+                         alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu">
                 </a>
+                <button class="btn-menu" type="button"
+                        data-bs-toggle="offcanvas" data-bs-target="#menuDrawer"
+                        aria-controls="menuDrawer" aria-label="Menu">
+                    <i class="bi bi-list"></i>
+                </button>
+            </div>
+        </header>
 
-                <div>
-                    <h1 id="judul-bantuan">Bantuan &amp; Support</h1>
+        <!-- Drawer menu -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="menuDrawer" aria-labelledby="menuDrawerLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="menuDrawerLabel">Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Tutup"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link text-dark" href="Beranda.html">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="cari.html">Cari</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="Simpan.html">Simpan</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="Profile.html">Profile</a></li>
+                </ul>
+            </div>
+        </div>
 
-                    <p>
-                        Butuh bantuan? Temukan jawaban atas pertanyaanmu
-                        atau hubungi kami.
-                    </p>
-                </div>
-            </header>
+        <main class="help-section">
 
+            <div class="help-card">
 
-            <form action="#" method="get" role="search">
-
-                <label for="search-help">
-                    Cari bantuan
-                </label>
-
-                <input
-                    type="search"
-                    id="search-help"
-                    name="q"
-                    placeholder="Cari pertanyaan, topik, atau kata kunci..."
-                >
-
-            </form>
-
-        </section>
-
-
-        <section aria-labelledby="faq">
-
-            <h2 id="faq">Pertanyaan yang sering diajukan</h2>
-
-            <article>
-                <a href="#destinasi-budget">
-                    <span aria-hidden="true">🔗</span>
-
+                <!-- Judul + tombol kembali -->
+                <section class="page-title" aria-labelledby="judul-bantuan">
+                    <a href="Profile.html" class="btn-back" aria-label="Kembali ke halaman profil">
+                        <i class="bi bi-chevron-left"></i>
+                    </a>
                     <div>
-                        <h3>Cara Menemukan destinasi sesuai budget</h3>
-
-                        <p>
-                            Dapatkan rekomendasi tempat wisata yang cocok
-                            dengan budget kamu.
-                        </p>
+                        <h1 id="judul-bantuan">Bantuan &amp; Support</h1>
+                        <p>Butuh bantuan? Temukan jawaban atas pertanyaanmu atau hubungi kami.</p>
                     </div>
+                </section>
 
-                    <span aria-hidden="true">‹</span>
-                </a>
-            </article>
-
-
-            <article>
-                <a href="#rekomendasi-destinasi">
-                    <span aria-hidden="true">◎</span>
-
-                    <div>
-                        <h3>Rekomendasi destinasi populer di Indonesia</h3>
-
-                        <p>
-                            Lihat destinasi favorit berdasarkan kategori
-                            dan musim terbaik.
-                        </p>
+                <!-- Pencarian -->
+                <form action="#" method="get" role="search">
+                    <label for="search-help" class="visually-hidden">Cari bantuan</label>
+                    <div class="search-wrap">
+                        <i class="bi bi-search"></i>
+                        <input type="search" class="form-control" id="search-help" name="q"
+                               placeholder="Cari pertanyaan, topik, atau kata kunci...">
                     </div>
+                </form>
 
-                    <span aria-hidden="true">‹</span>
-                </a>
-            </article>
+                <!-- Pertanyaan yang sering diajukan -->
+                <section class="block" aria-labelledby="faq">
+                    <h2 id="faq" class="section-title">Pertanyaan yang sering diajukan</h2>
 
+                    <div class="d-grid gap-2">
+                        <a href="#destinasi-budget" class="help-item">
+                            <span class="icon-box"><i class="bi bi-link-45deg"></i></span>
+                            <div class="flex-grow-1">
+                                <h3>Cara Menemukan destinasi sesuai budget</h3>
+                                <p>Dapatkan rekomendasi tempat wisata yang cocok dengan budget kamu.</p>
+                            </div>
+                            <i class="bi bi-chevron-left chevron"></i>
+                        </a>
 
-            <article>
-                <a href="#tips-liburan">
-                    <span aria-hidden="true">◇</span>
+                        <a href="#rekomendasi-destinasi" class="help-item">
+                            <span class="icon-box"><i class="bi bi-bullseye"></i></span>
+                            <div class="flex-grow-1">
+                                <h3>Rekomendasi destinasi populer di Indonesia</h3>
+                                <p>Lihat destinasi favorit berdasarkan kategori dan musim terbaik.</p>
+                            </div>
+                            <i class="bi bi-chevron-left chevron"></i>
+                        </a>
 
-                    <div>
-                        <h3>Tips liburan hemat</h3>
+                        <a href="#tips-liburan" class="help-item">
+                            <span class="icon-box"><i class="bi bi-gem"></i></span>
+                            <div class="flex-grow-1">
+                                <h3>Tips liburan hemat</h3>
+                                <p>Panduan mengatur anggaran, transportasi, dan akomodasi agar liburan tetap seru.</p>
+                            </div>
+                            <i class="bi bi-chevron-left chevron"></i>
+                        </a>
 
-                        <p>
-                            Panduan mengatur anggaran, transportasi, dan
-                            akomodasi agar liburan tetap seru.
-                        </p>
+                        <a href="#waktu-terbaik" class="help-item">
+                            <span class="icon-box"><i class="bi bi-calendar-event"></i></span>
+                            <div class="flex-grow-1">
+                                <h3>Waktu terbaik untuk berkunjung</h3>
+                                <p>Kapan waktu paling pas ke suatu destinasi wisata?</p>
+                            </div>
+                            <i class="bi bi-chevron-left chevron"></i>
+                        </a>
+
+                        <a href="#itinerary" class="help-item">
+                            <span class="icon-box"><i class="bi bi-diamond"></i></span>
+                            <div class="flex-grow-1">
+                                <h3>Itinerary &amp; paket perjalanan</h3>
+                                <p>Contoh itinerary untuk berbagai durasi perjalanan.</p>
+                            </div>
+                            <i class="bi bi-chevron-left chevron"></i>
+                        </a>
                     </div>
+                </section>
 
-                    <span aria-hidden="true">‹</span>
-                </a>
-            </article>
+                <!-- Hubungi Kami -->
+                <section class="block" aria-labelledby="hubungi-kami">
+                    <h2 id="hubungi-kami" class="section-title">Hubungi Kami</h2>
 
+                    <div class="contact-row">
+                        <article class="contact-card">
+                            <span class="icon-box"><i class="bi bi-envelope"></i></span>
+                            <h3>Email</h3>
+                            <a href="mailto:cs@tripnesia.co.id" class="btn-contact">Cek Email</a>
+                        </article>
 
-            <article>
-                <a href="#waktu-terbaik">
-                    <span aria-hidden="true">▣</span>
-
-                    <div>
-                        <h3>Waktu terbaik untuk berkunjung</h3>
-
-                        <p>
-                            Kapan waktu paling pas ke suatu destinasi wisata?
-                        </p>
+                        <article class="contact-card">
+                            <span class="icon-box"><i class="bi bi-telephone"></i></span>
+                            <h3>Telepon</h3>
+                            <a href="tel:+6281212345678" class="btn-contact">Hubungi</a>
+                        </article>
                     </div>
+                </section>
 
-                    <span aria-hidden="true">‹</span>
-                </a>
-            </article>
+                <!-- Punya pertanyaan lain -->
+                <section aria-labelledby="pertanyaan-lain">
+                    <a href="kontak-support.html" class="help-item">
+                        <span class="icon-box"><i class="bi bi-lightbulb"></i></span>
+                        <div class="flex-grow-1">
+                            <h2 id="pertanyaan-lain">Punya pertanyaan lain?</h2>
+                            <p>Jangan ragu untuk menghubungi kami. Tim kami siap membantu kamu menemukan destinasi impian!</p>
+                        </div>
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </a>
+                </section>
 
+            </div>
 
-            <article>
-                <a href="#itinerary">
-                    <span aria-hidden="true">♢</span>
+        </main>
 
-                    <div>
-                        <h3>Itinerary &amp; paket perjalanan</h3>
+        <!-- Footer -->
+        <footer class="footer">
+            <i class="bi bi-c-circle"></i>Copyright TripNesia 2026
+        </footer>
 
-                        <p>
-                            Contoh itinerary untuk berbagai durasi perjalanan.
-                        </p>
-                    </div>
+    </div>
 
-                    <span aria-hidden="true">‹</span>
-                </a>
-            </article>
-
-        </section>
-
-
-        <section aria-labelledby="hubungi-kami">
-
-            <h2 id="hubungi-kami">Hubungi Kami</h2>
-
-            <article>
-                <h3>Email</h3>
-
-                <p>cs@tripnesia.co.id</p>
-
-                <a href="mailto:cs@tripnesia.co.id">
-                    CEK EMAIL
-                </a>
-            </article>
-
-
-            <article>
-                <h3>Telepon</h3>
-
-                <p>+62 812 1234 5678</p>
-
-                <a href="tel:+6281212345678">
-                    Hubungi
-                </a>
-            </article>
-
-        </section>
-
-
-        <section aria-labelledby="pertanyaan-lain">
-
-            <article>
-
-                <a href="kontak-support.html">
-
-                    <span aria-hidden="true">💡</span>
-
-                    <div>
-                        <h2 id="pertanyaan-lain">
-                            Punya pertanyaan lain?
-                        </h2>
-
-                        <p>
-                            Jangan ragu untuk menghubungi kami.
-                            Tim kami siap membantu kamu menemukan
-                            destinasi impian!
-                        </p>
-                    </div>
-
-                    <span aria-hidden="true">›</span>
-
-                </a>
-
-            </article>
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        <p>
-            &copy; Copyright TripNesia 2026
-        </p>
-
-    </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
