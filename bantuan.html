@@ -34,7 +34,7 @@
             background: #fff;
         }
 
-        /* Ukuran halaman mengikuti daftar.html / login.html */
+        /* Ukuran halaman mengikuti login.html / daftar.html */
         .page {
             width: 100%;
             max-width: 960px;
@@ -43,22 +43,21 @@
 
         /* ===== Header (sejajar dengan kartu di bawahnya) ===== */
         .topbar {
-            padding: 0 20px;                 /* sama dengan padding kiri-kanan .help-section */
+            padding: 0 20px;
             background: #fff;
         }
 
         .topbar-inner {
             position: relative;
             width: 100%;
-            max-width: 390px;                /* sama dengan lebar .help-card */
+            max-width: 390px;
             margin: 0 auto;
-            padding: 8px 6px;                /* 6px kiri-kanan sama dengan padding .help-card */
+            padding: 8px 6px;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        /* Garis bawah navbar, selebar isi kartu */
         .topbar-inner::after {
             content: "";
             position: absolute;
@@ -76,8 +75,8 @@
         }
 
         .btn-menu {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -95,7 +94,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: 28px 20px 24px;
+            padding: 32px 20px 28px;
         }
 
         .help-card {
@@ -110,12 +109,12 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 18px;
+            margin-bottom: 22px;
         }
 
         .btn-back {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             flex-shrink: 0;
             display: inline-flex;
             align-items: center;
@@ -125,46 +124,46 @@
             background: #fff;
             box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
             color: var(--tn-text);
-            font-size: 14px;
+            font-size: 15px;
             text-decoration: none;
         }
 
         .page-title h1 {
             margin: 0;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
         }
 
         .page-title p {
-            margin: 2px 0 0;
-            font-size: 11px;
-            line-height: 1.35;
+            margin: 3px 0 0;
+            font-size: 12.5px;
+            line-height: 1.4;
             color: var(--tn-muted);
         }
 
         /* Pencarian */
         .search-wrap {
             position: relative;
-            margin-bottom: 22px;
+            margin-bottom: 26px;
         }
 
         .search-wrap i {
             position: absolute;
             top: 50%;
-            left: 12px;
+            left: 13px;
             transform: translateY(-50%);
-            font-size: 14px;
+            font-size: 15px;
             color: var(--tn-muted);
         }
 
         .search-wrap .form-control {
             width: 100%;
             height: 43px;
-            padding: 10px 12px 10px 36px;
+            padding: 10px 12px 10px 38px;
             border: 1px solid #c8ced5;
             border-radius: 8px;
             background: #f9fafb;
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .search-wrap .form-control::placeholder {
@@ -178,21 +177,174 @@
         }
 
         .section-title {
-            margin: 0 0 12px;
-            font-size: 14px;
+            margin: 0 0 14px;
+            font-size: 15px;
             font-weight: 700;
         }
 
         .block {
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
-        /* ===== Kartu FAQ ===== */
+        /* ===== Kartu FAQ (accordion) ===== */
+        .faq-item {
+            border: 1px solid #eef0f4;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, .10);
+            overflow: hidden;
+            transition: border-color .15s, box-shadow .15s;
+        }
+
+        .faq-item:hover,
+        .faq-item.open {
+            border-color: var(--bs-primary);
+            box-shadow: 0 2px 10px rgba(10, 132, 198, .18);
+        }
+
+        .faq-toggle {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 14px;
+            border: 0;
+            background: transparent;
+            color: inherit;
+            text-align: left;
+        }
+
+        .faq-toggle:focus-visible {
+            outline: 2px solid var(--bs-primary);
+            outline-offset: -2px;
+        }
+
+        .faq-toggle h3 {
+            margin: 0 0 3px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .faq-toggle p {
+            margin: 0;
+            font-size: 12px;
+            line-height: 1.45;
+            color: var(--tn-muted);
+        }
+
+        .faq-toggle .chevron {
+            font-size: 14px;
+            color: #9ca3af;
+            transition: transform .2s;
+        }
+
+        .faq-toggle[aria-expanded="true"] .chevron {
+            transform: rotate(180deg);
+            color: var(--bs-primary);
+        }
+
+        /* Isi jawaban */
+        .faq-answer {
+            margin: 0 14px 14px;
+            padding: 12px;
+            border-left: 3px solid var(--bs-primary);
+            border-radius: 0 8px 8px 0;
+            background: #f4f9fd;
+            font-size: 12.5px;
+            line-height: 1.55;
+        }
+
+        .faq-answer ul {
+            margin: 6px 0 0;
+            padding-left: 18px;
+        }
+
+        .faq-answer li {
+            margin-bottom: 2px;
+        }
+
+        .faq-answer a {
+            color: var(--bs-primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .faq-answer a:hover {
+            text-decoration: underline;
+        }
+
+        .icon-box {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            background: var(--tn-soft);
+            color: var(--bs-primary);
+            font-size: 18px;
+        }
+
+        .empty-msg {
+            padding: 14px;
+            text-align: center;
+            font-size: 12.5px;
+            color: var(--tn-muted);
+        }
+
+        /* ===== Kartu kontak ===== */
+        .contact-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .contact-card {
+            width: 140px;
+            padding: 16px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, .10);
+            text-align: center;
+        }
+
+        .contact-card .icon-box {
+            margin: 0 auto 10px;
+            background: #fff;
+            border: 1.5px solid var(--bs-primary);
+        }
+
+        .contact-card h3 {
+            margin: 0 0 10px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .btn-contact {
+            display: block;
+            padding: 8px 0;
+            border-radius: 6px;
+            background: var(--tn-soft);
+            color: var(--bs-primary);
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .btn-contact:hover {
+            background: var(--bs-primary);
+            color: #fff;
+        }
+
+        /* Kartu "Punya pertanyaan lain?" */
         .help-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px;
+            padding: 14px;
             border: 1px solid #eef0f4;
             border-radius: 10px;
             background: #fff;
@@ -209,82 +361,22 @@
             color: inherit;
         }
 
-        .help-item h2,
-        .help-item h3 {
-            margin: 0 0 2px;
-            font-size: 12px;
+        .help-item h2 {
+            margin: 0 0 3px;
+            font-size: 13px;
             font-weight: 700;
         }
 
         .help-item p {
             margin: 0;
-            font-size: 10.5px;
-            line-height: 1.4;
+            font-size: 12px;
+            line-height: 1.45;
             color: var(--tn-muted);
         }
 
-        .icon-box {
-            width: 36px;
-            height: 36px;
-            flex-shrink: 0;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #bfdbfe;
-            border-radius: 8px;
-            background: var(--tn-soft);
-            color: var(--bs-primary);
-            font-size: 16px;
-        }
-
         .help-item .chevron {
-            font-size: 13px;
+            font-size: 14px;
             color: #9ca3af;
-        }
-
-        /* ===== Kartu kontak ===== */
-        .contact-row {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-        }
-
-        .contact-card {
-            width: 120px;
-            padding: 14px 10px;
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-            background: #fff;
-            box-shadow: 0 1px 5px rgba(0, 0, 0, .10);
-            text-align: center;
-        }
-
-        .contact-card .icon-box {
-            margin: 0 auto 8px;
-            background: #fff;
-            border: 1.5px solid var(--bs-primary);
-        }
-
-        .contact-card h3 {
-            margin: 0 0 8px;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .btn-contact {
-            display: block;
-            padding: 6px 0;
-            border-radius: 6px;
-            background: var(--tn-soft);
-            color: var(--bs-primary);
-            font-size: 11px;
-            font-weight: 600;
-            text-decoration: none;
-        }
-
-        .btn-contact:hover {
-            background: var(--bs-primary);
-            color: #fff;
         }
 
         /* ===== Footer ===== */
@@ -305,11 +397,11 @@
         /* ===== Tampilan HP ===== */
         @media (max-width: 575.98px) {
             .topbar {
-                padding: 0 16px;             /* sama dengan padding .help-section di HP */
+                padding: 0 16px;
             }
 
             .topbar-inner {
-                max-width: 420px;            /* sama dengan .help-card di HP */
+                max-width: 420px;
                 padding: 6px 0;
             }
 
@@ -320,16 +412,12 @@
 
             .help-section {
                 min-height: calc(100vh - 119px);
-                padding: 20px 16px 24px;
+                padding: 24px 16px 28px;
             }
 
             .help-card {
                 max-width: 420px;
                 padding: 0;
-            }
-
-            .search-wrap .form-control {
-                height: 39px;
             }
 
             .footer {
@@ -389,13 +477,14 @@
                     </div>
                 </section>
 
-                <!-- Pencarian -->
-                <form action="#" method="get" role="search">
+                <!-- Pencarian (menyaring daftar pertanyaan) -->
+                <form id="searchForm" action="#" method="get" role="search">
                     <label for="search-help" class="visually-hidden">Cari bantuan</label>
                     <div class="search-wrap">
                         <i class="bi bi-search"></i>
                         <input type="search" class="form-control" id="search-help" name="q"
-                               placeholder="Cari pertanyaan, topik, atau kata kunci...">
+                               placeholder="Cari pertanyaan, topik, atau kata kunci..."
+                               autocomplete="off">
                     </div>
                 </form>
 
@@ -403,51 +492,125 @@
                 <section class="block" aria-labelledby="faq">
                     <h2 id="faq" class="section-title">Pertanyaan yang sering diajukan</h2>
 
-                    <div class="d-grid gap-2">
-                        <a href="#destinasi-budget" class="help-item">
-                            <span class="icon-box"><i class="bi bi-link-45deg"></i></span>
-                            <div class="flex-grow-1">
-                                <h3>Cara Menemukan destinasi sesuai budget</h3>
-                                <p>Dapatkan rekomendasi tempat wisata yang cocok dengan budget kamu.</p>
-                            </div>
-                            <i class="bi bi-chevron-left chevron"></i>
-                        </a>
+                    <div class="d-grid gap-2" id="faqList">
 
-                        <a href="#rekomendasi-destinasi" class="help-item">
-                            <span class="icon-box"><i class="bi bi-bullseye"></i></span>
-                            <div class="flex-grow-1">
-                                <h3>Rekomendasi destinasi populer di Indonesia</h3>
-                                <p>Lihat destinasi favorit berdasarkan kategori dan musim terbaik.</p>
+                        <!-- 1 -->
+                        <div class="faq-item">
+                            <button class="faq-toggle collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#jawab1"
+                                    aria-expanded="false" aria-controls="jawab1">
+                                <span class="icon-box"><i class="bi bi-link-45deg"></i></span>
+                                <div class="flex-grow-1">
+                                    <h3>Cara menemukan destinasi sesuai budget</h3>
+                                    <p>Dapatkan rekomendasi tempat wisata yang cocok dengan budget kamu.</p>
+                                </div>
+                                <i class="bi bi-chevron-down chevron"></i>
+                            </button>
+                            <div id="jawab1" class="collapse" data-bs-parent="#faqList">
+                                <div class="faq-answer">
+                                    Gunakan fitur <strong>Filter Budget</strong> di halaman Beranda, lalu pilih batas
+                                    biaya perjalananmu. Daftar destinasi akan otomatis menyesuaikan.
+                                    <ul>
+                                        <li>Buka halaman <a href="Beranda.html">Beranda</a> dan ketuk ikon Filter Budget.</li>
+                                        <li>Pilih rentang budget yang kamu inginkan, lalu ketuk <em>Terapkan</em>.</li>
+                                        <li>Lihat rincian estimasi biaya per orang di setiap destinasi.</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <i class="bi bi-chevron-left chevron"></i>
-                        </a>
+                        </div>
 
-                        <a href="#tips-liburan" class="help-item">
-                            <span class="icon-box"><i class="bi bi-gem"></i></span>
-                            <div class="flex-grow-1">
-                                <h3>Tips liburan hemat</h3>
-                                <p>Panduan mengatur anggaran, transportasi, dan akomodasi agar liburan tetap seru.</p>
+                        <!-- 2 -->
+                        <div class="faq-item">
+                            <button class="faq-toggle collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#jawab2"
+                                    aria-expanded="false" aria-controls="jawab2">
+                                <span class="icon-box"><i class="bi bi-bullseye"></i></span>
+                                <div class="flex-grow-1">
+                                    <h3>Rekomendasi destinasi populer di Indonesia</h3>
+                                    <p>Lihat destinasi favorit berdasarkan kategori dan musim terbaik.</p>
+                                </div>
+                                <i class="bi bi-chevron-down chevron"></i>
+                            </button>
+                            <div id="jawab2" class="collapse" data-bs-parent="#faqList">
+                                <div class="faq-answer">
+                                    Destinasi populer ditampilkan di bagian <strong>Destinasi Populer</strong> pada
+                                    Beranda, misalnya Kebun Raya Bogor, Pantai Sawarna, dan Taman Safari Indonesia.
+                                    Ketuk salah satu kartu untuk melihat lokasi, durasi, dan estimasi biayanya.
+                                </div>
                             </div>
-                            <i class="bi bi-chevron-left chevron"></i>
-                        </a>
+                        </div>
 
-                        <a href="#waktu-terbaik" class="help-item">
-                            <span class="icon-box"><i class="bi bi-calendar-event"></i></span>
-                            <div class="flex-grow-1">
-                                <h3>Waktu terbaik untuk berkunjung</h3>
-                                <p>Kapan waktu paling pas ke suatu destinasi wisata?</p>
+                        <!-- 3 -->
+                        <div class="faq-item">
+                            <button class="faq-toggle collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#jawab3"
+                                    aria-expanded="false" aria-controls="jawab3">
+                                <span class="icon-box"><i class="bi bi-gem"></i></span>
+                                <div class="flex-grow-1">
+                                    <h3>Tips liburan hemat</h3>
+                                    <p>Panduan mengatur anggaran, transportasi, dan akomodasi agar liburan tetap seru.</p>
+                                </div>
+                                <i class="bi bi-chevron-down chevron"></i>
+                            </button>
+                            <div id="jawab3" class="collapse" data-bs-parent="#faqList">
+                                <div class="faq-answer">
+                                    Beberapa cara agar liburan tetap hemat:
+                                    <ul>
+                                        <li>Tentukan total budget dan bagi ke transportasi, penginapan, makan, dan tiket.</li>
+                                        <li>Berangkat di hari kerja karena harga biasanya lebih murah.</li>
+                                        <li>Pesan penginapan dan transportasi jauh-jauh hari.</li>
+                                        <li>Berbagi biaya dengan teman atau keluarga.</li>
+                                    </ul>
+                                </div>
                             </div>
-                            <i class="bi bi-chevron-left chevron"></i>
-                        </a>
+                        </div>
 
-                        <a href="#itinerary" class="help-item">
-                            <span class="icon-box"><i class="bi bi-diamond"></i></span>
-                            <div class="flex-grow-1">
-                                <h3>Itinerary &amp; paket perjalanan</h3>
-                                <p>Contoh itinerary untuk berbagai durasi perjalanan.</p>
+                        <!-- 4 -->
+                        <div class="faq-item">
+                            <button class="faq-toggle collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#jawab4"
+                                    aria-expanded="false" aria-controls="jawab4">
+                                <span class="icon-box"><i class="bi bi-calendar-event"></i></span>
+                                <div class="flex-grow-1">
+                                    <h3>Waktu terbaik untuk berkunjung</h3>
+                                    <p>Kapan waktu paling pas ke suatu destinasi wisata?</p>
+                                </div>
+                                <i class="bi bi-chevron-down chevron"></i>
+                            </button>
+                            <div id="jawab4" class="collapse" data-bs-parent="#faqList">
+                                <div class="faq-answer">
+                                    Umumnya musim kemarau (sekitar April sampai Oktober) cocok untuk wisata pantai dan
+                                    alam terbuka. Hindari akhir pekan panjang dan libur sekolah kalau ingin suasana
+                                    lebih tenang dan harga lebih terjangkau.
+                                </div>
                             </div>
-                            <i class="bi bi-chevron-left chevron"></i>
-                        </a>
+                        </div>
+
+                        <!-- 5 -->
+                        <div class="faq-item">
+                            <button class="faq-toggle collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#jawab5"
+                                    aria-expanded="false" aria-controls="jawab5">
+                                <span class="icon-box"><i class="bi bi-diamond"></i></span>
+                                <div class="flex-grow-1">
+                                    <h3>Itinerary &amp; paket perjalanan</h3>
+                                    <p>Contoh itinerary untuk berbagai durasi perjalanan.</p>
+                                </div>
+                                <i class="bi bi-chevron-down chevron"></i>
+                            </button>
+                            <div id="jawab5" class="collapse" data-bs-parent="#faqList">
+                                <div class="faq-answer">
+                                    Setiap destinasi menampilkan durasi yang disarankan, misalnya 1 hari, 2 hari 1
+                                    malam, atau 3 hari 2 malam, lengkap dengan rincian estimasi biaya. Simpan
+                                    destinasi favoritmu di halaman <a href="Simpan.html">Simpan</a> untuk
+                                    membandingkannya nanti.
+                                </div>
+                            </div>
+                        </div>
+
+                        <p id="emptyMsg" class="empty-msg d-none mb-0">
+                            Tidak ada pertanyaan yang cocok dengan pencarianmu.
+                        </p>
                     </div>
                 </section>
 
@@ -494,5 +657,37 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const items = document.querySelectorAll("#faqList .faq-item");
+
+        // Tandai kartu yang sedang terbuka (untuk sorotan biru)
+        items.forEach(item => {
+            const panel = item.querySelector(".collapse");
+            panel.addEventListener("show.bs.collapse", () => item.classList.add("open"));
+            panel.addEventListener("hide.bs.collapse", () => item.classList.remove("open"));
+        });
+
+        // Pencarian: saring pertanyaan berdasarkan judul, deskripsi, dan isi jawaban
+        const searchInput = document.getElementById("search-help");
+
+        function saring() {
+            const kata = searchInput.value.trim().toLowerCase();
+            let tampil = 0;
+
+            items.forEach(item => {
+                const cocok = item.textContent.toLowerCase().includes(kata);
+                item.classList.toggle("d-none", !cocok);
+                if (cocok) tampil++;
+            });
+
+            document.getElementById("emptyMsg").classList.toggle("d-none", tampil > 0);
+        }
+
+        searchInput.addEventListener("input", saring);
+        document.getElementById("searchForm").addEventListener("submit", e => {
+            e.preventDefault();
+            saring();
+        });
+    </script>
 </body>
 </html>

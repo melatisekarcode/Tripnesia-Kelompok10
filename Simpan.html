@@ -19,31 +19,16 @@
     .btn-primary { --bs-btn-bg: #0a84c6; --bs-btn-border-color: #0a84c6; --bs-btn-hover-bg: #0873ab; --bs-btn-hover-border-color: #0873ab; --bs-btn-active-bg: #0873ab; }
     .btn-outline-secondary { --bs-btn-color: #4b5563; --bs-btn-border-color: var(--tn-border); }
     .page { max-width: 960px; }
-    
-    /* Nav Tabs Kustom */
-    .nav-pills-custom .nav-link {
-      color: #4b5563;
-      border-radius: 50px;
-      padding: 8px 20px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-right: 10px;
-      background-color: var(--tn-soft);
-      border: 1px solid var(--tn-border);
-    }
-    .nav-pills-custom .nav-link.active {
-      background-color: var(--bs-primary);
-      color: white;
-      border-color: var(--bs-primary);
-    }
 
-    /* Card Destinasi (Disesuaikan dari beranda) */
+    /* Card Destinasi (disamakan dengan Beranda) */
     .dest-card { border: 1px solid var(--tn-border); border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,.06); overflow: hidden; height: 100%; transition: transform .15s, border-color .15s; background: #fff; text-align: left; width: 100%; padding: 0; position: relative; }
     .dest-card:hover { transform: translateY(-2px); border-color: var(--bs-primary); }
     .dest-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
-    .dest-card .info { padding: 12px; }
-    
-    /* Tombol Opsi (Tiga Titik) di atas gambar */
+    .dest-card .info { padding: 8px; }
+    .dest-card .info .fw-bold { font-size: .8rem; }
+    .dest-card .info .small { font-size: .7rem !important; }
+
+    /* Tombol opsi (tiga titik) di atas gambar */
     .btn-more {
       position: absolute;
       top: 8px;
@@ -51,8 +36,9 @@
       background-color: rgba(255, 255, 255, 0.9);
       border: none;
       border-radius: 50%;
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
+      font-size: .8rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -62,7 +48,7 @@
     }
     .btn-more:hover { background-color: #ffffff; color: var(--bs-primary); }
 
-    /* Tombol Simpan di dalam card */
+    /* Tombol Tersimpan di dalam card */
     .btn-simpan-badge {
       display: inline-flex;
       align-items: center;
@@ -72,11 +58,11 @@
       color: var(--bs-primary);
       border: 1px solid var(--bs-primary);
       border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 0.8rem;
+      padding: 5px 8px;
+      font-size: .7rem;
       font-weight: 600;
       width: 100%;
-      margin-top: 10px;
+      margin-top: 8px;
       transition: all 0.2s;
     }
     .btn-simpan-badge:hover {
@@ -84,9 +70,15 @@
       color: #fff;
     }
 
+    @media (min-width: 768px) {
+      .dest-card .info { padding: 12px; }
+      .dest-card .info .fw-bold { font-size: .95rem; }
+      .dest-card .info .small { font-size: .8rem !important; }
+      .btn-more { width: 32px; height: 32px; font-size: 1rem; }
+      .btn-simpan-badge { padding: 6px 12px; font-size: .8rem; }
+    }
+
     footer { border-top: 1px solid var(--tn-border); }
-    #toast-wrap { position: fixed; top: 64px; left: 0; right: 0; z-index: 1090; display: flex; justify-content: center; pointer-events: none; }
-    #toast-wrap .toast { pointer-events: auto; }
   </style>
 </head>
 
@@ -117,9 +109,8 @@
         <li class="nav-item"><a class="nav-link fw-bold text-primary" href="Simpan.html">Simpan</a></li>
         <li class="nav-item"><a class="nav-link text-dark" href="Profile.html">Profile</a></li>
       </ul>
-      <div class="d-flex gap-2 mt-auto">
-        <a href="login.html" class="btn btn-primary flex-fill">Masuk</a>
-        <a href="daftar.html" class="btn btn-outline-secondary flex-fill">Daftar</a>
+      <div class="mt-auto">
+        <a href="Landing%20Page.html" class="btn btn-outline-secondary w-100">Keluar</a>
       </div>
     </div>
   </div>
@@ -127,31 +118,28 @@
   <main class="page container py-4">
 
     <!-- Judul & Deskripsi Halaman -->
-<section class="mb-4">
-    <!-- Judul Halaman (sebelumnya berbentuk tab/tombol) -->
-    <h4 class="fw-bold mb-2">Tempat Wisata</h4>
-    
-    <!-- Teks Deskripsi -->
-    <p class="text-secondary">
+    <section class="mb-4">
+      <h1 class="h5 fw-bold mb-1">Tempat Wisata</h1>
+      <p class="text-secondary small">
         Tempat Wisata yang sudah kamu simpan untuk dikunjungi nanti.
-    </p>
-</section>
+      </p>
+    </section>
 
-    <!-- Daftar Tempat Wisata Tersimpan (Bentuk Grid) -->
+    <!-- Daftar Tempat Wisata Tersimpan (Grid) -->
     <section>
       <div class="row g-3">
 
         <!-- Destinasi 1 -->
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="col-6 col-md-4 col-lg-3">
           <div class="dest-card">
             <img src="assets/images/pantaisawarna.png" alt="Pantai Sawarna">
             <button class="btn-more" title="Opsi Lainnya"><i class="bi bi-three-dots-vertical"></i></button>
             <div class="info">
-              <div class="fw-bold fs-6 mb-1">Pantai Sawarna</div>
+              <div class="fw-bold mb-1">Pantai Sawarna</div>
               <div class="small text-secondary mb-1"><i class="bi bi-geo-alt-fill text-danger"></i> Banten</div>
               <div class="small text-secondary"><i class="bi bi-star-fill text-warning"></i> 4.8 (320 Ulasan)</div>
-              
-              <button class="btn-simpan-badge mt-3">
+
+              <button class="btn-simpan-badge">
                 <i class="bi bi-bookmark-check-fill"></i> Tersimpan
               </button>
             </div>
@@ -159,16 +147,16 @@
         </div>
 
         <!-- Destinasi 2 -->
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="col-6 col-md-4 col-lg-3">
           <div class="dest-card">
             <img src="assets/images/tamansafari.png" alt="Taman Safari Indonesia">
             <button class="btn-more" title="Opsi Lainnya"><i class="bi bi-three-dots-vertical"></i></button>
             <div class="info">
-              <div class="fw-bold fs-6 mb-1">Taman Safari Indonesia</div>
+              <div class="fw-bold mb-1">Taman Safari Indonesia</div>
               <div class="small text-secondary mb-1"><i class="bi bi-geo-alt-fill text-danger"></i> Cisarua, Kab Bogor</div>
               <div class="small text-secondary"><i class="bi bi-star-fill text-warning"></i> 4.7 (72.715 Ulasan)</div>
-              
-              <button class="btn-simpan-badge mt-3">
+
+              <button class="btn-simpan-badge">
                 <i class="bi bi-bookmark-check-fill"></i> Tersimpan
               </button>
             </div>
@@ -176,16 +164,16 @@
         </div>
 
         <!-- Destinasi 3 -->
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="col-6 col-md-4 col-lg-3">
           <div class="dest-card">
             <img src="assets/images/kebunrayabogor.png" alt="Kebun Raya Bogor">
             <button class="btn-more" title="Opsi Lainnya"><i class="bi bi-three-dots-vertical"></i></button>
             <div class="info">
-              <div class="fw-bold fs-6 mb-1">Kebun Raya Bogor</div>
+              <div class="fw-bold mb-1">Kebun Raya Bogor</div>
               <div class="small text-secondary mb-1"><i class="bi bi-geo-alt-fill text-danger"></i> Bogor</div>
               <div class="small text-secondary"><i class="bi bi-star-fill text-warning"></i> 4.7 (105.112 Ulasan)</div>
-              
-              <button class="btn-simpan-badge mt-3">
+
+              <button class="btn-simpan-badge">
                 <i class="bi bi-bookmark-check-fill"></i> Tersimpan
               </button>
             </div>
@@ -193,16 +181,16 @@
         </div>
 
         <!-- Destinasi 4 -->
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="col-6 col-md-4 col-lg-3">
           <div class="dest-card">
             <img src="assets/images/curugcimahi.png" alt="Curug Cimahi">
             <button class="btn-more" title="Opsi Lainnya"><i class="bi bi-three-dots-vertical"></i></button>
             <div class="info">
-              <div class="fw-bold fs-6 mb-1">Curug Cimahi</div>
+              <div class="fw-bold mb-1">Curug Cimahi</div>
               <div class="small text-secondary mb-1"><i class="bi bi-geo-alt-fill text-danger"></i> Bandung</div>
               <div class="small text-secondary"><i class="bi bi-star-fill text-warning"></i> 4.7 (1.550 Ulasan)</div>
-              
-              <button class="btn-simpan-badge mt-3">
+
+              <button class="btn-simpan-badge">
                 <i class="bi bi-bookmark-check-fill"></i> Tersimpan
               </button>
             </div>
@@ -214,7 +202,7 @@
 
   </main>
 
-  <footer class="text-center text-secondary small py-4 mt-5">
+  <footer class="text-center text-secondary small py-3 mt-4">
     <i class="bi bi-c-circle"></i> Copyright TripNesia 2026
   </footer>
 

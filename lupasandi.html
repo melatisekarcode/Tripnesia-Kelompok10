@@ -42,9 +42,9 @@
         .forgot-section {
             min-height: calc(100vh - 65px);
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
-            padding: 40px 20px 24px;
+            padding: 40px 20px;
         }
 
         /* Ukuran kartu sama dengan register-card */
@@ -52,8 +52,7 @@
             position: relative;
             width: 100%;
             max-width: 390px;
-            min-height: 620px;
-            padding: 0 26px 50px;
+            padding: 28px 26px;
             background: #fff;
         }
 
@@ -76,24 +75,24 @@
 
         /* Form lupa kata sandi */
         .forgot-content {
-            padding-top: 69px;
+            padding-top: 0;
         }
 
         .forgot-heading {
             margin: 0 0 12px;
             color: #080808;
             text-align: center;
-            font-size: 21px;
-            line-height: 28px;
+            font-size: 22px;
+            line-height: 30px;
             font-weight: 700;
         }
 
         .forgot-description {
-            margin: 0 0 35px;
+            margin: 0 0 28px;
             color: #9299a5;
             text-align: center;
-            font-size: 10px;
-            line-height: 16px;
+            font-size: 12px;
+            line-height: 18px;
         }
 
         /* Input email */
@@ -101,17 +100,17 @@
             display: block;
             margin-bottom: 7px;
             color: #222;
-            font-size: 10px;
+            font-size: 13px;
         }
 
         .form-control {
             width: 100%;
-            height: 40px;
+            height: 43px;
             padding: 10px 12px;
             border: 1px solid #c8ced5;
             border-radius: 8px;
             background: #f9fafb;
-            font-size: 10px;
+            font-size: 13px;
         }
 
         .form-control::placeholder {
@@ -126,14 +125,14 @@
         /* Tombol kirim */
         .btn-send {
             width: 100%;
-            height: 40px;
+            height: 43px;
             margin-top: 21px;
             border: 1px solid var(--bs-primary);
             border-radius: 8px;
             background: var(--bs-primary);
             color: #fff;
-            font-size: 10px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         .btn-send:hover {
@@ -146,60 +145,44 @@
         .result-message {
             display: none;
             margin-top: 15px;
-            font-size: 11px;
+            font-size: 12.5px;
         }
 
-        /* Footer sama dengan halaman daftar */
         .footer {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            min-height: 31px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            padding: 8px 12px;
-            border-top: 1px solid var(--tn-border);
-            background: #f8fafc;
-            color: #6b7280;
-            font-size: 9px;
+        width: 100%;
+        padding: 18px 12px;
+        border-top: 1px solid var(--tn-border);
+        background: #f8fafc;
+        text-align: center;
+        color: #6b7280;
+        font-size: 12px;
         }
 
-        /* Responsif mengikuti daftar.html */
+        .footer i {
+            margin-right: 5px;
+        }
+
         @media (max-width: 575.98px) {
-            .forgot-section {
-                min-height: calc(100vh - 55px);
-                padding: 24px 16px;
-            }
+    .forgot-section {
+        min-height: calc(100vh - 55px);
+        padding: 24px 16px;
+    }
 
-            .forgot-card {
-                max-width: 420px;
-                min-height: 620px;
-                padding-right: 10px;
-                padding-left: 10px;
-            }
+    .forgot-card {
+        max-width: 420px;
+        padding: 22px 10px;
+    }
 
-            .forgot-content {
-                padding-top: 69px;
-            }
+    .footer {
+        font-size: 11px;
+    }
+}
 
-            .footer {
-                font-size: 11px;
-            }
-        }
-
-        @media (max-width: 360px) {
-            .forgot-content {
-                padding-right: 10px;
-                padding-left: 10px;
-            }
-
-            .forgot-heading {
-                font-size: 19px;
-            }
-        }
+@media (max-width: 360px) {
+    .forgot-heading {
+        font-size: 20px;
+    }
+}
     </style>
 </head>
 
@@ -252,17 +235,17 @@
 
                 </div>
 
-                <!-- Footer -->
-                <footer class="footer">
-                    <i class="bi bi-c-circle"></i>
-                    <span>Copyright TripNesia 2026</span>
-                </footer>
-
             </div>
 
         </section>
 
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <i class="bi bi-c-circle"></i>
+        Copyright TripNesia 2026
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 

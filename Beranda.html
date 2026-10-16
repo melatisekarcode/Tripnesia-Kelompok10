@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tripnesia - Rencanakan Liburan</title>
+  <title>Tripnesia - Beranda</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
@@ -56,7 +56,7 @@
     </div>
   </header>
 
-  <!-- Drawer menu (interaksi 1) -->
+  <!-- Drawer menu: semua link langsung bisa dipakai -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="menuDrawer" aria-labelledby="menuDrawerLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="menuDrawerLabel">Menu</h5>
@@ -64,25 +64,24 @@
     </div>
     <div class="offcanvas-body d-flex flex-column">
       <ul class="nav flex-column mb-4">
-        <li class="nav-item"><a class="nav-link text-dark need-login" href="Beranda.html">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link text-dark need-login" href="cari.html">Cari</a></li>
-        <li class="nav-item"><a class="nav-link text-dark need-login" href="Simpan.html">Simpan</a></li>
-        <li class="nav-item"><a class="nav-link text-dark need-login" href="Profile.html">Profile</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="Beranda.html">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="cari.html">Cari</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="Simpan.html">Simpan</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="Profile.html">Profile</a></li>
       </ul>
-      <div class="d-flex gap-2 mt-auto">
-        <a href="login.html" class="btn btn-primary flex-fill">Masuk</a>
-        <a href="daftar.html" class="btn btn-outline-secondary flex-fill">Daftar</a>
+      <div class="mt-auto">
+        <a href="index.html" class="btn btn-outline-secondary w-100">Keluar</a>
       </div>
     </div>
   </div>
 
-  <!-- Toast login (interaksi 2) -->
+  <!-- Toast konfirmasi pilih destinasi -->
   <div id="toast-wrap">
-    <div id="loginToast" class="toast align-items-center bg-white border shadow" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="pilihToast" class="toast align-items-center bg-white border shadow" role="status" aria-live="polite" aria-atomic="true">
       <div class="d-flex">
         <div class="toast-body">
-          <i class="bi bi-exclamation-circle-fill text-danger me-2"></i>
-          Silahkan <a href="login.html">Login</a>/<a href="daftar.html">Daftar</a> dahulu
+          <i class="bi bi-check-circle-fill text-success me-2"></i>
+          <span id="toastMsg"></span> <a href="Simpan.html">Lihat Simpan</a>
         </div>
         <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Tutup"></button>
       </div>
@@ -111,25 +110,25 @@
     <section id="fitur" class="mb-4">
       <div class="row g-2 text-center">
         <div class="col-3">
-          <a class="feature-btn d-block need-login" href="#detail">
+          <a class="feature-btn d-block" href="#detail">
             <span class="feature-icon"><i class="bi bi-credit-card"></i></span>
             Rekomendasi Budget
           </a>
         </div>
         <div class="col-3">
-          <a class="feature-btn d-block need-login" href="#destinasi">
+          <a class="feature-btn d-block" href="#destinasi">
             <span class="feature-icon"><i class="bi bi-star"></i></span>
             Destinasi Populer
           </a>
         </div>
         <div class="col-3">
-          <button type="button" class="feature-btn d-block w-100 need-login" data-bs-toggle="modal" data-bs-target="#filterModal">
+          <button type="button" class="feature-btn d-block w-100" data-bs-toggle="modal" data-bs-target="#filterModal">
             <span class="feature-icon"><i class="bi bi-funnel"></i></span>
             Filter Budget
           </button>
         </div>
         <div class="col-3">
-          <a class="feature-btn d-block need-login" href="Simpan.html">
+          <a class="feature-btn d-block" href="Simpan.html">
             <span class="feature-icon"><i class="bi bi-heart"></i></span>
             Destinasi Favorit
           </a>
@@ -200,13 +199,13 @@
       </div>
 
       <div class="d-flex justify-content-end gap-2">
-        <button type="button" class="btn btn-outline-secondary btn-sm px-3" data-bs-toggle="modal" data-bs-target="#detailModal">Lihat Detail</button>
+        <a id="btnDetail" href="detailwisata/pantaisawarna/index.html" class="btn btn-outline-secondary btn-sm px-3">Lihat Detail</a>
         <button type="button" class="btn btn-primary btn-sm px-3" id="btnPilih">Pilih Destinasi</button>
       </div>
     </section>
   </main>
 
-  <!-- Modal filter budget (interaksi 3) -->
+  <!-- Modal filter budget -->
   <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -256,12 +255,14 @@
     const DESTINASI = {
       kebunraya: {
         nama: "Kebun Raya Bogor", lokasi: "Jawa Barat", durasi: "1 Hari",
+        halaman: "detailwisata/kebunrayabogor/index.html",  
         img: "../assets/images/kebunrayabogor.png",
         deskripsi: "Kebun botani luas di tengah Kota Bogor, cocok untuk wisata santai bersama keluarga.",
         rincian: [["Transportasi PP", 50000], ["Penginapan", 0], ["Makan & Minum", 40000], ["Aktivitas & Tiket Masuk", 15500]]
       },
       sawarna: {
         nama: "Pantai Sawarna", lokasi: "Banten", durasi: "2 Hari 1 Malam",
+        halaman: "detailwisata/pantaisawarna/index.html",
         img: "../assets/images/pantaisawarna.png",
         deskripsi: "Pantai dengan tebing karang dan ombak besar di pesisir selatan Banten.",
         rincian: [["Transportasi PP", 300000], ["Penginapan (1 malam)", 300000], ["Makan & Minum", 150000], ["Aktivitas & Tiket Masuk", 100000]],
@@ -269,6 +270,7 @@
       },
       safari: {
         nama: "Taman Safari Indonesia", lokasi: "Jawa Barat", durasi: "3 Hari 2 Malam",
+        halaman: "detailwisata/tamansafari/index.html",
         img: "../assets/images/tamansafari.png",
         deskripsi: "Taman safari dengan koleksi satwa dari berbagai penjuru dunia di kawasan Puncak.",
         rincian: [["Transportasi PP", 100000], ["Penginapan (2 malam)", 500000], ["Makan & Minum", 250000], ["Aktivitas & Tiket Masuk", 150000]]
@@ -295,10 +297,7 @@
       $("dRincian").innerHTML = d.rincian.map(r =>
         `<li class="d-flex justify-content-between"><span>${r[0]}</span><span>${rp(r[1])}</span></li>`).join("");
 
-      $("mImg").src = d.img; $("mImg").alt = d.nama;
-      $("mNama").textContent = d.nama;
-      $("mLokasi").textContent = d.lokasi + " • " + d.durasi;
-      $("mDeskripsi").textContent = d.deskripsi;
+      $("btnDetail").href = d.halaman;
 
       document.querySelectorAll("#destList .dest-card").forEach(c => c.classList.remove("active"));
       document.querySelector(`#destList [data-id="${id}"] .dest-card`).classList.add("active");
@@ -322,20 +321,10 @@
       $("filterInfo").textContent = max ? "Maks. " + rp(max) : "";
     });
 
-    function peringatanLogin() {
-      bootstrap.Toast.getOrCreateInstance($("loginToast"), { delay: 4000 }).show();
-    }
-
-    $("btnPilih").addEventListener("click", peringatanLogin);
-
-    // Link menu -> tutup drawer lalu tampilkan peringatan
-    document.querySelectorAll(".need-login").forEach(link => {
-      link.addEventListener("click", e => {
-        e.preventDefault();
-        const drawer = bootstrap.Offcanvas.getInstance($("menuDrawer"));
-        if (drawer) drawer.hide();   // pengecekan ini penting, kalau tidak error saat drawer belum pernah dibuka
-        peringatanLogin();
-      });
+    // Pilih destinasi -> tampilkan konfirmasi (belum disimpan ke backend)
+    $("btnPilih").addEventListener("click", () => {
+      $("toastMsg").textContent = DESTINASI[terpilih].nama + " dipilih.";
+      bootstrap.Toast.getOrCreateInstance($("pilihToast"), { delay: 4000 }).show();
     });
 
     tampilkan(terpilih);
