@@ -193,7 +193,7 @@
   <!-- Header -->
   <header class="border-bottom bg-white sticky-top">
     <div class="page container d-flex align-items-center justify-content-between py-2">
-      <a href="Beranda.html">
+      <a href="<?= base_url('/'); ?>">
         <img src="../assets/images/logo.svg" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="36">
       </a>
       <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuDrawer" aria-controls="menuDrawer" aria-label="Menu">
@@ -210,10 +210,10 @@
     </div>
     <div class="offcanvas-body">
       <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link text-dark" href="Beranda.html">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link text-dark" href="cari.html">Cari</a></li>
-        <li class="nav-item"><a class="nav-link text-dark" href="Simpan.html">Simpan</a></li>
-        <li class="nav-item"><a class="nav-link text-dark" href="Profile.html">Profile</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="<?= base_url('/'); ?>">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="<?= base_url('cari'); ?>">Cari</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="<?= base_url('simpan'); ?>">Simpan</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="<?= base_url('profile'); ?>">Profile</a></li>
       </ul>
     </div>
   </div>
@@ -301,12 +301,11 @@
 
     <!-- Hasil Rekomendasi -->
     <section>
-      <!-- Bagian tombol Terpopuler telah dihapus di sini, menyisakan judul saja -->
       <div class="mb-3">
         <h1 class="h6 fw-bold mb-0">Hasil Rekomendasi</h1>
       </div>
 
-      <!-- Daftar Destinasi yang Dinamis -->
+      <!-- Daftar Destinasi -->
       <ul class="list-unstyled d-flex flex-column gap-3" id="destinationList">
         <!-- Item 1: Curug Cimahi -->
         <li class="dest-item" data-category="air-terjun" data-duration="1-hari" data-budget="250000">
@@ -319,7 +318,7 @@
                 <p class="price">Rp 150.000 - Rp 250.000</p>
                 <p class="duration"><i class="bi bi-clock"></i> 1 Hari</p>
               </div>
-              <a href="/detailwisata/curugcimahi/index.html" class="detail-btn">Lihat Detail</a>
+              <a href="<?= base_url('detailwisata/curugcimahi'); ?>" class="detail-btn">Lihat Detail</a>
             </div>
           </article>
         </li>
@@ -334,7 +333,7 @@
                 <p class="price">Rp 15.500 - Rp 50.000</p>
                 <p class="duration"><i class="bi bi-clock"></i> 1 hari</p>
               </div>
-              <a href="/detailwisata/kebunrayabogor/index.html" class="detail-btn">Lihat Detail</a>
+              <a href="<?= base_url('detailwisata/kebunrayabogor'); ?>" class="detail-btn">Lihat Detail</a>
             </div>
           </article>
         </li>
@@ -349,7 +348,7 @@
                 <p class="price">Rp 500.000 - Rp 850.000</p>
                 <p class="duration"><i class="bi bi-clock"></i> 2 Hari 1 Malam</p>
               </div>
-              <a href="/detailwisata/pantaisawarna/index.html" class="detail-btn">Lihat Detail</a>
+              <a href="<?= base_url('detailwisata/pantaisawarna'); ?>" class="detail-btn">Lihat Detail</a>
             </div>
           </article>
         </li>
@@ -364,11 +363,17 @@
                 <p class="price">Rp 600.000 - Rp 1.000.000</p>
                 <p class="duration"><i class="bi bi-clock"></i> 2 Hari 1 Malam</p>
               </div>
-              <a href="/detailwisata/tamansafari/index.html" class="detail-btn">Lihat Detail</a>
+              <a href="<?= base_url('detailwisata/tamansafari'); ?>" class="detail-btn">Lihat Detail</a>
             </div>
           </article>
         </li>
       </ul>
+
+      <!-- Empty state: muncul kalau hasil pencarian kosong -->
+      <div id="emptyState" class="text-center py-5 d-none">
+        <p class="mb-3">Yah, destinasi tidak ditemukan <i class="bi bi-search"></i></p>
+        <button type="button" id="btnReset" class="btn btn-outline-secondary btn-sm">Reset Pencarian</button>
+      </div>
     </section>
   </main>
 
@@ -376,59 +381,112 @@
     <i class="bi bi-c-circle"></i> Copyright TripNesia 2026
   </footer>
 
-  <!-- Bootstrap JS Bundle & Interactive Script -->
+  <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    const pills = document.querySelectorAll('.filter-pill');
-    const panels = document.querySelectorAll('.filter-panel');
-    const destItems = document.querySelectorAll('.dest-item');
 
+  <!-- Script pencarian & filter -->
+  <script>
+    const inputCari  = document.getElementById('cari');
+    const formCari   = inputCari.closest('form');
+    const pills      = document.querySelectorAll('.filter-pill');
+    const panels     = document.querySelectorAll('.filter-panel');
+    const destItems  = document.querySelectorAll('.dest-item');
+    const emptyState = document.getElementById('emptyState');
+    const btnReset   = document.getElementById('btnReset');
+
+    // Rentang budget tiap pilihan (sesuai label di panel Budget)
+    const rentangBudget = {
+      b1: [50000, 100000],
+      b2: [100000, 250000],
+      b3: [500000, 800000],
+      b4: [600000, 1000000]
+    };
+
+    // "Rp 150.000 - Rp 250.000" -> [150000, 250000]
+    function ambilAngka(teks) {
+      return (teks.match(/[\d.]+/g) || []).map(n => parseInt(n.replace(/\./g, ''), 10));
+    }
+
+    // Satu fungsi yang menggabungkan pencarian + filter yang aktif
+    function terapkanFilter() {
+      const kataKunci = inputCari.value.trim().toLowerCase();
+      const pillAktif = document.querySelector('.filter-pill.active').dataset.target;
+      let adaHasil = false;
+
+      destItems.forEach(item => {
+        const nama   = item.querySelector('h2').textContent.toLowerCase();
+        const lokasi = item.querySelector('.location').textContent.toLowerCase();
+        const jenis  = item.dataset.category.replace(/-/g, ' ');
+
+        // 1) Pencarian kata kunci: nama, lokasi, atau jenis
+        let cocok = (nama + ' ' + lokasi + ' ' + jenis).includes(kataKunci);
+
+        // 2) Filter budget (rentang harga kartu beririsan dengan rentang pilihan)
+        if (cocok && pillAktif === 'budget') {
+          const radio = document.querySelector('input[name="r_budget"]:checked');
+          if (radio) {
+            const [minR, maxR] = rentangBudget[radio.id];
+            const [minH, maxH] = ambilAngka(item.querySelector('.price').textContent);
+            cocok = minH <= maxR && maxH >= minR;
+          }
+        }
+
+        // 3) Filter durasi
+        if (cocok && pillAktif === 'durasi') {
+          const radio = document.querySelector('input[name="r_durasi"]:checked');
+          if (radio) cocok = item.dataset.duration === radio.value;
+        }
+
+        // 4) Filter jenis
+        if (cocok && pillAktif === 'jenis') {
+          const radio = document.querySelector('input[name="r_jenis"]:checked');
+          if (radio) cocok = item.dataset.category === radio.value;
+        }
+
+        item.classList.toggle('d-none', !cocok);
+        if (cocok) adaHasil = true;
+      });
+
+      emptyState.classList.toggle('d-none', adaHasil);
+    }
+
+    // Klik tab Semua / Budget / Durasi / Jenis
     pills.forEach(pill => {
-      pill.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        // Atur status aktif pada pill
+      pill.addEventListener('click', () => {
         pills.forEach(p => p.classList.remove('active'));
         pill.classList.add('active');
 
-        // Sembunyikan semua panel filter terlebih dahulu
         panels.forEach(panel => panel.classList.remove('show'));
-
-        const target = pill.getAttribute('data-target');
-        
-        if (target === 'semua') {
-          // Tampilkan semua destinasi
-          destItems.forEach(item => item.style.display = 'block');
-        } else {
-          // Tampilkan panel filter yang sesuai
-          const activePanel = document.getElementById(`panel-${target}`);
-          if (activePanel) {
-            activePanel.classList.add('show');
-          }
+        const target = pill.dataset.target;
+        if (target !== 'semua') {
+          document.getElementById('panel-' + target).classList.add('show');
         }
+        terapkanFilter();
       });
     });
 
-    // Simulasi filter interaktif berdasarkan pilihan radio button di dalam panel
+    // Ganti pilihan radio di dalam panel
     document.querySelectorAll('.filter-panel input[type="radio"]').forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        const activePill = document.querySelector('.filter-pill.active').getAttribute('data-target');
-        
-        destItems.forEach(item => {
-          if (activePill === 'jenis') {
-            const selectedJenis = document.querySelector('input[name="r_jenis"]:checked');
-            if (selectedJenis) {
-              // Cocokkan berdasarkan kategori jenis destinasi
-              const cat = item.getAttribute('data-category');
-              // Logika sederhana penyesuaian kategori
-              if (selectedJenis.id === 'j1' && cat === 'pantai') item.style.display = 'block';
-              else if (selectedJenis.id === 'j2' && cat === 'air-terjun') item.style.display = 'block';
-              else if (selectedJenis.id === 'j3' && cat === 'kebun-binatang') item.style.display = 'block';
-              else item.style.display = 'none';
-            }
-          }
-        });
-      });
+      radio.addEventListener('change', terapkanFilter);
+    });
+
+    // Ketik di kolom cari (juga saat klik tombol X di kolom cari)
+    inputCari.addEventListener('input', terapkanFilter);
+    inputCari.addEventListener('search', terapkanFilter);
+
+    // Tekan Enter jangan sampai memuat ulang halaman
+    formCari.addEventListener('submit', (e) => {
+      e.preventDefault();
+      terapkanFilter();
+    });
+
+    // Tombol Reset di empty state
+    btnReset.addEventListener('click', () => {
+      inputCari.value = '';
+      pills.forEach(p => p.classList.remove('active'));
+      document.querySelector('.filter-pill[data-target="semua"]').classList.add('active');
+      panels.forEach(panel => panel.classList.remove('show'));
+      terapkanFilter();
     });
   </script>
 </body>

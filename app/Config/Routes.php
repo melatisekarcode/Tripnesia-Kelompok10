@@ -8,3 +8,5 @@ $routes->get('/', 'Home::index');
    $routes->view('profile', 'profile');
    $routes->view('login', 'login');
    $routes->view('cari', 'cari');
+
+   $routes->get('detailwisata/(:segment)', 'DetailWisata::detail/$1');
