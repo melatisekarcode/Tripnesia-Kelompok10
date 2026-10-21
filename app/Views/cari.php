@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cari Destinasi - Tripnesia</title>
+
+  <!-- Bootstrap CSS & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bs-primary: #0a84c6;
+      --bs-primary-rgb: 10, 132, 198;
+      --tn-border: #dfe5ee;
+      --tn-soft: #f1f5fb;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: #111827;
+      background-color: #f8fafc;
+    }
+
+    .btn-primary {
+      --bs-btn-bg: #0a84c6;
+      --bs-btn-border-color: #0a84c6;
+      --bs-btn-hover-bg: #0873ab;
+      --bs-btn-hover-border-color: #0873ab;
+    }
+
+    .btn-outline-secondary {
+      --bs-btn-color: #4b5563;
+      --bs-btn-border-color: var(--tn-border);
+    }
+
+    .page {
+      max-width: 960px;
+    }
+
+    /* Search & Filter Styles */
+    .search-input {
+      background: var(--tn-soft);
+      border: 1px solid var(--tn-border);
+      border-radius: 10px;
+      font-size: .875rem;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      white-space: nowrap;
+    }
+
+    .filter-pills::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-pill {
+      background: #fff;
+      border: 1px solid var(--tn-border);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: .8rem;
+      font-weight: 500;
+      color: #4b5563;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all .15s;
+    }
+
+    .filter-pill.active {
+      background-color: var(--bs-primary);
+      color: #fff;
+      border-color: var(--bs-primary);
+    }
+
+    .filter-pill:hover {
+      border-color: #9ca3af;
+    }
+
+    /* Filter Box Panel */
+    .filter-panel {
+      background: #fff;
+      border: 1px solid var(--tn-border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.02);
+      display: none;
+    }
+
+    .filter-panel.show {
+      display: block;
+    }
+
+    .filter-panel h6 {
+      font-size: .85rem;
+      font-weight: 600;
+      color: #4b5563;
+      margin-bottom: 12px;
+    }
+
+    /* Recommendation Cards */
+    .dest-card {
+      border: 1px solid var(--tn-border);
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,.04);
+      overflow: hidden;
+      background: #fff;
+      padding: 12px;
+      display: flex;
+      gap: 12px;
+      position: relative;
+      transition: transform .15s, border-color .15s;
+    }
+
+    .dest-card:hover {
+      transform: translateY(-2px);
+      border-color: #cbd5e1;
+    }
+
+    .dest-card img {
+      width: 90px;
+      height: 90px;
+      border-radius: 10px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+
+    .card-info h2 {
+      font-size: .95rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 2px;
+    }
+
+    .card-info .location {
+      font-size: .75rem;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+
+    .card-info .price {
+      font-size: .85rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 2px;
+    }
+
+    .card-info .duration {
+      font-size: .75rem;
+      color: #6b7280;
+    }
+
+    .detail-btn {
+      align-self: flex-end;
+      padding: 4px 10px;
+      border: 1px solid #38bdf8;
+      color: #0284c7;
+      border-radius: 6px;
+      font-size: .75rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: #fff;
+      transition: background .15s;
+    }
+
+    .detail-btn:hover {
+      background-color: #f0f9ff;
+    }
+
+    footer {
+      border-top: 1px solid var(--tn-border);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="border-bottom bg-white sticky-top">
+    <div class="page container d-flex align-items-center justify-content-between py-2">
+      <a href="Beranda.html">
+        <img src="../assets/images/logo.svg" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="36">
+      </a>
+      <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuDrawer" aria-controls="menuDrawer" aria-label="Menu">
+        <i class="bi bi-list fs-5"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Drawer Menu -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="menuDrawer" aria-labelledby="menuDrawerLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="menuDrawerLabel">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Tutup"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="nav flex-column">
+        <li class="nav-item"><a class="nav-link text-dark" href="Beranda.html">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="cari.html">Cari</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="Simpan.html">Simpan</a></li>
+        <li class="nav-item"><a class="nav-link text-dark" href="Profile.html">Profile</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <main class="page container py-4">
+
+    <!-- Form Pencarian & Filter Pills -->
+    <form action="#" method="post" class="mb-3">
+      <div class="input-group mb-3">
+        <span class="input-group-text search-input border-end-0"><i class="bi bi-search text-secondary"></i></span>
+        <input type="search" id="cari" name="cari" class="form-control search-input border-start-0" placeholder="Cari destinasi, kota, atau aktivitas...">
+        <button type="submit" class="d-none">Cari</button>
+      </div>
+
+      <div class="filter-pills" id="filterPills">
+        <button type="button" class="filter-pill active" data-target="semua">Semua</button>
+        <button type="button" class="filter-pill" data-target="budget">Budget</button>
+        <button type="button" class="filter-pill" data-target="durasi">Durasi</button>
+        <button type="button" class="filter-pill" data-target="jenis">Jenis</button>
+      </div>
+    </form>
+
+    <!-- Panel Filter Budget -->
+    <div class="filter-panel" id="panel-budget">
+      <h6>Pilih Rentang Budget</h6>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="r_budget" id="b1" value="50000">
+        <label class="form-check-label small" for="b1">Rp 50.000 - Rp 100.000</label>
+      </div>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="r_budget" id="b2" value="100000">
+        <label class="form-check-label small" for="b2">Rp 100.000 - Rp 250.000</label>
+      </div>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="r_budget" id="b3" value="500000" checked>
+        <label class="form-check-label small" for="b3">Rp 500.000 - Rp 800.000</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="r_budget" id="b4" value="600000">
+        <label class="form-check-label small" for="b4">Rp 600.000 - Rp 1.000.000</label>
+      </div>
+    </div>
+
+    <!-- Panel Filter Durasi -->
+    <div class="filter-panel" id="panel-durasi">
+      <h6>Pilih Durasi</h6>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="r_durasi" id="d1" value="1-hari">
+        <label class="form-check-label small" for="d1">1 Hari</label>
+      </div>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="r_durasi" id="d2" value="2-hari" checked>
+        <label class="form-check-label small" for="d2">2 Hari 1 Malam</label>
+      </div>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="r_durasi" id="d3" value="3-hari">
+        <label class="form-check-label small" for="d3">3 Hari 2 Malam</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="r_durasi" id="d4" value="lebih">
+        <label class="form-check-label small" for="d4">Lebih dari 3 hari</label>
+      </div>
+    </div>
+
+    <!-- Panel Filter Jenis -->
+    <div class="filter-panel" id="panel-jenis">
+      <h6>Pilih Jenis Destinasi</h6>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="r_jenis" id="j1" value="pantai" checked>
+        <label class="form-check-label small" for="j1">Pantai</label>
+      </div>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="r_jenis" id="j2" value="air-terjun">
+        <label class="form-check-label small" for="j2">Air Terjun</label>
+      </div>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="radio" name="r_jenis" id="j3" value="kebun-binatang">
+        <label class="form-check-label small" for="j3">Kebun Binatang</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="r_jenis" id="j4" value="gunung">
+        <label class="form-check-label small" for="j4">Gunung</label>
+      </div>
+    </div>
+
+    <!-- Hasil Rekomendasi -->
+    <section>
+      <!-- Bagian tombol Terpopuler telah dihapus di sini, menyisakan judul saja -->
+      <div class="mb-3">
+        <h1 class="h6 fw-bold mb-0">Hasil Rekomendasi</h1>
+      </div>
+
+      <!-- Daftar Destinasi yang Dinamis -->
+      <ul class="list-unstyled d-flex flex-column gap-3" id="destinationList">
+        <!-- Item 1: Curug Cimahi -->
+        <li class="dest-item" data-category="air-terjun" data-duration="1-hari" data-budget="250000">
+          <article class="dest-card">
+            <img src="../assets/images/curugcimahi.png" alt="Curug Cimahi">
+            <div class="card-content">
+              <div class="card-info">
+                <h2>Curug Cimahi</h2>
+                <p class="location"><i class="bi bi-geo-alt"></i> Bandung</p>
+                <p class="price">Rp 150.000 - Rp 250.000</p>
+                <p class="duration"><i class="bi bi-clock"></i> 1 Hari</p>
+              </div>
+              <a href="/detailwisata/curugcimahi/index.html" class="detail-btn">Lihat Detail</a>
+            </div>
+          </article>
+        </li>
+        <!-- Item 2: Kebun Raya Bogor -->
+        <li class="dest-item" data-category="kebun-binatang" data-duration="1-hari" data-budget="50000">
+          <article class="dest-card">
+            <img src="../assets/images/kebunrayabogor.png" alt="Kebun Raya Bogor">
+            <div class="card-content">
+              <div class="card-info">
+                <h2>Kebun Raya Bogor</h2>
+                <p class="location"><i class="bi bi-geo-alt"></i> Bogor</p>
+                <p class="price">Rp 15.500 - Rp 50.000</p>
+                <p class="duration"><i class="bi bi-clock"></i> 1 hari</p>
+              </div>
+              <a href="/detailwisata/kebunrayabogor/index.html" class="detail-btn">Lihat Detail</a>
+            </div>
+          </article>
+        </li>
+        <!-- Item 3: Pantai Sawarna -->
+        <li class="dest-item" data-category="pantai" data-duration="2-hari" data-budget="850000">
+          <article class="dest-card">
+            <img src="../assets/images/pantaisawarna.png" alt="Pantai Sawarna">
+            <div class="card-content">
+              <div class="card-info">
+                <h2>Pantai Sawarna</h2>
+                <p class="location"><i class="bi bi-geo-alt"></i> Banten</p>
+                <p class="price">Rp 500.000 - Rp 850.000</p>
+                <p class="duration"><i class="bi bi-clock"></i> 2 Hari 1 Malam</p>
+              </div>
+              <a href="/detailwisata/pantaisawarna/index.html" class="detail-btn">Lihat Detail</a>
+            </div>
+          </article>
+        </li>
+        <!-- Item 4: Taman Safari -->
+        <li class="dest-item" data-category="kebun-binatang" data-duration="2-hari" data-budget="1000000">
+          <article class="dest-card">
+            <img src="../assets/images/tamansafari.png" alt="Taman Safari Indonesia">
+            <div class="card-content">
+              <div class="card-info">
+                <h2>Taman Safari Indonesia</h2>
+                <p class="location"><i class="bi bi-geo-alt"></i> Cisarua, Kab Bogor</p>
+                <p class="price">Rp 600.000 - Rp 1.000.000</p>
+                <p class="duration"><i class="bi bi-clock"></i> 2 Hari 1 Malam</p>
+              </div>
+              <a href="/detailwisata/tamansafari/index.html" class="detail-btn">Lihat Detail</a>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="text-center text-secondary small py-3 bg-white">
+    <i class="bi bi-c-circle"></i> Copyright TripNesia 2026
+  </footer>
+
+  <!-- Bootstrap JS Bundle & Interactive Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const pills = document.querySelectorAll('.filter-pill');
+    const panels = document.querySelectorAll('.filter-panel');
+    const destItems = document.querySelectorAll('.dest-item');
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Atur status aktif pada pill
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        // Sembunyikan semua panel filter terlebih dahulu
+        panels.forEach(panel => panel.classList.remove('show'));
+
+        const target = pill.getAttribute('data-target');
+        
+        if (target === 'semua') {
+          // Tampilkan semua destinasi
+          destItems.forEach(item => item.style.display = 'block');
+        } else {
+          // Tampilkan panel filter yang sesuai
+          const activePanel = document.getElementById(`panel-${target}`);
+          if (activePanel) {
+            activePanel.classList.add('show');
+          }
+        }
+      });
+    });
+
+    // Simulasi filter interaktif berdasarkan pilihan radio button di dalam panel
+    document.querySelectorAll('.filter-panel input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        const activePill = document.querySelector('.filter-pill.active').getAttribute('data-target');
+        
+        destItems.forEach(item => {
+          if (activePill === 'jenis') {
+            const selectedJenis = document.querySelector('input[name="r_jenis"]:checked');
+            if (selectedJenis) {
+              // Cocokkan berdasarkan kategori jenis destinasi
+              const cat = item.getAttribute('data-category');
+              // Logika sederhana penyesuaian kategori
+              if (selectedJenis.id === 'j1' && cat === 'pantai') item.style.display = 'block';
+              else if (selectedJenis.id === 'j2' && cat === 'air-terjun') item.style.display = 'block';
+              else if (selectedJenis.id === 'j3' && cat === 'kebun-binatang') item.style.display = 'block';
+              else item.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

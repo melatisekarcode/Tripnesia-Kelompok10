@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tripnesia - Login</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --bs-primary: #0a84c6;
+            --bs-primary-rgb: 10, 132, 198;
+            --tn-border: #dfe5ee;
+            --tn-soft: #f1f5fb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            color: #111827;
+            background: #fff;
+        }
+
+        /* Mengikuti ukuran halaman Beranda.html */
+        .page {
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Area utama login */
+        .login-section {
+            min-height: calc(100vh - 65px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* Kotak login */
+        .login-card {
+            width: 100%;
+            max-width: 390px;
+            padding: 28px 26px;
+            background: #fff;
+        }
+
+        /* Logo di tengah */
+        .brand {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .brand img {
+            display: block;
+            width: 175px;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Tab Masuk dan Daftar */
+        .tab-container {
+            display: flex;
+            width: 100%;
+            padding: 3px;
+            margin-bottom: 28px;
+            background: #f8f9fa;
+            border: 1px solid #c9cdd1;
+            border-radius: 8px;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            background: transparent;
+            color: #111827;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .tab-button.active {
+            background: #fff;
+            border-color: #e5e7eb;
+            color: #0a84c6;
+        }
+
+        /* Form */
+        .form-label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+        }
+
+        .form-control {
+            height: 43px;
+            border: 1px solid #c8ced5;
+            border-radius: 8px;
+            background: #f9fafb;
+            padding: 10px 12px;
+            font-size: 13px;
+        }
+
+        .form-control::placeholder {
+            color: #9ca3af;
+        }
+
+        .form-control:focus {
+            border-color: #0a84c6;
+            box-shadow: 0 0 0 3px rgba(10, 132, 198, 0.12);
+        }
+
+        .password-group {
+            position: relative;
+        }
+
+        .password-group .form-control {
+            padding-right: 42px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #6b7280;
+            font-size: 16px;
+            padding: 0;
+        }
+
+        .forgot-password {
+            display: block;
+            margin: 10px 0 22px;
+            text-align: right;
+            color: #111827;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            color: #0a84c6;
+        }
+
+        /* Tombol Masuk */
+        .btn-login {
+            width: 100%;
+            height: 43px;
+            border: 1px solid #0a84c6;
+            border-radius: 8px;
+            background: #0a84c6;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .btn-login:hover {
+            background: #0873ab;
+            border-color: #0873ab;
+            color: #fff;
+        }
+
+        /* Garis pemisah */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 23px 0 18px;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #d1d5db;
+        }
+
+        /* Google dan Facebook tersusun ke bawah */
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-social {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 9px;
+            width: 100%;
+            height: 43px;
+            border: 1px solid #555;
+            border-radius: 8px;
+            background: #fff;
+            color: #111827;
+            font-size: 12px;
+        }
+
+        .btn-social:hover {
+            background: #f8fafc;
+            border-color: #0a84c6;
+        }
+
+        .google-icon {
+            color: #4285f4;
+            font-size: 16px;
+        }
+
+        .facebook-icon {
+            color: #1877f2;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            padding: 18px 12px;
+            border-top: 1px solid var(--tn-border);
+            background: #f8fafc;
+            text-align: center;
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .footer i {
+            margin-right: 5px;
+        }
+
+        /* Responsif untuk HP */
+        @media (max-width: 575.98px) {
+            .login-section {
+                min-height: calc(100vh - 55px);
+                padding: 24px 16px;
+            }
+
+            .login-card {
+                max-width: 420px;
+                padding: 22px 10px;
+            }
+
+            .brand {
+                margin-bottom: 28px;
+            }
+
+            .brand img {
+                width: 165px;
+            }
+
+            .footer {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Area login -->
+    <main class="page">
+
+        <section class="login-section">
+
+            <div class="login-card">
+
+                <!-- Logo Tripnesia di tengah -->
+                <header class="brand">
+                    <img src="../assets/images/logo.svg"
+                         alt="Tripnesia - Jelajahi Indonesia, Temukan Cerita">
+                </header>
+
+                <!-- Tab Masuk dan Daftar -->
+                <div class="tab-container">
+                    <button type="button"
+                            class="tab-button active"
+                            id="loginTab">
+                        Masuk
+                    </button>
+
+                    <a href="daftar.html"
+                      class="tab-button text-center text-decoration-none"
+                      id="registerTab">
+                        Daftar
+                    </a>
+                </div>
+
+                <!-- Form Login -->
+                <form id="authForm">
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">
+                            Email atau No.HP
+                        </label>
+
+                        <input type="text"
+                               class="form-control"
+                               id="email"
+                               placeholder="Masukkan Email atau Nomor HP"
+                               autocomplete="username"
+                               required>
+                    </div>
+
+                    <div class="mb-0">
+                        <label for="password" class="form-label">
+                            Password
+                        </label>
+
+                        <div class="password-group">
+                            <input type="password"
+                                   class="form-control"
+                                   id="password"
+                                   placeholder="Masukkan Password"
+                                   autocomplete="current-password"
+                                   required>
+
+                            <button type="button"
+                                    class="toggle-password"
+                                    id="togglePassword"
+                                    aria-label="Tampilkan password">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <a href="lupasandi.html" class="forgot-password" id="forgotPassword">
+                        Lupa Password?
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-login"
+                            id="submitButton">
+                        Masuk
+                    </button>
+
+                    <!-- Pemisah -->
+                    <div class="divider">
+                        <span>atau</span>
+                    </div>
+
+                    <!-- Tombol Google dan Facebook -->
+                    <div class="social-buttons">
+
+                        <button type="button"
+                                class="btn btn-social"
+                                id="googleLogin">
+                            <i class="bi bi-google google-icon"></i>
+                            <span>Lanjut dengan Google</span>
+                        </button>
+
+                        <button type="button"
+                                class="btn btn-social"
+                                id="facebookLogin">
+                            <i class="bi bi-facebook facebook-icon"></i>
+                            <span>Lanjut dengan Facebook</span>
+                        </button>
+
+                    </div>
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <i class="bi bi-c-circle"></i>
+        Copyright TripNesia 2026
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const loginTab = document.getElementById("loginTab");
+        const registerTab = document.getElementById("registerTab");
+        const submitButton = document.getElementById("submitButton");
+        const authForm = document.getElementById("authForm");
+        const password = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+        const forgotPassword = document.getElementById("forgotPassword");
+
+        let mode = "login";
+
+        // Mengubah tab Masuk dan Daftar
+        function setMode(newMode) {
+            mode = newMode;
+
+            loginTab.classList.toggle("active", mode === "login");
+            registerTab.classList.toggle("active", mode === "register");
+
+            submitButton.textContent =
+                mode === "login" ? "Masuk" : "Daftar";
+
+            password.autocomplete =
+                mode === "login" ? "current-password" : "new-password";
+
+            forgotPassword.style.display =
+                mode === "login" ? "block" : "none";
+        }
+
+        loginTab.addEventListener("click", () => setMode("login"));
+
+        // Menampilkan atau menyembunyikan password
+        togglePassword.addEventListener("click", function () {
+            const show = password.type === "password";
+
+            password.type = show ? "text" : "password";
+
+            this.innerHTML = show
+                ? '<i class="bi bi-eye-slash"></i>'
+                : '<i class="bi bi-eye"></i>';
+        });
+
+                authForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            if (mode === "login") {
+                window.location.href = "Beranda.html";
+            }
+        });
+
+        document.getElementById("googleLogin").addEventListener("click", function () {
+            alert("Login Google belum terhubung.");
+        });
+
+        document.getElementById("facebookLogin").addEventListener("click", function () {
+            alert("Login Facebook belum terhubung.");
+        });
+    </script>
+
+</body>
+</html>

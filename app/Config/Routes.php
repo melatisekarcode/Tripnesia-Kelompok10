@@ -1,0 +1,10 @@
+<?php
+
+use CodeIgniter\Router\RouteCollection;
+
+/** @var RouteCollection $routes */
+$routes->get('/', 'Home::index');
+   $routes->view('simpan', 'simpan');
+   $routes->view('profile', 'profile');
+   $routes->view('login', 'login');
+   $routes->view('cari', 'cari');
