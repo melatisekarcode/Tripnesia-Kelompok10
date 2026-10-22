@@ -20,6 +20,28 @@
     .btn-outline-secondary { --bs-btn-color: #4b5563; --bs-btn-border-color: var(--tn-border); }
     .page { max-width: 960px; }
 
+    /* Menu drawer */
+    .menu-link {
+      color: #111827;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background-color .15s, color .15s;
+    }
+    .menu-link:hover,
+    .menu-link:focus-visible {
+      color: #0a84c6;
+      background-color: rgba(10, 132, 198, .1);
+    }
+    .menu-link.active {
+      color: #0a84c6;
+      font-weight: 700;
+    }
+    .offcanvas .btn-outline-secondary:hover {
+      color: #0a84c6;
+      border-color: #0a84c6;
+      background-color: rgba(10, 132, 198, .08);
+    }
+
     /* Logo navbar: ukuran dikunci supaya tidak membesar */
     .brand-logo { height: 48px; width: auto; display: block; }
     @media (min-width: 768px) {
@@ -69,17 +91,17 @@
       <h5 class="offcanvas-title" id="menuDrawerLabel">Menu</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Tutup"></button>
     </div>
-   <div class="offcanvas-body d-flex flex-column">
-  <ul class="nav flex-column mb-4">
-    <li class="nav-item"><a class="nav-link text-dark" href="<?= base_url('/'); ?>">Beranda</a></li>
-    <li class="nav-item"><a class="nav-link text-dark" href="<?= base_url('cari'); ?>">Cari</a></li>
-    <li class="nav-item"><a class="nav-link text-dark" href="<?= base_url('simpan'); ?>">Simpan</a></li>
-    <li class="nav-item"><a class="nav-link text-dark" href="<?= base_url('profile'); ?>">Profile</a></li>
-  </ul>
-  <div class="mt-auto">
-    <a href="<?= base_url('login'); ?>" class="btn btn-outline-secondary w-100">Keluar</a>
-  </div>
-</div>
+    <div class="offcanvas-body d-flex flex-column">
+      <ul class="nav flex-column mb-4">
+        <li class="nav-item"><a class="nav-link menu-link active" href="<?= base_url('/'); ?>">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('cari'); ?>">Cari</a></li>
+        <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('simpan'); ?>">Simpan</a></li>
+        <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('profile'); ?>">Profile</a></li>
+      </ul>
+      <div class="mt-auto">
+        <a href="<?= base_url('logout'); ?>" class="btn btn-outline-secondary w-100">Keluar</a>
+      </div>
+    </div>
   </div>
 
   <!-- Toast konfirmasi pilih destinasi -->
