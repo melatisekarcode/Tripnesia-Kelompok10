@@ -23,4 +23,3 @@ $routes->view('cari', 'cari');
 $routes->get('profile', 'Profile::index');
 $routes->get('profile/edit', 'Profile::edit');
 $routes->get('detailwisata/(:segment)', 'DetailWisata::detail/$1');
-
