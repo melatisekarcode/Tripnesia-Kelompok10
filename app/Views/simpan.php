@@ -20,6 +20,28 @@
     .btn-outline-secondary { --bs-btn-color: #4b5563; --bs-btn-border-color: var(--tn-border); }
     .page { max-width: 960px; }
 
+    /* Menu drawer */
+    .menu-link {
+      color: #111827;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background-color .15s, color .15s;
+    }
+    .menu-link:hover,
+    .menu-link:focus-visible {
+      color: #0a84c6;
+      background-color: rgba(10, 132, 198, .1);
+    }
+    .menu-link.active {
+      color: #0a84c6;
+      font-weight: 700;
+    }
+    .offcanvas .btn-outline-secondary:hover {
+      color: #0a84c6;
+      border-color: #0a84c6;
+      background-color: rgba(10, 132, 198, .08);
+    }
+
     /* Card Destinasi (disamakan dengan Beranda) */
     .dest-card { border: 1px solid var(--tn-border); border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,.06); overflow: hidden; height: 100%; transition: transform .15s, border-color .15s; background: #fff; text-align: left; width: 100%; padding: 0; position: relative; }
     .dest-card:hover { transform: translateY(-2px); border-color: var(--bs-primary); }
@@ -87,8 +109,8 @@
   <!-- Header -->
   <header class="border-bottom bg-white sticky-top">
     <div class="page container d-flex align-items-center justify-content-between py-2">
-      <a href="Beranda.html">
-        <img src="assets/images/logo.svg" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="40">
+      <a href="<?= base_url('/'); ?>">
+        <img src="<?= base_url('assets/images/logo.svg'); ?>" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="40">
       </a>
       <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuDrawer" aria-controls="menuDrawer" aria-label="Menu">
         <i class="bi bi-list fs-5"></i>
@@ -104,13 +126,13 @@
     </div>
     <div class="offcanvas-body d-flex flex-column">
       <ul class="nav flex-column mb-4">
-        <li class="nav-item"><a class="nav-link text-dark" href="Beranda.html">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link text-dark" href="cari.html">Cari</a></li>
-        <li class="nav-item"><a class="nav-link fw-bold text-primary" href="Simpan.html">Simpan</a></li>
-        <li class="nav-item"><a class="nav-link text-dark" href="Profile.html">Profile</a></li>
+        <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('/'); ?>">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('cari'); ?>">Cari</a></li>
+        <li class="nav-item"><a class="nav-link menu-link active" href="<?= base_url('simpan'); ?>">Simpan</a></li>
+        <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('profile'); ?>">Profile</a></li>
       </ul>
       <div class="mt-auto">
-        <a href="Landing%20Page.html" class="btn btn-outline-secondary w-100">Keluar</a>
+        <a href="<?= base_url('login'); ?>" class="btn btn-outline-secondary w-100">Keluar</a>
       </div>
     </div>
   </div>
@@ -132,7 +154,7 @@
         <!-- Destinasi 1 -->
         <div class="col-6 col-md-4 col-lg-3">
           <div class="dest-card">
-            <img src="assets/images/pantaisawarna.png" alt="Pantai Sawarna">
+            <img src="<?= base_url('assets/images/pantaisawarna.png'); ?>" alt="Pantai Sawarna">
             <button class="btn-more" title="Opsi Lainnya"><i class="bi bi-three-dots-vertical"></i></button>
             <div class="info">
               <div class="fw-bold mb-1">Pantai Sawarna</div>
@@ -149,7 +171,7 @@
         <!-- Destinasi 2 -->
         <div class="col-6 col-md-4 col-lg-3">
           <div class="dest-card">
-            <img src="assets/images/tamansafari.png" alt="Taman Safari Indonesia">
+            <img src="<?= base_url('assets/images/tamansafari.png'); ?>" alt="Taman Safari Indonesia">
             <button class="btn-more" title="Opsi Lainnya"><i class="bi bi-three-dots-vertical"></i></button>
             <div class="info">
               <div class="fw-bold mb-1">Taman Safari Indonesia</div>
@@ -166,7 +188,7 @@
         <!-- Destinasi 3 -->
         <div class="col-6 col-md-4 col-lg-3">
           <div class="dest-card">
-            <img src="assets/images/kebunrayabogor.png" alt="Kebun Raya Bogor">
+            <img src="<?= base_url('assets/images/kebunrayabogor.png'); ?>" alt="Kebun Raya Bogor">
             <button class="btn-more" title="Opsi Lainnya"><i class="bi bi-three-dots-vertical"></i></button>
             <div class="info">
               <div class="fw-bold mb-1">Kebun Raya Bogor</div>
@@ -183,7 +205,7 @@
         <!-- Destinasi 4 -->
         <div class="col-6 col-md-4 col-lg-3">
           <div class="dest-card">
-            <img src="assets/images/curugcimahi.png" alt="Curug Cimahi">
+            <img src="<?= base_url('assets/images/curugcimahi.png'); ?>" alt="Curug Cimahi">
             <button class="btn-more" title="Opsi Lainnya"><i class="bi bi-three-dots-vertical"></i></button>
             <div class="info">
               <div class="fw-bold mb-1">Curug Cimahi</div>

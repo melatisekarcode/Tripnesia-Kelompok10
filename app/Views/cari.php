@@ -39,6 +39,25 @@
       max-width: 960px;
     }
 
+    /* Menu drawer */
+    .menu-link {
+      color: #111827;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background-color .15s, color .15s;
+    }
+
+    .menu-link:hover,
+    .menu-link:focus-visible {
+      color: #0a84c6;
+      background-color: rgba(10, 132, 198, .1);
+    }
+
+    .menu-link.active {
+      color: #0a84c6;
+      font-weight: 700;
+    }
+
     /* Search & Filter Styles */
     .search-input {
       background: var(--tn-soft);
@@ -194,7 +213,7 @@
   <header class="border-bottom bg-white sticky-top">
     <div class="page container d-flex align-items-center justify-content-between py-2">
       <a href="<?= base_url('/'); ?>">
-        <img src="../assets/images/logo.svg" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="36">
+        <img src="<?= base_url('assets/images/logo.svg'); ?>" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="36">
       </a>
       <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuDrawer" aria-controls="menuDrawer" aria-label="Menu">
         <i class="bi bi-list fs-5"></i>
@@ -210,10 +229,10 @@
     </div>
     <div class="offcanvas-body">
       <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link text-dark" href="<?= base_url('/'); ?>">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link text-dark" href="<?= base_url('cari'); ?>">Cari</a></li>
-        <li class="nav-item"><a class="nav-link text-dark" href="<?= base_url('simpan'); ?>">Simpan</a></li>
-        <li class="nav-item"><a class="nav-link text-dark" href="<?= base_url('profile'); ?>">Profile</a></li>
+        <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('/'); ?>">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link menu-link active" href="<?= base_url('cari'); ?>">Cari</a></li>
+        <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('simpan'); ?>">Simpan</a></li>
+        <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('profile'); ?>">Profile</a></li>
       </ul>
     </div>
   </div>
@@ -310,7 +329,7 @@
         <!-- Item 1: Curug Cimahi -->
         <li class="dest-item" data-category="air-terjun" data-duration="1-hari" data-budget="250000">
           <article class="dest-card">
-            <img src="../assets/images/curugcimahi.png" alt="Curug Cimahi">
+            <img src="<?= base_url('assets/images/curugcimahi.png'); ?>" alt="Curug Cimahi">
             <div class="card-content">
               <div class="card-info">
                 <h2>Curug Cimahi</h2>
@@ -325,7 +344,7 @@
         <!-- Item 2: Kebun Raya Bogor -->
         <li class="dest-item" data-category="kebun-binatang" data-duration="1-hari" data-budget="50000">
           <article class="dest-card">
-            <img src="../assets/images/kebunrayabogor.png" alt="Kebun Raya Bogor">
+            <img src="<?= base_url('assets/images/kebunrayabogor.png'); ?>" alt="Kebun Raya Bogor">
             <div class="card-content">
               <div class="card-info">
                 <h2>Kebun Raya Bogor</h2>
@@ -340,7 +359,7 @@
         <!-- Item 3: Pantai Sawarna -->
         <li class="dest-item" data-category="pantai" data-duration="2-hari" data-budget="850000">
           <article class="dest-card">
-            <img src="../assets/images/pantaisawarna.png" alt="Pantai Sawarna">
+            <img src="<?= base_url('assets/images/pantaisawarna.png'); ?>" alt="Pantai Sawarna">
             <div class="card-content">
               <div class="card-info">
                 <h2>Pantai Sawarna</h2>
@@ -355,7 +374,7 @@
         <!-- Item 4: Taman Safari -->
         <li class="dest-item" data-category="kebun-binatang" data-duration="2-hari" data-budget="1000000">
           <article class="dest-card">
-            <img src="../assets/images/tamansafari.png" alt="Taman Safari Indonesia">
+            <img src="<?= base_url('assets/images/tamansafari.png'); ?>" alt="Taman Safari Indonesia">
             <div class="card-content">
               <div class="card-info">
                 <h2>Taman Safari Indonesia</h2>

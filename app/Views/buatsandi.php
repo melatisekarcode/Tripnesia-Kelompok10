@@ -93,7 +93,22 @@
         <p class="page-subtitle mb-0">Masukkan kata sandi baru untuk akun anda</p>
       </div>
 
-      <form action="login.html" method="get" id="formSandi" novalidate>
+      <!-- Pesan error dari server -->
+      <?php $errors = session()->getFlashdata('errors'); ?>
+      <?php if (! empty($errors)): ?>
+        <div class="alert alert-danger py-2 small" role="alert">
+          <ul class="mb-0 ps-3">
+            <?php foreach ($errors as $error): ?>
+              <li><?= esc($error); ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php endif; ?>
+
+      <form action="<?= base_url('reset-sandi'); ?>" method="post" id="formSandi" novalidate>
+        <?= csrf_field(); ?>
+        <?php $resetToken = isset($token) && is_string($token) ? $token : ''; ?>
+        <input type="hidden" name="token" value="<?= esc($resetToken); ?>">
 
         <!-- Kata sandi baru -->
         <div class="mb-3">
@@ -115,7 +130,7 @@
           <label for="confirm-password" class="form-label">Konfirmasi Kata Sandi Baru</label>
           <div class="input-group has-validation">
             <span class="input-group-text"><i class="bi bi-lock"></i></span>
-            <input type="password" class="form-control" id="confirm-password" name="confirm-password"
+            <input type="password" class="form-control" id="confirm-password" name="confirmPassword"
                    placeholder="Ulangi kata sandi baru" minlength="8" required
                    autocomplete="new-password">
             <button class="btn btn-toggle" type="button" data-toggle-password="confirm-password"
@@ -191,7 +206,7 @@
     pw.addEventListener('input', () => { updateRules(); if (cpw.value) checkMatch(); });
     cpw.addEventListener('input', checkMatch);
 
-    // Validasi sebelum kirim (front end saja)
+    // Cek cepat di browser; validasi utama tetap di server (Auth::prosesReset)
     form.addEventListener('submit', e => {
       const allValid = Object.values(rules).every(test => test(pw.value));
       if (!allValid || !pw.value || !cpw.value || !checkMatch()) {

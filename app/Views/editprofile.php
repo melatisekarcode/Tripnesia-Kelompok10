@@ -57,8 +57,8 @@
   <!-- Header -->
   <header class="border-bottom bg-white">
     <div class="page container py-2">
-      <a href="Beranda.html">
-        <img src="../assets/images/logo.svg" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="40">
+      <a href="<?= base_url('beranda.php') ?>" class="menu-item">
+        <img src="<?= base_url('assets/images/logo.svg') ?>" alt="Tripnesia..." height="40">
       </a>
     </div>
   </header>
@@ -78,7 +78,7 @@
 
   <main class="page container py-3 flex-grow-1">
 
-    <a href="Profile.html" class="btn-back mb-2" aria-label="Kembali ke Profil">
+    <a href="<?= base_url('profile') ?>" class="btn-back mb-2" aria-label="Kembali ke Profil">
       <i class="bi bi-chevron-left"></i>
     </a>
 

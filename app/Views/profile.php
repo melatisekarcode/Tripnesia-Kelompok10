@@ -48,15 +48,15 @@
   <!-- Header -->
   <header class="border-bottom bg-white">
     <div class="page container py-2">
-      <a href="Beranda.html">
-        <img src="../assets/images/logo.svg" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="40">
+      <a href="<?= base_url('/') ?>">
+        <img src="<?= base_url('assets/images/logo.svg') ?>" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="40">
       </a>
     </div>
   </header>
 
   <main class="page container py-3 flex-grow-1">
 
-    <a href="Beranda.html" class="btn-back mb-2" aria-label="Kembali ke Beranda">
+    <a href="<?= base_url('/') ?>" class="btn-back mb-2" aria-label="Kembali ke Beranda">
       <i class="bi bi-chevron-left"></i>
     </a>
 
@@ -76,7 +76,7 @@
           <input type="file" id="fotoInput" accept="image/*" class="d-none">
         </div>
 
-        <p class="fw-bold mb-0">MELPANSYANATPAL</p>
+        <p class="fw-bold mb-0"><?= esc(session()->get('name')) ?></p>
       </section>
 
       <!-- Akun saya -->
@@ -85,13 +85,13 @@
         <nav aria-label="Menu akun">
           <ul class="list-unstyled d-grid gap-2 mb-0">
             <li>
-              <a href="editprofile.html" class="menu-item">
+              <a href="<?= base_url('profile/edit') ?>" class="menu-item">
                 <span class="menu-icon" aria-hidden="true"><i class="bi bi-person-lines-fill"></i></span>
                 Edit Profil
               </a>
             </li>
             <li>
-              <a href="Simpan.html" class="menu-item">
+              <a href="<?= base_url('simpan') ?>" class="menu-item">
                 <span class="menu-icon" aria-hidden="true"><i class="bi bi-bookmark-fill"></i></span>
                 Riwayat Simpan Wisata
               </a>
@@ -106,7 +106,7 @@
         <nav aria-label="Menu umum">
           <ul class="list-unstyled d-grid gap-3 mb-0">
             <li>
-              <a href="bantuan.html" class="menu-item">
+              <a href="<?= base_url('bantuan') ?>" class="menu-item">
                 <span class="menu-icon" aria-hidden="true"><i class="bi bi-clock-history"></i></span>
                 Bantuan &amp; Support
               </a>
@@ -135,7 +135,7 @@
         <div class="modal-body small text-secondary">Yakin ingin keluar dari akun kamu?</div>
         <div class="modal-footer border-0 pt-0">
           <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Batal</button>
-          <a href="login.html" class="btn btn-danger btn-sm">Keluar</a>
+          <a href="<?= base_url('logout') ?>" class="btn btn-danger btn-sm">Keluar</a>
         </div>
       </div>
     </div>
