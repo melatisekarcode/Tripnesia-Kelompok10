@@ -19,6 +19,6 @@ class DetailWisata extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        return view('detailwisata/' . $slug . '/index.html');
+        return view('detailwisata/' . $slug . '/index.html', ['slug' => $slug]);
     }
 }

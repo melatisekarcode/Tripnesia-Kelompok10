@@ -1,5 +1,4 @@
 #--------------------------------------------------------------------
-<<<<<<< HEAD
 #Example Environment Configuration file
 
 #This file can be used as a starting point for your own
@@ -31,13 +30,13 @@ CI_ENVIRONMENT = development
 #DATABASE
 #--------------------------------------------------------------------
 
-#database.default.hostname = localhost
-#database.default.database = db_tripnesia
-#database.default.username = root
-#database.default.password = root
-#database.default.DBDriver = MySQLi
-#database.default.DBPrefix =
-#database.default.port = 3306
+database.default.hostname = localhost
+database.default.database = db_tripnesia
+database.default.username = root
+database.default.password = root
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
+database.default.port = 3306
 
 #If you use MySQLi as tests, first update the values of Config\Database::$tests.
 #database.tests.hostname = localhost
@@ -68,7 +67,6 @@ CI_ENVIRONMENT = development
 #--------------------------------------------------------------------
 
 #logger.threshold = 4
-=======
 # Example Environment Configuration file
 #
 # This file can be used as a starting point for your own
@@ -137,4 +135,3 @@ CI_ENVIRONMENT = development
 #--------------------------------------------------------------------
 
 # logger.threshold = 4
->>>>>>> cf4ed58239a90be7c661d935817273817074dc6b

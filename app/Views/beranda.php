@@ -228,7 +228,7 @@
       </div>
 
       <div class="d-flex justify-content-end gap-2">
-        <a id="btnDetail" href="<?= base_url('detailwisata/pantaisawarna/index.html'); ?>" class="btn btn-outline-secondary btn-sm px-3">Lihat Detail</a>
+           <a id="btnDetail" href="<?= base_url('detailwisata/pantaisawarna'); ?>" class="btn btn-outline-secondary btn-sm px-3">Lihat Detail</a>
         <button type="button" class="btn btn-primary btn-sm px-3" id="btnPilih">Pilih Destinasi</button>
       </div>
     </section>
@@ -284,14 +284,14 @@
     const DESTINASI = {
       kebunraya: {
         nama: "Kebun Raya Bogor", lokasi: "Jawa Barat", durasi: "1 Hari",
-        halaman: "<?= base_url('detailwisata/kebunrayabogor/index.html'); ?>",
+        halaman: "<?= base_url('detailwisata/kebunrayabogor'); ?>",
         img: "<?= base_url('assets/images/kebunrayabogor.png'); ?>",
         deskripsi: "Kebun botani luas di tengah Kota Bogor, cocok untuk wisata santai bersama keluarga.",
         rincian: [["Transportasi PP", 50000], ["Penginapan", 0], ["Makan & Minum", 40000], ["Aktivitas & Tiket Masuk", 15500]]
       },
       sawarna: {
         nama: "Pantai Sawarna", lokasi: "Banten", durasi: "2 Hari 1 Malam",
-        halaman: "<?= base_url('detailwisata/pantaisawarna/index.html'); ?>",
+        halaman: "<?= base_url('detailwisata/pantaisawarna'); ?>",
         img: "<?= base_url('assets/images/pantaisawarna.png'); ?>",
         deskripsi: "Pantai dengan tebing karang dan ombak besar di pesisir selatan Banten.",
         rincian: [["Transportasi PP", 300000], ["Penginapan (1 malam)", 300000], ["Makan & Minum", 150000], ["Aktivitas & Tiket Masuk", 100000]],
@@ -299,7 +299,7 @@
       },
       safari: {
         nama: "Taman Safari Indonesia", lokasi: "Jawa Barat", durasi: "3 Hari 2 Malam",
-        halaman: "<?= base_url('detailwisata/tamansafari/index.html'); ?>",
+        halaman: "<?= base_url('detailwisata/tamansafari'); ?>",
         img: "<?= base_url('assets/images/tamansafari.png'); ?>",
         deskripsi: "Taman safari dengan koleksi satwa dari berbagai penjuru dunia di kawasan Puncak.",
         rincian: [["Transportasi PP", 100000], ["Penginapan (2 malam)", 500000], ["Makan & Minum", 250000], ["Aktivitas & Tiket Masuk", 150000]]

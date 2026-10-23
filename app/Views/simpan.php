@@ -132,7 +132,7 @@
         <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('profile'); ?>">Profile</a></li>
       </ul>
       <div class="mt-auto">
-        <a href="<?= base_url('login'); ?>" class="btn btn-outline-secondary w-100">Keluar</a>
+        <a href="<?= base_url('logout'); ?>" class="btn btn-outline-secondary w-100">Keluar</a>
       </div>
     </div>
   </div>
@@ -147,79 +147,39 @@
       </p>
     </section>
 
-    <!-- Daftar Tempat Wisata Tersimpan (Grid) -->
+    <!-- Daftar Tempat Wisata Tersimpan (dari database) -->
     <section>
-      <div class="row g-3">
+      <div class="row g-3" id="listSimpan">
 
-        <!-- Destinasi 1 -->
-        <div class="col-6 col-md-4 col-lg-3">
+        <?php foreach ($items as $d): ?>
+        <div class="col-6 col-md-4 col-lg-3" data-slug="<?= esc($d['slug']); ?>">
           <div class="dest-card">
-            <img src="<?= base_url('assets/images/pantaisawarna.png'); ?>" alt="Pantai Sawarna">
-            <button class="btn-more" title="Opsi Lainnya"><i class="bi bi-three-dots-vertical"></i></button>
+            <a href="<?= base_url('detailwisata/' . $d['slug']); ?>">
+              <img src="<?= base_url('assets/images/' . $d['img']); ?>" alt="<?= esc($d['nama']); ?>">
+            </a>
+            <button type="button" class="btn-more" title="Hapus dari simpan"><i class="bi bi-three-dots-vertical"></i></button>
             <div class="info">
-              <div class="fw-bold mb-1">Pantai Sawarna</div>
-              <div class="small text-secondary mb-1"><i class="bi bi-geo-alt-fill text-danger"></i> Banten</div>
-              <div class="small text-secondary"><i class="bi bi-star-fill text-warning"></i> 4.8 (320 Ulasan)</div>
+              <div class="fw-bold mb-1"><?= esc($d['nama']); ?></div>
+              <div class="small text-secondary mb-1"><i class="bi bi-geo-alt-fill text-danger"></i> <?= esc($d['lokasi']); ?></div>
+              <div class="small text-secondary"><i class="bi bi-star-fill text-warning"></i> <?= esc($d['rating']); ?> (<?= esc($d['ulasan']); ?> Ulasan)</div>
 
-              <button class="btn-simpan-badge">
+              <button type="button" class="btn-simpan-badge btn-hapus">
                 <i class="bi bi-bookmark-check-fill"></i> Tersimpan
               </button>
             </div>
           </div>
         </div>
-
-        <!-- Destinasi 2 -->
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="dest-card">
-            <img src="<?= base_url('assets/images/tamansafari.png'); ?>" alt="Taman Safari Indonesia">
-            <button class="btn-more" title="Opsi Lainnya"><i class="bi bi-three-dots-vertical"></i></button>
-            <div class="info">
-              <div class="fw-bold mb-1">Taman Safari Indonesia</div>
-              <div class="small text-secondary mb-1"><i class="bi bi-geo-alt-fill text-danger"></i> Cisarua, Kab Bogor</div>
-              <div class="small text-secondary"><i class="bi bi-star-fill text-warning"></i> 4.7 (72.715 Ulasan)</div>
-
-              <button class="btn-simpan-badge">
-                <i class="bi bi-bookmark-check-fill"></i> Tersimpan
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Destinasi 3 -->
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="dest-card">
-            <img src="<?= base_url('assets/images/kebunrayabogor.png'); ?>" alt="Kebun Raya Bogor">
-            <button class="btn-more" title="Opsi Lainnya"><i class="bi bi-three-dots-vertical"></i></button>
-            <div class="info">
-              <div class="fw-bold mb-1">Kebun Raya Bogor</div>
-              <div class="small text-secondary mb-1"><i class="bi bi-geo-alt-fill text-danger"></i> Bogor</div>
-              <div class="small text-secondary"><i class="bi bi-star-fill text-warning"></i> 4.7 (105.112 Ulasan)</div>
-
-              <button class="btn-simpan-badge">
-                <i class="bi bi-bookmark-check-fill"></i> Tersimpan
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Destinasi 4 -->
-        <div class="col-6 col-md-4 col-lg-3">
-          <div class="dest-card">
-            <img src="<?= base_url('assets/images/curugcimahi.png'); ?>" alt="Curug Cimahi">
-            <button class="btn-more" title="Opsi Lainnya"><i class="bi bi-three-dots-vertical"></i></button>
-            <div class="info">
-              <div class="fw-bold mb-1">Curug Cimahi</div>
-              <div class="small text-secondary mb-1"><i class="bi bi-geo-alt-fill text-danger"></i> Bandung</div>
-              <div class="small text-secondary"><i class="bi bi-star-fill text-warning"></i> 4.7 (1.550 Ulasan)</div>
-
-              <button class="btn-simpan-badge">
-                <i class="bi bi-bookmark-check-fill"></i> Tersimpan
-              </button>
-            </div>
-          </div>
-        </div>
+        <?php endforeach; ?>
 
       </div>
+
+      <!-- Tampil kalau belum ada yang disimpan -->
+      <div id="kosong" class="text-center py-5 <?= empty($items) ? '' : 'd-none'; ?>">
+        <i class="bi bi-bookmark fs-1 text-secondary"></i>
+        <p class="text-secondary
+            <p class="text-secondary mt-2 mb-3">Belum ada tempat wisata yang disimpan.</p>
+    <a href="<?= base_url('cari'); ?>" class="btn btn-primary btn-sm px-3">Cari Destinasi</a>
+  </div>
     </section>
 
   </main>
@@ -229,5 +189,31 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Hapus dari simpan: klik "Tersimpan" atau tombol titik tiga
+    document.querySelectorAll(".btn-hapus, .btn-more").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const col  = btn.closest("[data-slug]");
+        const slug = col.dataset.slug;
+
+        const res = await fetch("<?= base_url('simpan/toggle'); ?>", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-Requested-With": "XMLHttpRequest",
+            "<?= csrf_header(); ?>": "<?= csrf_hash(); ?>"
+          },
+          body: "slug=" + encodeURIComponent(slug)
+        });
+
+        if (res.status === 401) { location.href = "<?= base_url('login'); ?>"; return; }
+        if (res.ok) {
+          col.remove();
+          const sisa = document.querySelectorAll("#listSimpan [data-slug]").length;
+          document.getElementById("kosong").classList.toggle("d-none", sisa > 0);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
