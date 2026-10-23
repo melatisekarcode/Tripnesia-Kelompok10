@@ -19,6 +19,33 @@
     .btn-primary { --bs-btn-bg: #0a84c6; --bs-btn-border-color: #0a84c6; --bs-btn-hover-bg: #0873ab; --bs-btn-hover-border-color: #0873ab; --bs-btn-active-bg: #0873ab; }
     .btn-outline-secondary { --bs-btn-color: #4b5563; --bs-btn-border-color: var(--tn-border); }
     .page { max-width: 960px; }
+
+    /* Menu drawer & efek hover */
+    .menu-link {
+      color: #111827;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: background-color .15s, color .15s;
+      text-decoration: none;
+      display: block;
+    }
+    .menu-link:hover,
+    .menu-link:focus-visible {
+      color: #0a84c6;
+      background-color: rgba(10, 132, 198, .1);
+    }
+    .offcanvas .btn-outline-secondary:hover {
+      color: #0a84c6;
+      border-color: #0a84c6;
+      background-color: rgba(10, 132, 198, .08);
+    }
+
+    /* Logo navbar */
+    .brand-logo { height: 48px; width: auto; display: block; }
+    @media (min-width: 768px) {
+      .brand-logo { height: 56px; }
+    }
+
     .hero h1 { font-weight: 800; line-height: 1.2; }
     .search-input { background: var(--tn-soft); border: 1px solid var(--tn-border); border-radius: 10px; }
     .feature-btn { text-decoration: none; color: #374151; font-size: .75rem; text-align: center; border: 0; background: none; }
@@ -47,8 +74,8 @@
   <!-- Header -->
   <header class="border-bottom bg-white sticky-top">
     <div class="page container d-flex align-items-center justify-content-between py-2">
-      <a href="Beranda.html">
-        <img src="../assets/images/logo.svg" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="40">
+      <a href="<?= base_url('/'); ?>">
+        <img src="<?= base_url('assets/images/logo.svg'); ?>" alt="Logo Tripnesia" class="brand-logo">
       </a>
       <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuDrawer" aria-controls="menuDrawer" aria-label="Menu">
         <i class="bi bi-list fs-5"></i>
@@ -56,7 +83,7 @@
     </div>
   </header>
 
-  <!-- Drawer menu (interaksi 1) -->
+  <!-- Drawer menu -->
   <div class="offcanvas offcanvas-end" tabindex="-1" id="menuDrawer" aria-labelledby="menuDrawerLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="menuDrawerLabel">Menu</h5>
@@ -64,25 +91,26 @@
     </div>
     <div class="offcanvas-body d-flex flex-column">
       <ul class="nav flex-column mb-4">
-        <li class="nav-item"><a class="nav-link text-dark need-login" href="Beranda.html">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link text-dark need-login" href="cari.html">Cari</a></li>
-        <li class="nav-item"><a class="nav-link text-dark need-login" href="Simpan.html">Simpan</a></li>
-        <li class="nav-item"><a class="nav-link text-dark need-login" href="Profile.html">Profile</a></li>
+        <li class="nav-item"><a class="nav-link menu-link need-login" href="<?= base_url('/'); ?>">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link menu-link need-login" href="<?= base_url('cari'); ?>">Cari</a></li>
+        <li class="nav-item"><a class="nav-link menu-link need-login" href="<?= base_url('simpan'); ?>">Simpan</a></li>
+        <li class="nav-item"><a class="nav-link menu-link need-login" href="<?= base_url('profile'); ?>">Profile</a></li>
       </ul>
       <div class="d-flex gap-2 mt-auto">
-        <a href="login.html" class="btn btn-primary flex-fill">Masuk</a>
-        <a href="daftar.html" class="btn btn-outline-secondary flex-fill">Daftar</a>
+        <div class="d-flex gap-2 mt-auto">
+        <a href="<?= base_url('login'); ?>" class="btn btn-primary flex-fill">Masuk</a>
+        <a href="<?= base_url('daftar'); ?>" class="btn btn-outline-secondary flex-fill">Daftar</a>
       </div>
     </div>
   </div>
 
-  <!-- Toast login (interaksi 2) -->
+  <!-- Toast login -->
   <div id="toast-wrap">
     <div id="loginToast" class="toast align-items-center bg-white border shadow" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex">
         <div class="toast-body">
           <i class="bi bi-exclamation-circle-fill text-danger me-2"></i>
-          Silahkan <a href="login.html">Login</a>/<a href="daftar.html">Daftar</a> dahulu
+          Silahkan <a href="<?= base_url('login'); ?>">Login</a>/<a href="<?= base_url('daftar'); ?>">Daftar</a> dahulu
         </div>
         <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Tutup"></button>
       </div>
@@ -98,7 +126,7 @@
         Temukan rekomendasi destinasi wisata, lihat estimasi biaya, dan atur perjalanan impianmu.
       </p>
 
-      <form id="formCari" action="cari.html" method="get">
+      <form id="formCari" action="<?= base_url('cari'); ?>" method="get">
         <div class="input-group mb-2">
           <span class="input-group-text search-input border-end-0"><i class="bi bi-search text-secondary"></i></span>
           <input type="text" id="pencarian" name="pencarian" class="form-control search-input border-start-0" placeholder="Cari destinasi, kota, atau aktivitas...">
@@ -129,7 +157,7 @@
           </button>
         </div>
         <div class="col-3">
-          <a class="feature-btn d-block need-login" href="Simpan.html">
+          <a class="feature-btn d-block need-login" href="<?= base_url('simpan'); ?>">
             <span class="feature-icon"><i class="bi bi-heart"></i></span>
             Destinasi Favorit
           </a>
@@ -146,7 +174,7 @@
       <div class="row g-2" id="destList">
         <div class="col-4" data-id="kebunraya" data-harga="15500">
           <button type="button" class="dest-card">
-            <img src="../assets/images/kebunrayabogor.png" alt="Kebun Raya Bogor">
+            <img src="<?= base_url('assets/images/kebunrayabogor.png'); ?>" alt="Kebun Raya Bogor">
             <div class="info">
               <div class="fw-bold">Kebun Raya</div>
               <div class="fw-semibold">Rp 15.500</div>
@@ -156,7 +184,7 @@
         </div>
         <div class="col-4" data-id="sawarna" data-harga="500000">
           <button type="button" class="dest-card active">
-            <img src="../assets/images/pantaisawarna.png" alt="Pantai Sawarna">
+            <img src="<?= base_url('assets/images/pantaisawarna.png'); ?>" alt="Pantai Sawarna">
             <div class="info">
               <div class="fw-bold">Pantai Sawarna</div>
               <div class="fw-semibold">Rp 500.000</div>
@@ -166,7 +194,7 @@
         </div>
         <div class="col-4" data-id="safari" data-harga="1000000">
           <button type="button" class="dest-card">
-            <img src="../assets/images/tamansafari.png" alt="Taman Safari Indonesia">
+            <img src="<?= base_url('assets/images/tamansafari.png'); ?>" alt="Taman Safari Indonesia">
             <div class="info">
               <div class="fw-bold">Taman Safari Indonesia</div>
               <div class="fw-semibold">Rp 1.000.000</div>
@@ -178,10 +206,10 @@
       <p id="emptyMsg" class="text-secondary small text-center my-3 d-none">Tidak ada destinasi pada rentang budget ini.</p>
     </section>
 
-    <!-- Detail destinasi (berubah saat kartu dipilih) -->
+    <!-- Detail destinasi -->
     <section id="detail" class="detail-card p-3">
       <div class="d-flex gap-3 mb-3">
-        <img id="dImg" src="../assets/images/pantaisawarna.png" alt="Pantai Sawarna">
+        <img id="dImg" src="<?= base_url('assets/images/pantaisawarna.png'); ?>" alt="Pantai Sawarna">
         <div>
           <h3 class="h6 fw-bold mb-1" id="dNama">Pantai Sawarna</h3>
           <div class="small text-secondary"><i class="bi bi-geo-alt"></i> <span id="dLokasi">Banten</span></div>
@@ -205,28 +233,6 @@
       </div>
     </section>
   </main>
-
-  <!-- Modal filter budget (interaksi 3) -->
-  <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="filterModalLabel">Filter Budget</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-        </div>
-        <div class="modal-body">
-          <div class="form-check mb-2"><input class="form-check-input" type="radio" name="budget" id="b0" value="0" checked><label class="form-check-label" for="b0">Semua budget</label></div>
-          <div class="form-check mb-2"><input class="form-check-input" type="radio" name="budget" id="b1" value="100000"><label class="form-check-label" for="b1">Hingga Rp 100.000</label></div>
-          <div class="form-check mb-2"><input class="form-check-input" type="radio" name="budget" id="b2" value="600000"><label class="form-check-label" for="b2">Hingga Rp 600.000</label></div>
-          <div class="form-check"><input class="form-check-input" type="radio" name="budget" id="b3" value="1000000"><label class="form-check-label" for="b3">Hingga Rp 1.000.000</label></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-          <button type="button" class="btn btn-primary" id="btnTerapkan" data-bs-dismiss="modal">Terapkan</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Modal lihat detail -->
   <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
@@ -252,24 +258,23 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Data dummy destinasi (front-end saja, belum dari backend)
     const DESTINASI = {
       kebunraya: {
         nama: "Kebun Raya Bogor", lokasi: "Jawa Barat", durasi: "1 Hari",
-        img: "../assets/images/kebunrayabogor.png",
+        img: "<?= base_url('assets/images/kebunrayabogor.png'); ?>",
         deskripsi: "Kebun botani luas di tengah Kota Bogor, cocok untuk wisata santai bersama keluarga.",
         rincian: [["Transportasi PP", 50000], ["Penginapan", 0], ["Makan & Minum", 40000], ["Aktivitas & Tiket Masuk", 15500]]
       },
       sawarna: {
         nama: "Pantai Sawarna", lokasi: "Banten", durasi: "2 Hari 1 Malam",
-        img: "../assets/images/pantaisawarna.png",
+        img: "<?= base_url('assets/images/pantaisawarna.png'); ?>",
         deskripsi: "Pantai dengan tebing karang dan ombak besar di pesisir selatan Banten.",
         rincian: [["Transportasi PP", 300000], ["Penginapan (1 malam)", 300000], ["Makan & Minum", 150000], ["Aktivitas & Tiket Masuk", 100000]],
         min: 500000
       },
       safari: {
         nama: "Taman Safari Indonesia", lokasi: "Jawa Barat", durasi: "3 Hari 2 Malam",
-        img: "../assets/images/tamansafari.png",
+        img: "<?= base_url('assets/images/tamansafari.png'); ?>",
         deskripsi: "Taman safari dengan koleksi satwa dari berbagai penjuru dunia di kawasan Puncak.",
         rincian: [["Transportasi PP", 100000], ["Penginapan (2 malam)", 500000], ["Makan & Minum", 250000], ["Aktivitas & Tiket Masuk", 150000]]
       }
@@ -279,7 +284,6 @@
     const $ = id => document.getElementById(id);
     let terpilih = "sawarna";
 
-    // Tampilkan detail destinasi yang dipilih
     function tampilkan(id) {
       const d = DESTINASI[id];
       const total = d.rincian.reduce((s, r) => s + r[1], 0);
@@ -304,22 +308,8 @@
       document.querySelector(`#destList [data-id="${id}"] .dest-card`).classList.add("active");
     }
 
-    // Klik kartu destinasi -> detail berubah
     document.querySelectorAll("#destList [data-id]").forEach(col => {
       col.addEventListener("click", () => tampilkan(col.dataset.id));
-    });
-
-    // Filter budget
-    $("btnTerapkan").addEventListener("click", () => {
-      const max = Number(document.querySelector('input[name="budget"]:checked').value);
-      let tampil = 0;
-      document.querySelectorAll("#destList [data-id]").forEach(col => {
-        const ok = max === 0 || Number(col.dataset.harga) <= max;
-        col.classList.toggle("d-none", !ok);
-        if (ok) tampil++;
-      });
-      $("emptyMsg").classList.toggle("d-none", tampil > 0);
-      $("filterInfo").textContent = max ? "Maks. " + rp(max) : "";
     });
 
     function peringatanLogin() {
@@ -328,21 +318,22 @@
 
     $("btnPilih").addEventListener("click", peringatanLogin);
 
-    // Link menu -> tutup drawer lalu tampilkan peringatan
+    // Semua tombol/menu dengan kelas .need-login akan memunculkan toast peringatan login
     document.querySelectorAll(".need-login").forEach(link => {
       link.addEventListener("click", e => {
         e.preventDefault();
-        const drawer = bootstrap.Offcanvas.getInstance($("menuDrawer"));
-        if (drawer) drawer.hide();   // pengecekan ini penting, kalau tidak error saat drawer belum pernah dibuka
+        const drawerElement = $("menuDrawer");
+        const drawer = bootstrap.Offcanvas.getInstance(drawerElement);
+        if (drawer) drawer.hide();
         peringatanLogin();
       });
     });
 
-          // TAMBAH: Cari Destinasi -> minta login dulu (klik tombol maupun tekan Enter)
-      $("formCari").addEventListener("submit", e => {
-        e.preventDefault();   // batalkan pindah ke cari.html
-        peringatanLogin();
-      });
+    $("formCari").addEventListener("submit", e => {
+      e.preventDefault();
+      peringatanLogin();
+    });
+
     tampilkan(terpilih);
   </script>
 </body>

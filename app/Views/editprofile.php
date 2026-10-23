@@ -57,8 +57,8 @@
   <!-- Header -->
   <header class="border-bottom bg-white">
     <div class="page container py-2">
-      <a href="<?= base_url('beranda.php') ?>" class="menu-item">
-        <img src="<?= base_url('assets/images/logo.svg') ?>" alt="Tripnesia..." height="40">
+      <a href="<?= base_url('/') ?>">
+        <img src="<?= base_url('assets/images/logo.svg') ?>" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="40">
       </a>
     </div>
   </header>
@@ -90,15 +90,20 @@
 
         <div class="avatar-wrap mb-3">
           <div class="avatar" id="avatar" role="img" aria-label="Foto profil pengguna">
-            <i class="bi bi-person"></i>
+            <!-- Jika di database sudah ada foto, tampilkan dari database -->
+            <?php if (!empty(session()->get('avatar'))): ?>
+              <img src="<?= base_url('uploads/avatar/' . session()->get('avatar')) ?>" alt="Foto profil pengguna">
+            <?php else: ?>
+              <i class="bi bi-person"></i>
+            <?php endif; ?>
           </div>
           <button type="button" class="btn-camera" id="btnCamera" aria-label="Ubah foto profil">
             <i class="bi bi-camera-fill"></i>
           </button>
-          <input type="file" id="fotoInput" accept="image/*" class="d-none">
+          <input type="file" id="fotoInput" name="avatar" accept="image/*" class="d-none">
         </div>
 
-        <p class="fw-bold mb-0" id="namaTampil">MELPANSYANATPAL</p>
+        <p class="fw-bold mb-0" id="namaTampil"><?= esc(session()->get('name')) ?></p>
       </section>
 
       <!-- Informasi akun -->
@@ -111,7 +116,7 @@
             <span class="field-icon" aria-hidden="true"><i class="bi bi-person-fill"></i></span>
             <div class="field-body">
               <label for="username" class="field-label">Nama Pengguna</label>
-              <input type="text" id="username" name="username" class="field-input" value="MELPANSYANATPAL" required readonly>
+              <input type="text" id="username" name="username" class="field-input" value="<?= esc(session()->get('name')) ?>" required readonly>
             </div>
             <button type="button" class="btn-edit" aria-label="Edit nama pengguna"><i class="bi bi-pencil-fill"></i></button>
           </div>
@@ -120,25 +125,16 @@
             <span class="field-icon" aria-hidden="true"><i class="bi bi-envelope-fill"></i></span>
             <div class="field-body">
               <label for="email" class="field-label">Email</label>
-              <input type="email" id="email" name="email" class="field-input" placeholder="Email" readonly>
+              <input type="email" id="email" name="email" class="field-input" placeholder="Email" value="<?= esc(session()->get('email')) ?>" readonly>
             </div>
             <button type="button" class="btn-edit" aria-label="Edit email"><i class="bi bi-pencil-fill"></i></button>
-          </div>
-
-          <div class="field-row">
-            <span class="field-icon" aria-hidden="true"><i class="bi bi-telephone-fill"></i></span>
-            <div class="field-body">
-              <label for="phone" class="field-label">No Handphone</label>
-              <input type="tel" id="phone" name="phone" class="field-input" placeholder="No Handphone" pattern="^(\+62|62|0)8[0-9]{8,12}$" title="Contoh: 081234567890" readonly>
-            </div>
-            <button type="button" class="btn-edit" aria-label="Edit nomor handphone"><i class="bi bi-pencil-fill"></i></button>
           </div>
 
           <div class="field-row">
             <span class="field-icon" aria-hidden="true"><i class="bi bi-key-fill"></i></span>
             <div class="field-body">
               <label for="password" class="field-label">Password</label>
-              <input type="password" id="password" name="password" class="field-input" placeholder="Password" minlength="6" readonly>
+              <input type="password" id="password" name="password" class="field-input" placeholder="Password baru (kosongkan jika tidak diubah)" minlength="6" readonly>
             </div>
             <button type="button" class="btn-eye d-none" id="btnEye" aria-label="Tampilkan password"><i class="bi bi-eye"></i></button>
             <button type="button" class="btn-edit" aria-label="Edit password"><i class="bi bi-pencil-fill"></i></button>
@@ -163,7 +159,7 @@
     const $ = id => document.getElementById(id);
     const form = $("editForm");
     const inputs = [...form.querySelectorAll(".field-input")];
-    let awal = {};   // nilai sebelum diedit, dipakai tombol Batal
+    let awal = {};  // nilai sebelum diedit, dipakai tombol Batal
 
     function simpanAwal() { inputs.forEach(i => awal[i.id] = i.value); }
     simpanAwal();
@@ -213,11 +209,12 @@
 
     // Batal: kembalikan nilai awal
     $("btnBatal").addEventListener("click", () => {
+      inputs.steps?.();
       inputs.forEach(i => i.value = awal[i.id]);
       kunciSemua();
     });
 
-    // Simpan (front-end saja, belum ke backend)
+    // Simpan (Nanti dihubungkan ke Controller Backend CodeIgniter untuk database)
     form.addEventListener("submit", e => {
       e.preventDefault();
       const salah = inputs.find(i => !i.readOnly && !i.checkValidity());
@@ -229,13 +226,13 @@
       tampilToast("Perubahan berhasil disimpan.");
     });
 
-    // Ubah foto profil: pratinjau saja
+    // Ubah foto profil: pratinjau sementara
     $("btnCamera").addEventListener("click", () => $("fotoInput").click());
     $("fotoInput").addEventListener("change", () => {
       const file = $("fotoInput").files[0];
       if (!file) return;
       $("avatar").innerHTML = `<img src="${URL.createObjectURL(file)}" alt="Foto profil pengguna">`;
-      tampilToast("Foto profil diperbarui.");
+      tampilToast("Pratinjau foto diperbarui (Simpan ke database menyusul).");
     });
   </script>
 </body>
