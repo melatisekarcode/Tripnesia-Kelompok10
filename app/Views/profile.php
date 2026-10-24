@@ -22,7 +22,11 @@
     .page { max-width: 960px; }
     .content { max-width: 420px; }
 
-    .btn-back { width: 36px; height: 36px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 1px solid var(--tn-border); background: #fff; color: #111827; }
+    /* Menu drawer */
+    .menu-link { color: #111827; padding: 8px 16px; border-radius: 8px; transition: background-color .15s, color .15s; }
+    .menu-link:hover, .menu-link:focus-visible { color: #0a84c6; background-color: rgba(10, 132, 198, .1); }
+    .menu-link.active { color: #0a84c6; font-weight: 700; }
+    .offcanvas .btn-outline-secondary:hover { color: #0a84c6; border-color: #0a84c6; background-color: rgba(10, 132, 198, .08); }
 
     /* Avatar */
     .avatar-wrap { position: relative; width: 150px; height: 150px; margin: 0 auto; }
@@ -46,19 +50,37 @@
 <body class="d-flex flex-column min-vh-100">
 
   <!-- Header -->
-  <header class="border-bottom bg-white">
-    <div class="page container py-2">
+  <header class="border-bottom bg-white sticky-top">
+    <div class="page container d-flex align-items-center justify-content-between py-2">
       <a href="<?= base_url('/') ?>">
         <img src="<?= base_url('assets/images/logo.svg') ?>" alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="40">
       </a>
+      <button class="btn btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuDrawer" aria-controls="menuDrawer" aria-label="Menu">
+        <i class="bi bi-list fs-5"></i>
+      </button>
     </div>
   </header>
 
-  <main class="page container py-3 flex-grow-1">
+  <!-- Drawer menu -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="menuDrawer" aria-labelledby="menuDrawerLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="menuDrawerLabel">Menu</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Tutup"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column">
+      <ul class="nav flex-column mb-4">
+        <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('/') ?>">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('cari') ?>">Cari</a></li>
+        <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('simpan') ?>">Simpan</a></li>
+        <li class="nav-item"><a class="nav-link menu-link active" href="<?= base_url('profile') ?>">Profile</a></li>
+      </ul>
+      <div class="mt-auto">
+        <a href="<?= base_url('logout') ?>" class="btn btn-outline-secondary w-100">Keluar</a>
+      </div>
+    </div>
+  </div>
 
-    <a href="<?= base_url('/') ?>" class="btn-back mb-2" aria-label="Kembali ke Beranda">
-      <i class="bi bi-chevron-left"></i>
-    </a>
+  <main class="page container py-4 flex-grow-1">
 
     <div class="content mx-auto">
 

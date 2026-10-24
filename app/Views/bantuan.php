@@ -6,12 +6,10 @@
     <title>Tripnesia - Bantuan &amp; Support</title>
 
     <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
         :root {
@@ -23,120 +21,51 @@
             --tn-muted: #6b7280;
         }
 
-        * {
-            box-sizing: border-box;
-        }
-
         body {
-            margin: 0;
             font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
             color: var(--tn-text);
             background: #fff;
         }
 
-        /* Ukuran halaman mengikuti login.html / daftar.html */
-        .page {
-            width: 100%;
-            max-width: 960px;
-            margin: 0 auto;
-        }
+        /* Ukuran halaman sama dengan halaman lain */
+        .page { max-width: 960px; }
 
-        /* ===== Header (sejajar dengan kartu di bawahnya) ===== */
-        .topbar {
-            padding: 0 20px;
-            background: #fff;
-        }
+        /* Lebar isi halaman (lebih lebar dari sebelumnya, ubah angka ini kalau mau disesuaikan) */
+        .content { max-width: 640px; }
 
-        .topbar-inner {
-            position: relative;
-            width: 100%;
-            max-width: 390px;
-            margin: 0 auto;
-            padding: 8px 6px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .topbar-inner::after {
-            content: "";
-            position: absolute;
-            left: 6px;
-            right: 6px;
-            bottom: 0;
-            height: 1px;
-            background: var(--tn-border);
-        }
-
-        .topbar img {
-            display: block;
-            height: 40px;
-            width: auto;
-        }
-
-        .btn-menu {
-            width: 40px;
-            height: 40px;
+        .btn-back {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             padding: 0;
             border: 1px solid var(--tn-border);
-            border-radius: 8px;
             background: #fff;
-            color: #4b5563;
-            font-size: 20px;
-        }
-
-        /* ===== Area utama ===== */
-        .help-section {
-            min-height: calc(100vh - 129px);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 32px 20px 28px;
-        }
-
-        .help-card {
-            width: 100%;
-            max-width: 390px;
-            padding: 0 6px;
-            background: #fff;
-        }
-
-        /* Judul + tombol kembali */
-        .page-title {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 22px;
-        }
-
-        .btn-back {
-            width: 40px;
-            height: 40px;
-            flex-shrink: 0;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--tn-border);
-            border-radius: 50%;
-            background: #fff;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, .08);
-            color: var(--tn-text);
-            font-size: 15px;
+            color: #111827;
             text-decoration: none;
+            transition: border-color .15s, color .15s, background .15s;
         }
+
+        .btn-back:hover {
+            border-color: var(--bs-primary);
+            color: var(--bs-primary);
+            background: rgba(10, 132, 198, .08);
+        }
+
+        /* Judul */
+        .page-title { margin-bottom: 22px; }
 
         .page-title h1 {
             margin: 0;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
         }
 
         .page-title p {
-            margin: 3px 0 0;
-            font-size: 12.5px;
+            margin: 4px 0 0;
+            font-size: 13px;
             line-height: 1.4;
             color: var(--tn-muted);
         }
@@ -166,9 +95,7 @@
             font-size: 13px;
         }
 
-        .search-wrap .form-control::placeholder {
-            color: #9ca3af;
-        }
+        .search-wrap .form-control::placeholder { color: #9ca3af; }
 
         .search-wrap .form-control:focus {
             border-color: var(--bs-primary);
@@ -182,9 +109,7 @@
             font-weight: 700;
         }
 
-        .block {
-            margin-bottom: 28px;
-        }
+        .block { margin-bottom: 28px; }
 
         /* ===== Kartu FAQ (accordion) ===== */
         .faq-item {
@@ -221,13 +146,13 @@
 
         .faq-toggle h3 {
             margin: 0 0 3px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
         }
 
         .faq-toggle p {
             margin: 0;
-            font-size: 12px;
+            font-size: 12.5px;
             line-height: 1.45;
             color: var(--tn-muted);
         }
@@ -250,7 +175,7 @@
             border-left: 3px solid var(--bs-primary);
             border-radius: 0 8px 8px 0;
             background: #f4f9fd;
-            font-size: 12.5px;
+            font-size: 13px;
             line-height: 1.55;
         }
 
@@ -259,9 +184,7 @@
             padding-left: 18px;
         }
 
-        .faq-answer li {
-            margin-bottom: 2px;
-        }
+        .faq-answer li { margin-bottom: 2px; }
 
         .faq-answer a {
             color: var(--bs-primary);
@@ -269,9 +192,7 @@
             text-decoration: none;
         }
 
-        .faq-answer a:hover {
-            text-decoration: underline;
-        }
+        .faq-answer a:hover { text-decoration: underline; }
 
         .icon-box {
             width: 40px;
@@ -290,7 +211,7 @@
         .empty-msg {
             padding: 14px;
             text-align: center;
-            font-size: 12.5px;
+            font-size: 13px;
             color: var(--tn-muted);
         }
 
@@ -302,7 +223,8 @@
         }
 
         .contact-card {
-            width: 140px;
+            flex: 1;
+            max-width: 220px;
             padding: 16px 12px;
             border: 1px solid #e5e7eb;
             border-radius: 10px;
@@ -319,7 +241,7 @@
 
         .contact-card h3 {
             margin: 0 0 10px;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
         }
 
@@ -329,7 +251,7 @@
             border-radius: 6px;
             background: var(--tn-soft);
             color: var(--bs-primary);
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 600;
             text-decoration: none;
         }
@@ -339,322 +261,204 @@
             color: #fff;
         }
 
-        /* Kartu "Punya pertanyaan lain?" */
-        .help-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px;
-            border: 1px solid #eef0f4;
-            border-radius: 10px;
-            background: #fff;
-            box-shadow: 0 1px 5px rgba(0, 0, 0, .10);
-            color: inherit;
-            text-decoration: none;
-            transition: border-color .15s, box-shadow .15s;
-        }
-
-        .help-item:hover,
-        .help-item:focus-visible {
-            border-color: var(--bs-primary);
-            box-shadow: 0 2px 10px rgba(10, 132, 198, .18);
-            color: inherit;
-        }
-
-        .help-item h2 {
-            margin: 0 0 3px;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .help-item p {
-            margin: 0;
-            font-size: 12px;
-            line-height: 1.45;
-            color: var(--tn-muted);
-        }
-
-        .help-item .chevron {
-            font-size: 14px;
-            color: #9ca3af;
-        }
-
-        /* ===== Footer ===== */
-        .footer {
-            width: 100%;
-            padding: 18px 12px;
+        footer {
             border-top: 1px solid var(--tn-border);
             background: #f8fafc;
-            color: var(--tn-muted);
-            text-align: center;
-            font-size: 12px;
-        }
-
-        .footer i {
-            margin-right: 5px;
-        }
-
-        /* ===== Tampilan HP ===== */
-        @media (max-width: 575.98px) {
-            .topbar {
-                padding: 0 16px;
-            }
-
-            .topbar-inner {
-                max-width: 420px;
-                padding: 6px 0;
-            }
-
-            .topbar-inner::after {
-                left: 0;
-                right: 0;
-            }
-
-            .help-section {
-                min-height: calc(100vh - 119px);
-                padding: 24px 16px 28px;
-            }
-
-            .help-card {
-                max-width: 420px;
-                padding: 0;
-            }
-
-            .footer {
-                font-size: 11px;
-            }
         }
     </style>
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
-    <div class="page">
+    <!-- Header -->
+    <header class="border-bottom bg-white">
+        <div class="page container py-2">
+            <a href="<?= base_url('/'); ?>">
+                <img src="<?= base_url('assets/images/logo.svg'); ?>"
+                     alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu" height="40">
+            </a>
+        </div>
+    </header>
 
-        <!-- Header -->
-        <header class="topbar">
-            <div class="topbar-inner">
-                <a href="Beranda.html">
-                    <img src="../assets/images/logo.svg"
-                         alt="Tripnesia, Jelajahi Indonesia, Temukan Ceritamu">
-                </a>
-                <button class="btn-menu" type="button"
-                        data-bs-toggle="offcanvas" data-bs-target="#menuDrawer"
-                        aria-controls="menuDrawer" aria-label="Menu">
-                    <i class="bi bi-list"></i>
-                </button>
-            </div>
-        </header>
+    <main class="page container py-3 flex-grow-1">
 
-        <!-- Drawer menu -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="menuDrawer" aria-labelledby="menuDrawerLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="menuDrawerLabel">Menu</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Tutup"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link text-dark" href="Beranda.html">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="cari.html">Cari</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="Simpan.html">Simpan</a></li>
-                    <li class="nav-item"><a class="nav-link text-dark" href="Profile.html">Profile</a></li>
-                </ul>
-            </div>
+        <!-- Tombol kembali ke profil -->
+        <a href="<?= base_url('profile'); ?>" class="btn-back mb-2" aria-label="Kembali ke Profil">
+            <i class="bi bi-chevron-left"></i>
+        </a>
+
+        <div class="content mx-auto pt-2 pb-3">
+
+            <!-- Judul -->
+            <section class="page-title" aria-labelledby="judul-bantuan">
+                <h1 id="judul-bantuan">Bantuan &amp; Support</h1>
+                <p>Butuh bantuan? Temukan jawaban atas pertanyaanmu atau hubungi kami.</p>
+            </section>
+
+            <!-- Pencarian (menyaring daftar pertanyaan) -->
+            <form id="searchForm" action="#" method="get" role="search">
+                <label for="search-help" class="visually-hidden">Cari bantuan</label>
+                <div class="search-wrap">
+                    <i class="bi bi-search"></i>
+                    <input type="search" class="form-control" id="search-help" name="q"
+                           placeholder="Cari pertanyaan, topik, atau kata kunci..."
+                           autocomplete="off">
+                </div>
+            </form>
+
+            <!-- Pertanyaan yang sering diajukan -->
+            <section class="block" aria-labelledby="faq">
+                <h2 id="faq" class="section-title">Pertanyaan yang sering diajukan</h2>
+
+                <div class="d-grid gap-2" id="faqList">
+
+                    <!-- 1 -->
+                    <div class="faq-item">
+                        <button class="faq-toggle collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#jawab1"
+                                aria-expanded="false" aria-controls="jawab1">
+                            <span class="icon-box"><i class="bi bi-link-45deg"></i></span>
+                            <div class="flex-grow-1">
+                                <h3>Cara menemukan destinasi sesuai budget</h3>
+                                <p>Dapatkan rekomendasi tempat wisata yang cocok dengan budget kamu.</p>
+                            </div>
+                            <i class="bi bi-chevron-down chevron"></i>
+                        </button>
+                        <div id="jawab1" class="collapse" data-bs-parent="#faqList">
+                            <div class="faq-answer">
+                                Gunakan fitur <strong>Filter Budget</strong> di halaman Beranda, lalu pilih batas
+                                biaya perjalananmu. Daftar destinasi akan otomatis menyesuaikan.
+                                <ul>
+                                    <li>Buka halaman <a href="<?= base_url('/'); ?>">Beranda</a> dan ketuk ikon Filter Budget.</li>
+                                    <li>Pilih rentang budget yang kamu inginkan, lalu ketuk <em>Terapkan</em>.</li>
+                                    <li>Lihat rincian estimasi biaya per orang di setiap destinasi.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2 -->
+                    <div class="faq-item">
+                        <button class="faq-toggle collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#jawab2"
+                                aria-expanded="false" aria-controls="jawab2">
+                            <span class="icon-box"><i class="bi bi-bullseye"></i></span>
+                            <div class="flex-grow-1">
+                                <h3>Rekomendasi destinasi populer di Indonesia</h3>
+                                <p>Lihat destinasi favorit berdasarkan kategori dan musim terbaik.</p>
+                            </div>
+                            <i class="bi bi-chevron-down chevron"></i>
+                        </button>
+                        <div id="jawab2" class="collapse" data-bs-parent="#faqList">
+                            <div class="faq-answer">
+                                Destinasi populer ditampilkan di bagian <strong>Destinasi Populer</strong> pada
+                                Beranda, misalnya Kebun Raya Bogor, Pantai Sawarna, dan Taman Safari Indonesia.
+                                Ketuk salah satu kartu untuk melihat lokasi, durasi, dan estimasi biayanya.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3 -->
+                    <div class="faq-item">
+                        <button class="faq-toggle collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#jawab3"
+                                aria-expanded="false" aria-controls="jawab3">
+                            <span class="icon-box"><i class="bi bi-gem"></i></span>
+                            <div class="flex-grow-1">
+                                <h3>Tips liburan hemat</h3>
+                                <p>Panduan mengatur anggaran, transportasi, dan akomodasi agar liburan tetap seru.</p>
+                            </div>
+                            <i class="bi bi-chevron-down chevron"></i>
+                        </button>
+                        <div id="jawab3" class="collapse" data-bs-parent="#faqList">
+                            <div class="faq-answer">
+                                Beberapa cara agar liburan tetap hemat:
+                                <ul>
+                                    <li>Tentukan total budget dan bagi ke transportasi, penginapan, makan, dan tiket.</li>
+                                    <li>Berangkat di hari kerja karena harga biasanya lebih murah.</li>
+                                    <li>Pesan penginapan dan transportasi jauh-jauh hari.</li>
+                                    <li>Berbagi biaya dengan teman atau keluarga.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4 -->
+                    <div class="faq-item">
+                        <button class="faq-toggle collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#jawab4"
+                                aria-expanded="false" aria-controls="jawab4">
+                            <span class="icon-box"><i class="bi bi-calendar-event"></i></span>
+                            <div class="flex-grow-1">
+                                <h3>Waktu terbaik untuk berkunjung</h3>
+                                <p>Kapan waktu paling pas ke suatu destinasi wisata?</p>
+                            </div>
+                            <i class="bi bi-chevron-down chevron"></i>
+                        </button>
+                        <div id="jawab4" class="collapse" data-bs-parent="#faqList">
+                            <div class="faq-answer">
+                                Umumnya musim kemarau (sekitar April sampai Oktober) cocok untuk wisata pantai dan
+                                alam terbuka. Hindari akhir pekan panjang dan libur sekolah kalau ingin suasana
+                                lebih tenang dan harga lebih terjangkau.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5 -->
+                    <div class="faq-item">
+                        <button class="faq-toggle collapsed" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#jawab5"
+                                aria-expanded="false" aria-controls="jawab5">
+                            <span class="icon-box"><i class="bi bi-diamond"></i></span>
+                            <div class="flex-grow-1">
+                                <h3>Itinerary &amp; paket perjalanan</h3>
+                                <p>Contoh itinerary untuk berbagai durasi perjalanan.</p>
+                            </div>
+                            <i class="bi bi-chevron-down chevron"></i>
+                        </button>
+                        <div id="jawab5" class="collapse" data-bs-parent="#faqList">
+                            <div class="faq-answer">
+                                Setiap destinasi menampilkan durasi yang disarankan, misalnya 1 hari, 2 hari 1
+                                malam, atau 3 hari 2 malam, lengkap dengan rincian estimasi biaya. Simpan
+                                destinasi favoritmu di halaman <a href="<?= base_url('simpan'); ?>">Simpan</a> untuk
+                                membandingkannya nanti.
+                            </div>
+                        </div>
+                    </div>
+
+                    <p id="emptyMsg" class="empty-msg d-none mb-0">
+                        Tidak ada pertanyaan yang cocok dengan pencarianmu.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Hubungi Kami -->
+            <section class="block" aria-labelledby="hubungi-kami">
+                <h2 id="hubungi-kami" class="section-title">Hubungi Kami</h2>
+
+                <div class="contact-row">
+                    <article class="contact-card">
+                        <span class="icon-box"><i class="bi bi-envelope"></i></span>
+                        <h3>Email</h3>
+                        <a href="mailto:cs@tripnesia.co.id" class="btn-contact">Cek Email</a>
+                    </article>
+
+                    <article class="contact-card">
+                        <span class="icon-box"><i class="bi bi-telephone"></i></span>
+                        <h3>Telepon</h3>
+                        <a href="tel:+6281212345678" class="btn-contact">Hubungi</a>
+                    </article>
+                </div>
+            </section>
+
+
         </div>
 
-        <main class="help-section">
+    </main>
 
-            <div class="help-card">
-
-                <!-- Judul + tombol kembali -->
-                <section class="page-title" aria-labelledby="judul-bantuan">
-                    <a href="Profile.html" class="btn-back" aria-label="Kembali ke halaman profil">
-                        <i class="bi bi-chevron-left"></i>
-                    </a>
-                    <div>
-                        <h1 id="judul-bantuan">Bantuan &amp; Support</h1>
-                        <p>Butuh bantuan? Temukan jawaban atas pertanyaanmu atau hubungi kami.</p>
-                    </div>
-                </section>
-
-                <!-- Pencarian (menyaring daftar pertanyaan) -->
-                <form id="searchForm" action="#" method="get" role="search">
-                    <label for="search-help" class="visually-hidden">Cari bantuan</label>
-                    <div class="search-wrap">
-                        <i class="bi bi-search"></i>
-                        <input type="search" class="form-control" id="search-help" name="q"
-                               placeholder="Cari pertanyaan, topik, atau kata kunci..."
-                               autocomplete="off">
-                    </div>
-                </form>
-
-                <!-- Pertanyaan yang sering diajukan -->
-                <section class="block" aria-labelledby="faq">
-                    <h2 id="faq" class="section-title">Pertanyaan yang sering diajukan</h2>
-
-                    <div class="d-grid gap-2" id="faqList">
-
-                        <!-- 1 -->
-                        <div class="faq-item">
-                            <button class="faq-toggle collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#jawab1"
-                                    aria-expanded="false" aria-controls="jawab1">
-                                <span class="icon-box"><i class="bi bi-link-45deg"></i></span>
-                                <div class="flex-grow-1">
-                                    <h3>Cara menemukan destinasi sesuai budget</h3>
-                                    <p>Dapatkan rekomendasi tempat wisata yang cocok dengan budget kamu.</p>
-                                </div>
-                                <i class="bi bi-chevron-down chevron"></i>
-                            </button>
-                            <div id="jawab1" class="collapse" data-bs-parent="#faqList">
-                                <div class="faq-answer">
-                                    Gunakan fitur <strong>Filter Budget</strong> di halaman Beranda, lalu pilih batas
-                                    biaya perjalananmu. Daftar destinasi akan otomatis menyesuaikan.
-                                    <ul>
-                                        <li>Buka halaman <a href="Beranda.html">Beranda</a> dan ketuk ikon Filter Budget.</li>
-                                        <li>Pilih rentang budget yang kamu inginkan, lalu ketuk <em>Terapkan</em>.</li>
-                                        <li>Lihat rincian estimasi biaya per orang di setiap destinasi.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 2 -->
-                        <div class="faq-item">
-                            <button class="faq-toggle collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#jawab2"
-                                    aria-expanded="false" aria-controls="jawab2">
-                                <span class="icon-box"><i class="bi bi-bullseye"></i></span>
-                                <div class="flex-grow-1">
-                                    <h3>Rekomendasi destinasi populer di Indonesia</h3>
-                                    <p>Lihat destinasi favorit berdasarkan kategori dan musim terbaik.</p>
-                                </div>
-                                <i class="bi bi-chevron-down chevron"></i>
-                            </button>
-                            <div id="jawab2" class="collapse" data-bs-parent="#faqList">
-                                <div class="faq-answer">
-                                    Destinasi populer ditampilkan di bagian <strong>Destinasi Populer</strong> pada
-                                    Beranda, misalnya Kebun Raya Bogor, Pantai Sawarna, dan Taman Safari Indonesia.
-                                    Ketuk salah satu kartu untuk melihat lokasi, durasi, dan estimasi biayanya.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 3 -->
-                        <div class="faq-item">
-                            <button class="faq-toggle collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#jawab3"
-                                    aria-expanded="false" aria-controls="jawab3">
-                                <span class="icon-box"><i class="bi bi-gem"></i></span>
-                                <div class="flex-grow-1">
-                                    <h3>Tips liburan hemat</h3>
-                                    <p>Panduan mengatur anggaran, transportasi, dan akomodasi agar liburan tetap seru.</p>
-                                </div>
-                                <i class="bi bi-chevron-down chevron"></i>
-                            </button>
-                            <div id="jawab3" class="collapse" data-bs-parent="#faqList">
-                                <div class="faq-answer">
-                                    Beberapa cara agar liburan tetap hemat:
-                                    <ul>
-                                        <li>Tentukan total budget dan bagi ke transportasi, penginapan, makan, dan tiket.</li>
-                                        <li>Berangkat di hari kerja karena harga biasanya lebih murah.</li>
-                                        <li>Pesan penginapan dan transportasi jauh-jauh hari.</li>
-                                        <li>Berbagi biaya dengan teman atau keluarga.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 4 -->
-                        <div class="faq-item">
-                            <button class="faq-toggle collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#jawab4"
-                                    aria-expanded="false" aria-controls="jawab4">
-                                <span class="icon-box"><i class="bi bi-calendar-event"></i></span>
-                                <div class="flex-grow-1">
-                                    <h3>Waktu terbaik untuk berkunjung</h3>
-                                    <p>Kapan waktu paling pas ke suatu destinasi wisata?</p>
-                                </div>
-                                <i class="bi bi-chevron-down chevron"></i>
-                            </button>
-                            <div id="jawab4" class="collapse" data-bs-parent="#faqList">
-                                <div class="faq-answer">
-                                    Umumnya musim kemarau (sekitar April sampai Oktober) cocok untuk wisata pantai dan
-                                    alam terbuka. Hindari akhir pekan panjang dan libur sekolah kalau ingin suasana
-                                    lebih tenang dan harga lebih terjangkau.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 5 -->
-                        <div class="faq-item">
-                            <button class="faq-toggle collapsed" type="button"
-                                    data-bs-toggle="collapse" data-bs-target="#jawab5"
-                                    aria-expanded="false" aria-controls="jawab5">
-                                <span class="icon-box"><i class="bi bi-diamond"></i></span>
-                                <div class="flex-grow-1">
-                                    <h3>Itinerary &amp; paket perjalanan</h3>
-                                    <p>Contoh itinerary untuk berbagai durasi perjalanan.</p>
-                                </div>
-                                <i class="bi bi-chevron-down chevron"></i>
-                            </button>
-                            <div id="jawab5" class="collapse" data-bs-parent="#faqList">
-                                <div class="faq-answer">
-                                    Setiap destinasi menampilkan durasi yang disarankan, misalnya 1 hari, 2 hari 1
-                                    malam, atau 3 hari 2 malam, lengkap dengan rincian estimasi biaya. Simpan
-                                    destinasi favoritmu di halaman <a href="Simpan.html">Simpan</a> untuk
-                                    membandingkannya nanti.
-                                </div>
-                            </div>
-                        </div>
-
-                        <p id="emptyMsg" class="empty-msg d-none mb-0">
-                            Tidak ada pertanyaan yang cocok dengan pencarianmu.
-                        </p>
-                    </div>
-                </section>
-
-                <!-- Hubungi Kami -->
-                <section class="block" aria-labelledby="hubungi-kami">
-                    <h2 id="hubungi-kami" class="section-title">Hubungi Kami</h2>
-
-                    <div class="contact-row">
-                        <article class="contact-card">
-                            <span class="icon-box"><i class="bi bi-envelope"></i></span>
-                            <h3>Email</h3>
-                            <a href="mailto:cs@tripnesia.co.id" class="btn-contact">Cek Email</a>
-                        </article>
-
-                        <article class="contact-card">
-                            <span class="icon-box"><i class="bi bi-telephone"></i></span>
-                            <h3>Telepon</h3>
-                            <a href="tel:+6281212345678" class="btn-contact">Hubungi</a>
-                        </article>
-                    </div>
-                </section>
-
-                <!-- Punya pertanyaan lain -->
-                <section aria-labelledby="pertanyaan-lain">
-                    <a href="kontak-support.html" class="help-item">
-                        <span class="icon-box"><i class="bi bi-lightbulb"></i></span>
-                        <div class="flex-grow-1">
-                            <h2 id="pertanyaan-lain">Punya pertanyaan lain?</h2>
-                            <p>Jangan ragu untuk menghubungi kami. Tim kami siap membantu kamu menemukan destinasi impian!</p>
-                        </div>
-                        <i class="bi bi-chevron-right chevron"></i>
-                    </a>
-                </section>
-
-            </div>
-
-        </main>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <i class="bi bi-c-circle"></i>Copyright TripNesia 2026
-        </footer>
-
-    </div>
+    <footer class="text-center text-secondary small py-3">
+        <i class="bi bi-c-circle"></i> Copyright TripNesia 2026
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>

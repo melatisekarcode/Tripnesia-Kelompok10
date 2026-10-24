@@ -65,8 +65,6 @@
     .detail-card { border: 1px solid var(--tn-border); border-radius: 14px; }
     .detail-card img { width: 100%; max-width: 110px; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
     .cost-box { background: var(--tn-soft); border: 1px solid var(--tn-border); border-radius: 10px; font-size: .8rem; }
-    #toast-wrap { position: fixed; top: 64px; left: 0; right: 0; z-index: 1090; display: flex; justify-content: center; pointer-events: none; }
-    #toast-wrap .toast { pointer-events: auto; }
     footer { border-top: 1px solid var(--tn-border); }
     @media (min-width: 768px) {
       .detail-card img { max-width: 160px; }
@@ -104,19 +102,6 @@
       </ul>
       <div class="mt-auto">
         <a href="<?= base_url('logout'); ?>" class="btn btn-outline-secondary w-100">Keluar</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast konfirmasi pilih destinasi -->
-  <div id="toast-wrap">
-    <div id="pilihToast" class="toast align-items-center bg-white border shadow" role="status" aria-live="polite" aria-atomic="true">
-      <div class="d-flex">
-        <div class="toast-body">
-          <i class="bi bi-check-circle-fill text-success me-2"></i>
-          <span id="toastMsg"></span> <a href="<?= base_url('simpan'); ?>">Lihat Simpan</a>
-        </div>
-        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Tutup"></button>
       </div>
     </div>
   </div>
@@ -232,9 +217,8 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-end gap-2">
-           <a id="btnDetail" href="<?= base_url('detailwisata/pantaisawarna'); ?>" class="btn btn-outline-secondary btn-sm px-3">Lihat Detail</a>
-        <button type="button" class="btn btn-primary btn-sm px-3" id="btnPilih">Pilih Destinasi</button>
+      <div class="d-flex justify-content-end">
+        <a id="btnDetail" href="<?= base_url('detailwisata/pantaisawarna'); ?>" class="btn btn-primary btn-sm px-3">Lihat Destinasi</a>
       </div>
     </section>
   </main>
@@ -318,6 +302,16 @@
     const $ = id => document.getElementById(id);
     let terpilih = "sawarna";
 
+    // ===== Simpan destinasi =====
+    // (dideklarasikan di atas supaya sudah ada sebelum tampilkan() dipanggil)
+    const SIMPAN = new Set();
+    const CSRF_H = "<?= csrf_header(); ?>", CSRF_V = "<?= csrf_hash(); ?>";
+
+    function ikonSimpan() {
+      const saved = SIMPAN.has(DESTINASI[terpilih].slug);
+      $("iconBm").className = saved ? "bi bi-bookmark-fill" : "bi bi-bookmark";
+    }
+
     // Tampilkan detail destinasi yang dipilih
     function tampilkan(id) {
       const d = DESTINASI[id];
@@ -359,28 +353,13 @@
       $("filterInfo").textContent = max ? "Maks. " + rp(max) : "";
     });
 
-    // Pilih destinasi -> tampilkan konfirmasi (belum disimpan ke backend)
-    $("btnPilih").addEventListener("click", () => {
-      $("toastMsg").textContent = DESTINASI[terpilih].nama + " dipilih.";
-      bootstrap.Toast.getOrCreateInstance($("pilihToast"), { delay: 4000 }).show();
-    });
-
-    tampilkan(terpilih);
-
-        // ===== Simpan destinasi =====
-    const SIMPAN = new Set();
-    const CSRF_H = "<?= csrf_header(); ?>", CSRF_V = "<?= csrf_hash(); ?>";
-
-    function ikonSimpan() {
-      const saved = SIMPAN.has(DESTINASI[terpilih].slug);
-      $("iconBm").className = saved ? "bi bi-bookmark-fill" : "bi bi-bookmark";
-    }
-
+    // Ambil daftar yang sudah disimpan, lalu perbarui ikon bookmark
     fetch("<?= base_url('simpan/daftar'); ?>").then(r => r.json()).then(d => {
       d.slugs.forEach(s => SIMPAN.add(s));
       ikonSimpan();
     });
 
+    // Klik ikon bookmark = simpan / hapus
     $("btnBm").addEventListener("click", async () => {
       const slug = DESTINASI[terpilih].slug;
       const res = await fetch("<?= base_url('simpan/toggle'); ?>", {
