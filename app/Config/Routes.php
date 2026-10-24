@@ -21,6 +21,7 @@ $routes->post('reset-sandi', 'Auth::prosesReset');
 $routes->get('simpan', 'Simpan::index');
 $routes->get('simpan/status/(:segment)', 'Simpan::status/$1');
 $routes->post('simpan/toggle', 'Simpan::toggle');
+$routes->get('simpan/daftar', 'Simpan::daftar');
 $routes->view('cari', 'cari');
 $routes->get('profile', 'Profile::index');
 $routes->get('profile/edit', 'Profile::edit');

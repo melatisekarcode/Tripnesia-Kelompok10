@@ -57,6 +57,10 @@
     .dest-card:hover { transform: translateY(-2px); }
     .dest-card.active { border-color: var(--bs-primary); box-shadow: 0 0 0 2px rgba(10,132,198,.25); }
     .dest-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+    .btn-bm { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--tn-border); background: #fff; color: #0a84c6;
+      display: flex; align-items: center; justify-content: center; }
+    .btn-bm:hover { background: #f0f9ff; }
     .dest-card .info { padding: 8px; font-size: .7rem; }
     .detail-card { border: 1px solid var(--tn-border); border-radius: 14px; }
     .detail-card img { width: 100%; max-width: 110px; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
@@ -207,7 +211,8 @@
     </section>
 
     <!-- Detail destinasi (berubah saat kartu dipilih) -->
-    <section id="detail" class="detail-card p-3">
+    <section id="detail" class="detail-card p-3 position-relative">
+      <button type="button" class="btn-bm" id="btnBm" title="Simpan"><i class="bi bi-bookmark" id="iconBm"></i></button>
       <div class="d-flex gap-3 mb-3">
         <img id="dImg" src="<?= base_url('assets/images/pantaisawarna.png'); ?>" alt="Pantai Sawarna">
         <div>
@@ -283,6 +288,7 @@
     // Data dummy destinasi (front-end saja, nanti diganti data dari database lewat fetch)
     const DESTINASI = {
       kebunraya: {
+        slug: "kebunrayabogor",
         nama: "Kebun Raya Bogor", lokasi: "Jawa Barat", durasi: "1 Hari",
         halaman: "<?= base_url('detailwisata/kebunrayabogor'); ?>",
         img: "<?= base_url('assets/images/kebunrayabogor.png'); ?>",
@@ -290,6 +296,7 @@
         rincian: [["Transportasi PP", 50000], ["Penginapan", 0], ["Makan & Minum", 40000], ["Aktivitas & Tiket Masuk", 15500]]
       },
       sawarna: {
+        slug: "pantaisawarna",
         nama: "Pantai Sawarna", lokasi: "Banten", durasi: "2 Hari 1 Malam",
         halaman: "<?= base_url('detailwisata/pantaisawarna'); ?>",
         img: "<?= base_url('assets/images/pantaisawarna.png'); ?>",
@@ -298,6 +305,7 @@
         min: 500000
       },
       safari: {
+        slug: "tamansafari",
         nama: "Taman Safari Indonesia", lokasi: "Jawa Barat", durasi: "3 Hari 2 Malam",
         halaman: "<?= base_url('detailwisata/tamansafari'); ?>",
         img: "<?= base_url('assets/images/tamansafari.png'); ?>",
@@ -330,6 +338,7 @@
 
       document.querySelectorAll("#destList .dest-card").forEach(c => c.classList.remove("active"));
       document.querySelector(`#destList [data-id="${id}"] .dest-card`).classList.add("active");
+      ikonSimpan();
     }
 
     // Klik kartu destinasi -> detail berubah
@@ -354,6 +363,39 @@
     $("btnPilih").addEventListener("click", () => {
       $("toastMsg").textContent = DESTINASI[terpilih].nama + " dipilih.";
       bootstrap.Toast.getOrCreateInstance($("pilihToast"), { delay: 4000 }).show();
+    });
+
+    tampilkan(terpilih);
+
+        // ===== Simpan destinasi =====
+    const SIMPAN = new Set();
+    const CSRF_H = "<?= csrf_header(); ?>", CSRF_V = "<?= csrf_hash(); ?>";
+
+    function ikonSimpan() {
+      const saved = SIMPAN.has(DESTINASI[terpilih].slug);
+      $("iconBm").className = saved ? "bi bi-bookmark-fill" : "bi bi-bookmark";
+    }
+
+    fetch("<?= base_url('simpan/daftar'); ?>").then(r => r.json()).then(d => {
+      d.slugs.forEach(s => SIMPAN.add(s));
+      ikonSimpan();
+    });
+
+    $("btnBm").addEventListener("click", async () => {
+      const slug = DESTINASI[terpilih].slug;
+      const res = await fetch("<?= base_url('simpan/toggle'); ?>", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "X-Requested-With": "XMLHttpRequest",
+          [CSRF_H]: CSRF_V
+        },
+        body: "slug=" + encodeURIComponent(slug)
+      });
+      if (res.status === 401) { location.href = "<?= base_url('login'); ?>"; return; }
+      const d = await res.json();
+      d.saved ? SIMPAN.add(slug) : SIMPAN.delete(slug);
+      ikonSimpan();
     });
 
     tampilkan(terpilih);

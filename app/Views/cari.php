@@ -144,6 +144,15 @@
       border-color: #cbd5e1;
     }
 
+    .btn-bm {
+      position: absolute; top: 10px; right: 10px;
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 1px solid var(--tn-border); background: #fff;
+      color: #0a84c6; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,.08);
+    }
+    .btn-bm:hover { background: #f0f9ff; }
+
     .dest-card img {
       width: 90px;
       height: 90px;
@@ -327,9 +336,10 @@
       <!-- Daftar Destinasi -->
       <ul class="list-unstyled d-flex flex-column gap-3" id="destinationList">
         <!-- Item 1: Curug Cimahi -->
-        <li class="dest-item" data-category="air-terjun" data-duration="1-hari" data-budget="250000">
+        <li class="dest-item" data-slug="curugcimahi" data-category="air-terjun" data-duration="1-hari" data-budget="250000">
           <article class="dest-card">
             <img src="<?= base_url('assets/images/curugcimahi.png'); ?>" alt="Curug Cimahi">
+            <button type="button" class="btn-bm" title="Simpan"><i class="bi bi-bookmark"></i></button>
             <div class="card-content">
               <div class="card-info">
                 <h2>Curug Cimahi</h2>
@@ -342,9 +352,10 @@
           </article>
         </li>
         <!-- Item 2: Kebun Raya Bogor -->
-        <li class="dest-item" data-category="kebun-binatang" data-duration="1-hari" data-budget="50000">
+        <li class="dest-item" data-slug="kebunrayabogor" data-category="kebun-binatang" data-duration="1-hari" data-budget="50000">
           <article class="dest-card">
             <img src="<?= base_url('assets/images/kebunrayabogor.png'); ?>" alt="Kebun Raya Bogor">
+            <button type="button" class="btn-bm" title="Simpan"><i class="bi bi-bookmark"></i></button>
             <div class="card-content">
               <div class="card-info">
                 <h2>Kebun Raya Bogor</h2>
@@ -357,9 +368,10 @@
           </article>
         </li>
         <!-- Item 3: Pantai Sawarna -->
-        <li class="dest-item" data-category="pantai" data-duration="2-hari" data-budget="850000">
+        <li class="dest-item" data-slug="pantaisawarna" data-category="pantai" data-duration="2-hari" data-budget="850000">
           <article class="dest-card">
             <img src="<?= base_url('assets/images/pantaisawarna.png'); ?>" alt="Pantai Sawarna">
+            <button type="button" class="btn-bm" title="Simpan"><i class="bi bi-bookmark"></i></button>
             <div class="card-content">
               <div class="card-info">
                 <h2>Pantai Sawarna</h2>
@@ -372,9 +384,10 @@
           </article>
         </li>
         <!-- Item 4: Taman Safari -->
-        <li class="dest-item" data-category="kebun-binatang" data-duration="2-hari" data-budget="1000000">
+        <li class="dest-item" data-slug="tamansafari" data-category="kebun-binatang" data-duration="2-hari" data-budget="1000000">
           <article class="dest-card">
             <img src="<?= base_url('assets/images/tamansafari.png'); ?>" alt="Taman Safari Indonesia">
+            <button type="button" class="btn-bm" title="Simpan"><i class="bi bi-bookmark"></i></button>
             <div class="card-content">
               <div class="card-info">
                 <h2>Taman Safari Indonesia</h2>
@@ -508,5 +521,37 @@
       terapkanFilter();
     });
   </script>
+  <script>
+  const CSRF_H = "<?= csrf_header(); ?>", CSRF_V = "<?= csrf_hash(); ?>";
+
+  function setIkon(btn, saved) {
+    btn.querySelector("i").className = saved ? "bi bi-bookmark-fill" : "bi bi-bookmark";
+  }
+
+  // Tandai yang sudah disimpan
+  fetch("<?= base_url('simpan/daftar'); ?>").then(r => r.json()).then(d => {
+    document.querySelectorAll(".dest-item").forEach(li => {
+      setIkon(li.querySelector(".btn-bm"), d.slugs.includes(li.dataset.slug));
+    });
+  });
+
+  // Klik ikon = simpan / hapus
+  document.querySelectorAll(".dest-item .btn-bm").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const slug = btn.closest(".dest-item").dataset.slug;
+      const res = await fetch("<?= base_url('simpan/toggle'); ?>", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "X-Requested-With": "XMLHttpRequest",
+          [CSRF_H]: CSRF_V
+        },
+        body: "slug=" + encodeURIComponent(slug)
+      });
+      if (res.status === 401) { location.href = "<?= base_url('login'); ?>"; return; }
+      setIkon(btn, (await res.json()).saved);
+    });
+  });
+</script>
 </body>
 </html>

@@ -47,6 +47,17 @@ class Simpan extends BaseController
         return $this->response->setJSON(['login' => (bool) $uid, 'saved' => (bool) $ada]);
     }
 
+    // Daftar slug yang sudah disimpan user (untuk menandai ikon di Beranda & Cari)
+    public function daftar()
+    {
+        $uid   = $this->userId();
+        $slugs = [];
+        if ($uid) {
+        $slugs = array_column((new SimpanModel())->where('user_id', $uid)->findAll(), 'slug');
+        }
+        return $this->response->setJSON(['login' => (bool) $uid, 'slugs' => $slugs]);
+    }
+
     // Simpan / hapus (toggle)
     public function toggle()
     {
