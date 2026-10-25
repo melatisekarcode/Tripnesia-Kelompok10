@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+ <?php $login = (bool) session()->get('isLoggedIn'); ?>
+ <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -101,7 +102,11 @@
         <li class="nav-item"><a class="nav-link menu-link" href="<?= base_url('profile'); ?>">Profile</a></li>
       </ul>
       <div class="mt-auto">
-        <a href="<?= base_url('logout'); ?>" class="btn btn-outline-secondary w-100">Keluar</a>
+        <?php if ($login): ?>
+          <a href="<?= base_url('logout'); ?>" class="btn btn-outline-secondary w-100">Keluar</a>
+        <?php else: ?>
+          <a href="<?= base_url('login'); ?>" class="btn btn-primary w-100">Masuk</a>
+        <?php endif; ?>
       </div>
     </div>
   </div>
@@ -115,7 +120,7 @@
         Temukan rekomendasi destinasi wisata, lihat estimasi biaya, dan atur perjalanan impianmu.
       </p>
 
-      <form action="<?= base_url('cari'); ?>" method="get">
+      <form id="formCari" action="<?= base_url('cari'); ?>" method="get">
         <div class="input-group mb-2">
           <span class="input-group-text search-input border-end-0"><i class="bi bi-search text-secondary"></i></span>
           <input type="text" id="pencarian" name="pencarian" class="form-control search-input border-start-0" placeholder="Cari destinasi, kota, atau aktivitas...">
@@ -128,7 +133,7 @@
     <section id="fitur" class="mb-4">
       <div class="row g-2 text-center">
         <div class="col-3">
-          <a class="feature-btn d-block" href="#detail">
+          <a class="feature-btn d-block" href="<?= $login ? '#detail' : base_url('login'); ?>">
             <span class="feature-icon"><i class="bi bi-credit-card"></i></span>
             Rekomendasi Budget
           </a>
@@ -172,7 +177,7 @@
           </button>
         </div>
         <div class="col-4" data-id="sawarna" data-harga="500000">
-          <button type="button" class="dest-card active">
+          <button type="button" class="dest-card <?= $login ? 'active' : ''; ?>">
             <img src="<?= base_url('assets/images/pantaisawarna.png'); ?>" alt="Pantai Sawarna">
             <div class="info">
               <div class="fw-bold">Pantai Sawarna</div>
@@ -196,7 +201,7 @@
     </section>
 
     <!-- Detail destinasi (berubah saat kartu dipilih) -->
-    <section id="detail" class="detail-card p-3 position-relative">
+    <section id="detail" class="detail-card p-3 position-relative <?= $login ? '' : 'd-none'; ?>">
       <button type="button" class="btn-bm" id="btnBm" title="Simpan"><i class="bi bi-bookmark" id="iconBm"></i></button>
       <div class="d-flex gap-3 mb-3">
         <img id="dImg" src="<?= base_url('assets/images/pantaisawarna.png'); ?>" alt="Pantai Sawarna">
@@ -300,6 +305,13 @@
 
     const rp = n => "Rp " + n.toLocaleString("id-ID");
     const $ = id => document.getElementById(id);
+    const LOGIN = <?= $login ? 'true' : 'false'; ?>;
+    const URL_LOGIN = "<?= base_url('login'); ?>";
+
+    // Cari destinasi: wajib login
+    $("formCari").addEventListener("submit", e => {
+      if (!LOGIN) { e.preventDefault(); location.href = URL_LOGIN; }
+    });
     let terpilih = "sawarna";
 
     // ===== Simpan destinasi =====
@@ -337,11 +349,14 @@
 
     // Klik kartu destinasi -> detail berubah
     document.querySelectorAll("#destList [data-id]").forEach(col => {
-      col.addEventListener("click", () => tampilkan(col.dataset.id));
+      col.addEventListener("click", () => {
+        if (!LOGIN) { location.href = URL_LOGIN; return; }
+        tampilkan(col.dataset.id);
+      });
     });
-
     // Filter budget
     $("btnTerapkan").addEventListener("click", () => {
+      if (!LOGIN) { location.href = URL_LOGIN; return; }
       const max = Number(document.querySelector('input[name="budget"]:checked').value);
       let tampil = 0;
       document.querySelectorAll("#destList [data-id]").forEach(col => {
@@ -377,7 +392,7 @@
       ikonSimpan();
     });
 
-    tampilkan(terpilih);
+    if (LOGIN) tampilkan(terpilih);
   </script>
 </body>
 </html>
