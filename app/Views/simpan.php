@@ -15,7 +15,15 @@
       --tn-border: #dfe5ee;
       --tn-soft: #f1f5fb;
     }
-    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #111827; background-color: #ffffff; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color: #111827;
+      background-color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main { flex: 1; }
     .btn-primary { --bs-btn-bg: #0a84c6; --bs-btn-border-color: #0a84c6; --bs-btn-hover-bg: #0873ab; --bs-btn-hover-border-color: #0873ab; --bs-btn-active-bg: #0873ab; }
     .btn-outline-secondary { --bs-btn-color: #4b5563; --bs-btn-border-color: var(--tn-border); }
     .page { max-width: 960px; }
@@ -50,26 +58,6 @@
     .dest-card .info .fw-bold { font-size: .8rem; }
     .dest-card .info .small { font-size: .7rem !important; }
 
-    /* Tombol opsi (tiga titik) di atas gambar */
-    .btn-more {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background-color: rgba(255, 255, 255, 0.9);
-      border: none;
-      border-radius: 50%;
-      width: 28px;
-      height: 28px;
-      font-size: .8rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #374151;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      transition: background .15s;
-    }
-    .btn-more:hover { background-color: #ffffff; color: var(--bs-primary); }
-
     /* Tombol Tersimpan di dalam card */
     .btn-simpan-badge {
       display: inline-flex;
@@ -90,6 +78,18 @@
     .btn-simpan-badge:hover {
       background-color: var(--bs-primary);
       color: #fff;
+    }
+
+    /* Tampilan setelah di-klik (belum tersimpan) */
+    .btn-simpan-badge.belum {
+      background-color: #fff;
+      color: #4b5563;
+      border-color: var(--tn-border);
+    }
+    .btn-simpan-badge.belum:hover {
+      background-color: var(--tn-soft);
+      color: var(--bs-primary);
+      border-color: var(--bs-primary);
     }
 
     @media (min-width: 768px) {
@@ -157,7 +157,6 @@
             <a href="<?= base_url('detailwisata/' . $d['slug']); ?>">
               <img src="<?= base_url('assets/images/' . $d['img']); ?>" alt="<?= esc($d['nama']); ?>">
             </a>
-            <button type="button" class="btn-more" title="Hapus dari simpan"><i class="bi bi-three-dots-vertical"></i></button>
             <div class="info">
               <div class="fw-bold mb-1"><?= esc($d['nama']); ?></div>
               <div class="small text-secondary mb-1"><i class="bi bi-geo-alt-fill text-danger"></i> <?= esc($d['lokasi']); ?></div>
@@ -184,18 +183,20 @@
 
   </main>
 
-  <footer class="text-center text-secondary small py-3 mt-4">
+  <footer class="text-center text-secondary small py-3 bg-white">
     <i class="bi bi-c-circle"></i> Copyright TripNesia 2026
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Hapus dari simpan: klik "Tersimpan" atau tombol titik tiga
-    document.querySelectorAll(".btn-hapus, .btn-more").forEach(btn => {
-      btn.addEventListener("click", async () => {
-        const col  = btn.closest("[data-slug]");
-        const slug = col.dataset.slug;
+  // Tombol Tersimpan / Simpan = toggle. Kartu tetap tampil sampai halaman dimuat ulang.
+  document.querySelectorAll(".btn-hapus").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      const col  = btn.closest("[data-slug]");
+      const slug = col.dataset.slug;
 
+      btn.disabled = true;
+      try {
         const res = await fetch("<?= base_url('simpan/toggle'); ?>", {
           method: "POST",
           headers: {
@@ -208,12 +209,20 @@
 
         if (res.status === 401) { location.href = "<?= base_url('login'); ?>"; return; }
         if (res.ok) {
-          col.remove();
-          const sisa = document.querySelectorAll("#listSimpan [data-slug]").length;
-          document.getElementById("kosong").classList.toggle("d-none", sisa > 0);
+          const d = await res.json();
+          if (d.saved) {
+            btn.innerHTML = '<i class="bi bi-bookmark-check-fill"></i> Tersimpan';
+            btn.classList.remove("belum");
+          } else {
+            btn.innerHTML = '<i class="bi bi-bookmark"></i> Simpan';
+            btn.classList.add("belum");
+          }
         }
-      });
+      } finally {
+        btn.disabled = false;
+      }
     });
-  </script>
+  });
+</script>
 </body>
 </html>
