@@ -17,7 +17,7 @@ class Database extends Config
     /**
      * Lets you choose which connection group to use if no other is specified.
      */
-    public string $defaultGroup = 'default';
+    public string $defaultGroup = 'production';
 
     /**
      * The default database connection.
@@ -51,6 +51,25 @@ class Database extends Config
         ],
     ];
 
+    public array $production = [
+    'DSN'      => '',
+    'hostname' => 'sql305.infinityfree.com',
+    'username' => 'if0_43265782',
+    'password' => 'KyjzyC8uhMRbU',
+    'database' => 'if0_43265782_db_tripnesia',
+    'DBDriver' => 'MySQLi',
+    'DBPrefix' => '',
+    'pConnect' => false,
+    'DBDebug'  => false,
+    'charset'  => 'utf8mb4',
+    'DBCollat' => 'utf8mb4_general_ci',
+    'swapPre'  => '',
+    'encrypt'  => false,
+    'compress' => false,
+    'strictOn' => false,
+    'failover' => [],
+    'port'     => 3306,
+];
     //    /**
     //     * Sample database connection for SQLite3.
     //     *

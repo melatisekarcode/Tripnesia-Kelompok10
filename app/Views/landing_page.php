@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tripnesia - Rencanakan Liburan</title>
 
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "z41seo8e6r");
+</script>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
@@ -97,7 +105,6 @@
         <li class="nav-item"><a class="nav-link menu-link need-login" href="<?= base_url('profile'); ?>">Profile</a></li>
       </ul>
       <div class="d-flex gap-2 mt-auto">
-        <div class="d-flex gap-2 mt-auto">
         <a href="<?= base_url('login'); ?>" class="btn btn-primary flex-fill">Masuk</a>
         <a href="<?= base_url('daftar'); ?>" class="btn btn-outline-secondary flex-fill">Daftar</a>
       </div>

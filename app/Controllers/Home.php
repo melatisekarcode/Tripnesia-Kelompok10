@@ -6,6 +6,12 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view('beranda');
+        // Sudah login -> beranda
+        if (session()->get('isLoggedIn')) {
+            return view('beranda');
+        }
+
+        // Belum login -> landing page
+        return view('landing_page');
     }
 }
